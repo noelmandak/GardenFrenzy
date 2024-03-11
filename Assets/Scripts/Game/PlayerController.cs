@@ -7,28 +7,42 @@ using static UnityEngine.UI.ScrollRect;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool isRed = true;
     public float playerSpeed = 300.0f;
-    private Rigidbody2D rig;
+    public Rigidbody2D playerRed;
+    public Rigidbody2D playerBlue;
+    private Rigidbody2D player;
 
     [SerializeField]
     private InputActionReference move_action;
-    // Start is called before the first frame update
-    void Start()
-    {
-        rig = GetComponent<Rigidbody2D>();
-    }
+
+    public CameraFollow cameraFollow;
 
     // Update is called once per frame
     void Update()
     {
         Vector2 movement = move_action.action.ReadValue<Vector2>();
-        Debug.Log(movement);
         MoveObject(movement);
     }
     private void MoveObject(Vector2 movement)
     {
-        rig.velocity = playerSpeed * Time.deltaTime * movement;
-        Debug.Log("VELOCITY");
-        Debug.Log(rig.velocity);
+        player = isRed ? playerRed : playerBlue;
+        player.velocity = playerSpeed * Time.deltaTime * movement;
+        cameraFollow.UpdateCamera(player.transform);
+    }
+
+    public void SetPlayerSpeed(float speed)
+    {
+        playerSpeed = speed;
+    }
+
+    public float GetPlayerSpeed()
+    {
+        return playerSpeed;
+    }
+
+    public void ChangePlayer()
+    {
+        isRed = !isRed;
     }
 }

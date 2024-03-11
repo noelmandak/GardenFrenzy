@@ -7,21 +7,24 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI timerText;
     public GameObject pausePopup;
     public GameObject activatePowerPopup;
+    public GameObject advancedSettingsPopup;
 
     private float timer = 60f;
     private bool isPaused = false;
     private bool isActivatingPower = false;
+    private bool isAdvancedSettings = false;
 
 
     private void Start()
     {
         isPaused = false;
         isActivatingPower = false;
+        isAdvancedSettings = false;
     }
 
     void Update()
     {
-        if (!isPaused && !isActivatingPower)
+        if (!isPaused && !isActivatingPower && !isAdvancedSettings)
         {
             // Kurangi waktu seiring berjalannya waktu
             timer -= Time.deltaTime;
@@ -61,11 +64,17 @@ public class GameManager : MonoBehaviour
     {
         // Sembunyikan popup pause
         SetActivatePower(false);
+        SetAdvancedSettings(false);
     }
     public void OnActivatePowerButtonClick()
     {
         // Tampilkan popup pause
         SetActivatePower(true);
+    }
+    public void OnAdvancedSettingsButtonClick()
+    {
+        // Tampilkan popup pause
+        SetAdvancedSettings(true);
     }
 
     // Fungsi untuk memanggil saat tombol Quit di popup ditekan
@@ -95,6 +104,13 @@ public class GameManager : MonoBehaviour
         Time.timeScale = isPaused ? 0f : 1f;
 
         activatePowerPopup.SetActive(isActivatePowerUp);
+    }
+    void SetAdvancedSettings(bool isAdvancedSettings)
+    {
+        bool isPaused = isAdvancedSettings;
+        this.isPaused = isPaused;
+        Time.timeScale = isPaused ? 0f : 1f;
 
+        advancedSettingsPopup.SetActive(isAdvancedSettings);
     }
 }
