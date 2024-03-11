@@ -7,7 +7,7 @@ using static UnityEngine.UI.ScrollRect;
 
 public class PlayerController : MonoBehaviour
 {
-    private float playerSpeed = 100.0f;
+    public float playerSpeed = 300.0f;
     private Rigidbody2D rig;
 
     [SerializeField]

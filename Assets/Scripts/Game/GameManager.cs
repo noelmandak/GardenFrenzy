@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject pausePopup;
     public GameObject activatePowerPopup;
 
-    private float timer = 30f;
+    private float timer = 60f;
     private bool isPaused = false;
     private bool isActivatingPower = false;
 
