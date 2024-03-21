@@ -14,12 +14,12 @@ public class GameManager : MonoBehaviour
     private bool isActivatingPower = false;
     private bool isAdvancedSettings = false;
 
-
     private void Start()
     {
         isPaused = false;
         isActivatingPower = false;
         isAdvancedSettings = false;
+   
     }
 
     void Update()
