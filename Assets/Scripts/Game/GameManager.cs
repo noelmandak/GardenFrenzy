@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     private bool isActivatingPower = false;
     private bool isAdvancedSettings = false;
 
+    public PlayerController playerController;
+    public ActivatePowerUp activatePowerUp;
+
     private void Start()
     {
         isPaused = false;
@@ -66,10 +69,16 @@ public class GameManager : MonoBehaviour
         SetActivatePower(false);
         SetAdvancedSettings(false);
     }
-    public void OnActivatePowerButtonClick()
+    public void OnActivatePowerButtonClick(int buttonIndex)
     {
         // Tampilkan popup pause
-        SetActivatePower(true);
+        int currentPowerUpType = playerController.ActivatePower(buttonIndex);
+        if (currentPowerUpType > 0)
+        {
+            activatePowerUp.currentPowerUpType = currentPowerUpType;
+            SetActivatePower(true);
+            activatePowerUp.SetCommand();
+        }
     }
     public void OnAdvancedSettingsButtonClick()
     {
