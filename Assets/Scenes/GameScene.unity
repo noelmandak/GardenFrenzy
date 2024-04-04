@@ -1698,7 +1698,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 414345389}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a3f459601e058b469ea6ec8151cd242, type: 3}
   m_Name: 
@@ -1709,6 +1709,8 @@ MonoBehaviour:
   advancedSettingsPopup: {fileID: 1120274608}
   playerController: {fileID: 0}
   activatePowerUp: {fileID: 0}
+  powerUpSpawner: {fileID: 0}
+  vegetableSpawner: {fileID: 0}
 --- !u!20 &414345393
 Camera:
   m_ObjectHideFlags: 0
@@ -2530,6 +2532,8 @@ MonoBehaviour:
   advancedSettingsPopup: {fileID: 1120274608}
   playerController: {fileID: 671460801}
   activatePowerUp: {fileID: 296925657}
+  powerUpSpawner: {fileID: 422451170}
+  vegetableSpawner: {fileID: 422451169}
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2915,6 +2919,9 @@ GameObject:
   - component: {fileID: 671460802}
   - component: {fileID: 671460801}
   - component: {fileID: 671460803}
+  - component: {fileID: 671460806}
+  - component: {fileID: 671460805}
+  - component: {fileID: 671460804}
   m_Layer: 0
   m_Name: Players
   m_TagString: Player
@@ -2934,8 +2941,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1dcef268472c2b4aba043ad4ceed2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 0
   isRed: 1
   playerSpeed: 300
+  playerRedGO: {fileID: 2129943364}
+  playerBlueGO: {fileID: 932244517}
   playerRed: {fileID: 2129943371}
   playerBlue: {fileID: 932244519}
   maxCapacity: 5
@@ -2979,6 +2992,66 @@ MonoBehaviour:
   playerBlueCounter: {fileID: 1732438987}
   playerRedScoreText: {fileID: 1273526946}
   playerBlueScoreText: {fileID: 1012295536}
+--- !u!114 &671460804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671460800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
+--- !u!114 &671460805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671460800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 5000
+--- !u!114 &671460806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671460800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 22
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 2
+      BranchSizes: 
+    VectorActionSize: 02000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 1
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 5022602860645237092, guid: bebb09ce020ce8c4a86ec56d01367b82, type: 3}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: CollectVegetables
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
 --- !u!1 &691191084
 GameObject:
   m_ObjectHideFlags: 0

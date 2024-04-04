@@ -28,6 +28,7 @@ public class PowerUpSpawner : MonoBehaviour
 
             spawnedPowerUps[i] = spawnedObject;
         }
+        Debug.Log("powerup spawned");
     }
 
     public void RemoveAllPowerUps()
@@ -36,7 +37,15 @@ public class PowerUpSpawner : MonoBehaviour
         {
             Destroy(powerUp);
         }
+        Debug.Log("powerup removed");
+    }
 
+    public void ResetPowerUps()
+    {
+        Debug.Log("powerup start reset");
+        RemoveAllPowerUps();
+        SpawnPowerUps();
+        Debug.Log("powerup end reset");
     }
 }
 

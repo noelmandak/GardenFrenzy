@@ -5,11 +5,17 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.UI.ScrollRect;
+using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
 
-public class PlayerController : MonoBehaviour
+
+public class PlayerController : Agent
 {
     public bool isRed = true;
     public float playerSpeed = 300.0f;
+    public GameObject playerRedGO;
+    public GameObject playerBlueGO;
     public Rigidbody2D playerRed;
     public Rigidbody2D playerBlue;
     private Rigidbody2D player;
@@ -39,6 +45,36 @@ public class PlayerController : MonoBehaviour
 
     public CameraFollow cameraFollow;
 
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        sensor.AddObservation(playerRedGO.transform.position);
+        sensor.AddObservation(playerBlueGO.transform.position);
+
+        sensor.AddObservation(playerRedType);
+        sensor.AddObservation(playerRedCaring);
+        sensor.AddObservation(playerRedKentangCount);
+        sensor.AddObservation(playerRedWortelCount);
+        sensor.AddObservation(playerRedScore);
+        sensor.AddObservation(new Vector3(playerRedPowerUp[0], playerRedPowerUp[1], playerRedPowerUp[2]));
+
+        sensor.AddObservation(playerBlueType);
+        sensor.AddObservation(playerBlueCaring);
+        sensor.AddObservation(playerBlueKentangCount);
+        sensor.AddObservation(playerBlueWortelCount);
+        sensor.AddObservation(playerBlueScore);
+        sensor.AddObservation(new Vector3(playerBluePowerUp[0], playerBluePowerUp[1], playerBluePowerUp[2]));
+
+    }
+
+    public override void OnActionReceived(ActionBuffers actions)
+    {
+        //Debug.Log(actions.ContinuousActions[0]);
+        //Debug.Log(actions.ContinuousActions[1]);
+        var x = actions.ContinuousActions[0];
+        var y = actions.ContinuousActions[1];
+        MovePlayer(!isRed, new Vector2(x, y));
+    }
+    
     private void Start()
     {
         playerUI = GetComponent<PlayerUI>();
@@ -49,11 +85,48 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = move_action.action.ReadValue<Vector2>();
         MoveObject(movement);
     }
+
+
+    public void resetPlayer()
+    {
+        playerRedType = 0;
+        playerRedCaring = 0; //0 is none, 1 is kentang, 2 is wortel
+        playerRedKentangCount = 0;
+        playerRedWortelCount = 0;
+        playerRedScore = 0;
+        playerRedPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
+
+        playerBlueType = 0;
+        playerBlueCaring = 0;
+        playerBlueKentangCount = 0;
+        playerBlueWortelCount = 0;
+        playerBlueScore = 0;
+        playerBluePowerUp = new int[] { 0, 0, 0 };
+
+
+        playerUI.UpdateUI(true, 0, 0);
+        playerUI.UpdateUI(false, 0, 0);
+
+        playerUI.UpdateScore(playerRedScore, playerBlueScore);
+
+        powerUpUI.UpdatePowerUpButton(playerRedPowerUp);
+        powerUpUI.UpdatePowerUpButton(playerBluePowerUp);
+        playerRedGO.transform.position = new Vector3(-3, 0, 0);
+        playerBlueGO.transform.position = new Vector3(3, 0, 0);
+        Debug.Log("player reseted");
+    }
+
     private void MoveObject(Vector2 movement)
     {
         player = isRed ? playerRed : playerBlue;
         player.velocity = playerSpeed * Time.deltaTime * movement;
         cameraFollow.UpdateCamera(player.transform);
+    }
+
+    private void MovePlayer(bool isPlayerRed, Vector2 movement)
+    {
+        player = isPlayerRed ? playerRed : playerBlue;
+        player.velocity = playerSpeed * Time.deltaTime * movement;
     }
 
     public void SetPlayerSpeed(float speed)
@@ -83,7 +156,8 @@ public class PlayerController : MonoBehaviour
                 if (isRed && isPlayerRed)
                 {
                     powerUpUI.UpdatePowerUpButton(playerRedPowerUp);
-                } 
+                }
+                SetReward(1);
                 return true;
             }
         } else
@@ -97,6 +171,7 @@ public class PlayerController : MonoBehaviour
                 {
                     powerUpUI.UpdatePowerUpButton(playerBluePowerUp);
                 }
+                SetReward(1);
                 return true;
             }
         }
@@ -116,6 +191,7 @@ public class PlayerController : MonoBehaviour
                 {
                     playerRedCaring++;
                     playerUI.UpdateUI(isPlayerRed, vegetableType, playerRedCaring);
+                    SetReward(1);
                     return true;
                 }
             }
@@ -131,6 +207,7 @@ public class PlayerController : MonoBehaviour
                 {
                     playerBlueCaring++;
                     playerUI.UpdateUI(isPlayerRed, vegetableType, playerBlueCaring);
+                    SetReward(1);
                     return true;
                 }
             }
@@ -154,6 +231,7 @@ public class PlayerController : MonoBehaviour
                     playerUI.UpdateUI(isPlayerRed, 0, playerRedCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
                     SaveScore();
+                    SetReward(point * playerRedCaring);
                     return true;
                 }
                 if (boxType == 2)
@@ -165,6 +243,7 @@ public class PlayerController : MonoBehaviour
                     playerUI.UpdateUI(isPlayerRed, 0, playerRedCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
                     SaveScore();
+                    SetReward(point * playerRedCaring);
                     return true;
                 }
             }
@@ -172,6 +251,7 @@ public class PlayerController : MonoBehaviour
         {
             if (boxType == playerBlueType)
             {
+                SetReward(1);
                 if (boxType == 1)
                 {
                     playerBlueKentangCount += playerBlueCaring;
@@ -181,6 +261,7 @@ public class PlayerController : MonoBehaviour
                     playerUI.UpdateUI(isPlayerRed, 0, playerBlueCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
                     SaveScore();
+                    SetReward(point * playerBlueCaring);
                     return true;
                 }
                 if (boxType == 2)
@@ -192,6 +273,7 @@ public class PlayerController : MonoBehaviour
                     playerUI.UpdateUI(isPlayerRed, 0, playerBlueCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
                     SaveScore();
+                    SetReward(point * playerBlueCaring);
                     return true;
                 }
             }
@@ -224,5 +306,10 @@ public class PlayerController : MonoBehaviour
             powerUpUI.UpdatePowerUpButton(playerBluePowerUp);
             return powerUpType;
         }
+    }
+    public void GameOver()
+    {
+        EndEpisode();
+        resetPlayer();
     }
 }

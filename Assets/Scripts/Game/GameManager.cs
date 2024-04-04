@@ -9,19 +9,26 @@ public class GameManager : MonoBehaviour
     public GameObject activatePowerPopup;
     public GameObject advancedSettingsPopup;
 
-    private float timer = 60f;
+    private float duration = 100f;
+    private float timer;
     private bool isPaused = false;
     private bool isActivatingPower = false;
     private bool isAdvancedSettings = false;
+    private bool isGameOver = false;
+
+
 
     public PlayerController playerController;
     public ActivatePowerUp activatePowerUp;
+    public PowerUpSpawner powerUpSpawner;
+    public VegetableSpawner vegetableSpawner;
 
     private void Start()
     {
         isPaused = false;
         isActivatingPower = false;
         isAdvancedSettings = false;
+        timer = duration;
    
     }
 
@@ -34,13 +41,26 @@ public class GameManager : MonoBehaviour
             UpdateTimerText();
 
             // Cek jika waktu habis
-            if (timer <= 0f)
+            if (timer <= 0f && !isGameOver)
             {
+                isGameOver = true;
+                isPaused = true;
                 // Pindah ke scene GameOver
-                SceneManager.LoadScene("GameOver");
+                //SceneManager.LoadScene("GameOver");
             }
         }
+        if (isGameOver)
+        {
+            vegetableSpawner.ResetAllVegetables();
+            powerUpSpawner.ResetPowerUps();
+            playerController.GameOver();
+            timer = 100f;
+            isGameOver = false;
+            isPaused = false;
+
+        }
     }
+
 
     void UpdateTimerText()
     {
