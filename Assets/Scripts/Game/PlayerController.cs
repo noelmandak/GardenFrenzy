@@ -9,7 +9,7 @@ using static UnityEngine.UI.ScrollRect;
 public class PlayerController : MonoBehaviour
 {
     public bool isRed = true;
-    public float playerSpeed = 250.0f;
+    public float playerSpeed = 200.0f;
     public Rigidbody2D playerRed;
     public Rigidbody2D playerBlue;
     private Rigidbody2D player;
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     private int playerRedWortelCount = 0;
     private int playerRedScore = 0; 
     private int[] playerRedPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
-    public float playerRedSpeed = 250.0f;
+    public float playerRedSpeed;
 
 
 
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private int playerBlueWortelCount = 0;
     private int playerBlueScore = 0;
     private int[] playerBluePowerUp = new int[] { 0, 0, 0 };
-    public float playerBlueSpeed = 250.0f;
+    public float playerBlueSpeed;
 
     private PlayerUI playerUI;
     public PowerUpUI powerUpUI;
@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerUI = GetComponent<PlayerUI>();
+        playerRedSpeed = playerSpeed;
+        playerBlueSpeed = playerSpeed;
     }
 
     void Update()
@@ -236,6 +238,22 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetString("LastScore", GetScore(isRed).ToString());
     }
 
+    public bool gameOverChecker()
+    {
+        return (playerRedScore + playerBlueScore) == 300;
+    }
+
+    public void claimBonusTimePoint(int bonusPoint)
+    {
+        if (playerRedScore >  playerBlueScore) playerRedScore += bonusPoint;
+        else if (playerRedScore < playerBlueScore) playerBlueScore += bonusPoint;
+        else
+        {
+            playerRedScore += bonusPoint / 2;
+            playerBlueScore += bonusPoint / 2;
+        }
+        SaveScore();
+    }
     public int ActivatePower(int index)
     {
         if (isRed)

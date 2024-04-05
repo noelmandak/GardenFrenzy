@@ -45,18 +45,32 @@ public class GameManager : MonoBehaviour
                 // Pindah ke scene GameOver
                 SceneManager.LoadScene("GameOver");
             }
+            if (playerController.gameOverChecker())
+            { 
+                int bonusPoint = (int)(duration-timer)*2;
+                playerController.claimBonusTimePoint(bonusPoint);
+                SceneManager.LoadScene("GameOver");
+            }
         }
     }
 
     void UpdateTimerText()
     {
-        int minutes = Mathf.FloorToInt(timer / 60);
-        int seconds = Mathf.FloorToInt(timer % 60);
+        if (timer>=0)
+        {
+            int minutes = Mathf.FloorToInt(timer / 60);
+            int seconds = Mathf.FloorToInt(timer % 60);
 
-        // Format waktu menjadi "mm:ss"
-        string formattedTime = string.Format("{0:00}.{1:00}", minutes, seconds);
-        timerText.text = formattedTime;
+            // Format waktu menjadi "mm:ss"
+            string formattedTime = string.Format("{0:00}.{1:00}", minutes, seconds);
+            timerText.text = formattedTime;
+        } else
+        {
+            timerText.text = "00:00";
+        }
     }
+
+    
 
     // Fungsi untuk memanggil saat tombol pause ditekan
     public void OnPauseButtonClick()
