@@ -23,9 +23,10 @@ public class VegetableSpawner : MonoBehaviour
         for (int i = 0; i < jumlahKentang + jumlahWortel; i++)
         {
             Debug.Log(i);
-            float randomX = Random.Range(-18f, 18f);
-            float randomY = Random.Range(-18f, 18f);
+            float randomX = Random.Range(-15f, 15f);
+            float randomY = Random.Range(-15f, 15f);
             Vector3 spawnPosition = new Vector3(randomX, randomY, 0f);
+            spawnPosition = gameObject.transform.TransformPoint(spawnPosition);
 
             // Memilih prefab yang akan di-spawn
             bool isCarrot = (i < jumlahWortel);

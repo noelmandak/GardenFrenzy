@@ -1,0 +1,57 @@
+{
+    "CollectVegetables": {
+        "checkpoints": [
+            {
+                "steps": 499992,
+                "file_path": "results\\longtrain-1\\CollectVegetables\\CollectVegetables-499992.onnx",
+                "reward": -84.25,
+                "creation_time": 1712258513.0615625,
+                "auxillary_file_paths": [
+                    "results\\longtrain-1\\CollectVegetables\\CollectVegetables-499992.pt"
+                ]
+            },
+            {
+                "steps": 999982,
+                "file_path": "results\\longtrain-1\\CollectVegetables\\CollectVegetables-999982.onnx",
+                "reward": -2.5,
+                "creation_time": 1712260284.0977829,
+                "auxillary_file_paths": [
+                    "results\\longtrain-1\\CollectVegetables\\CollectVegetables-999982.pt"
+                ]
+            },
+            {
+                "steps": 1499972,
+                "file_path": "results\\longtrain-1\\CollectVegetables\\CollectVegetables-1499972.onnx",
+                "reward": 3.0,
+                "creation_time": 1712262049.6845734,
+                "auxillary_file_paths": [
+                    "results\\longtrain-1\\CollectVegetables\\CollectVegetables-1499972.pt"
+                ]
+            },
+            {
+                "steps": 1500036,
+                "file_path": "results\\longtrain-1\\CollectVegetables\\CollectVegetables-1500036.onnx",
+                "reward": 3.0,
+                "creation_time": 1712262049.7156484,
+                "auxillary_file_paths": [
+                    "results\\longtrain-1\\CollectVegetables\\CollectVegetables-1500036.pt"
+                ]
+            }
+        ],
+        "elo": 1200.0,
+        "final_checkpoint": {
+            "steps": 1500036,
+            "file_path": "results\\longtrain-1\\CollectVegetables.onnx",
+            "reward": 3.0,
+            "creation_time": 1712262049.7156484,
+            "auxillary_file_paths": [
+                "results\\longtrain-1\\CollectVegetables\\CollectVegetables-1500036.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "2.2.2+cu118"
+    }
+}

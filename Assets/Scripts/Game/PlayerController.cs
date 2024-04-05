@@ -20,22 +20,23 @@ public class PlayerController : Agent
     public Rigidbody2D playerBlue;
     private Rigidbody2D player;
     public int maxCapacity = 5;
+    public AnotherPlayer anotherPlayer;
+    public GameManager gameManager;
 
-    private int playerRedType = 0;
-    private int playerRedCaring = 0; //0 is none, 1 is kentang, 2 is wortel
-    private int playerRedKentangCount = 0;
-    private int playerRedWortelCount = 0;
-    private int playerRedScore = 0; 
-    private int[] playerRedPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
+    public int playerRedType = 0;
+    public int playerRedCaring = 0; //0 is none, 1 is kentang, 2 is wortel
+    public int playerRedKentangCount = 0;
+    public int playerRedWortelCount = 0;
+    public int playerRedScore = 0; 
+    public int[] playerRedPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
 
 
-
-    private int playerBlueType = 0;
-    private int playerBlueCaring = 0;
-    private int playerBlueKentangCount = 0;
-    private int playerBlueWortelCount = 0;
-    private int playerBlueScore = 0;
-    private int[] playerBluePowerUp = new int[] { 0, 0, 0 };
+    public int playerBlueType = 0;
+    public int playerBlueCaring = 0;
+    public int playerBlueKentangCount = 0;
+    public int playerBlueWortelCount = 0;
+    public int playerBlueScore = 0;
+    public int[] playerBluePowerUp = new int[] { 0, 0, 0 };
 
     private PlayerUI playerUI;
     public PowerUpUI powerUpUI;
@@ -43,12 +44,13 @@ public class PlayerController : Agent
     [SerializeField]
     private InputActionReference move_action;
 
-    public CameraFollow cameraFollow;
+    //public CameraFollow cameraFollow;
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(playerRedGO.transform.position);
-        sensor.AddObservation(playerBlueGO.transform.position);
+        sensor.AddObservation(!isRed);
+        sensor.AddObservation(playerRedGO.transform.localPosition);
+        sensor.AddObservation(playerBlueGO.transform.localPosition);
 
         sensor.AddObservation(playerRedType);
         sensor.AddObservation(playerRedCaring);
@@ -111,8 +113,8 @@ public class PlayerController : Agent
 
         powerUpUI.UpdatePowerUpButton(playerRedPowerUp);
         powerUpUI.UpdatePowerUpButton(playerBluePowerUp);
-        playerRedGO.transform.position = new Vector3(-3, 0, 0);
-        playerBlueGO.transform.position = new Vector3(3, 0, 0);
+        playerRedGO.transform.localPosition = new Vector3(-3, 0, 0);
+        playerBlueGO.transform.localPosition = new Vector3(3, 0, 0);
         Debug.Log("player reseted");
     }
 
@@ -120,10 +122,10 @@ public class PlayerController : Agent
     {
         player = isRed ? playerRed : playerBlue;
         player.velocity = playerSpeed * Time.deltaTime * movement;
-        cameraFollow.UpdateCamera(player.transform);
+        //cameraFollow.UpdateCamera(player.transform);
     }
 
-    private void MovePlayer(bool isPlayerRed, Vector2 movement)
+    public void MovePlayer(bool isPlayerRed, Vector2 movement)
     {
         player = isPlayerRed ? playerRed : playerBlue;
         player.velocity = playerSpeed * Time.deltaTime * movement;
@@ -157,7 +159,7 @@ public class PlayerController : Agent
                 {
                     powerUpUI.UpdatePowerUpButton(playerRedPowerUp);
                 }
-                SetReward(1);
+                anotherPlayer.AddRewards(0.005f - gameManager.GetPenalty());
                 return true;
             }
         } else
@@ -171,7 +173,7 @@ public class PlayerController : Agent
                 {
                     powerUpUI.UpdatePowerUpButton(playerBluePowerUp);
                 }
-                SetReward(1);
+                AddReward(0.005f - gameManager.GetPenalty());
                 return true;
             }
         }
@@ -191,7 +193,7 @@ public class PlayerController : Agent
                 {
                     playerRedCaring++;
                     playerUI.UpdateUI(isPlayerRed, vegetableType, playerRedCaring);
-                    SetReward(1);
+                    anotherPlayer.AddRewards(0.003f - gameManager.GetPenalty());
                     return true;
                 }
             }
@@ -207,7 +209,7 @@ public class PlayerController : Agent
                 {
                     playerBlueCaring++;
                     playerUI.UpdateUI(isPlayerRed, vegetableType, playerBlueCaring);
-                    SetReward(1);
+                    AddReward(0.003f-gameManager.GetPenalty());
                     return true;
                 }
             }
@@ -231,7 +233,7 @@ public class PlayerController : Agent
                     playerUI.UpdateUI(isPlayerRed, 0, playerRedCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
                     SaveScore();
-                    SetReward(point * playerRedCaring);
+                    anotherPlayer.AddRewards((point * playerRedCaring)/300-gameManager.GetPenalty());
                     return true;
                 }
                 if (boxType == 2)
@@ -243,7 +245,7 @@ public class PlayerController : Agent
                     playerUI.UpdateUI(isPlayerRed, 0, playerRedCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
                     SaveScore();
-                    SetReward(point * playerRedCaring);
+                    anotherPlayer.AddRewards((point * playerRedCaring) / 300 - gameManager.GetPenalty());
                     return true;
                 }
             }
@@ -251,7 +253,6 @@ public class PlayerController : Agent
         {
             if (boxType == playerBlueType)
             {
-                SetReward(1);
                 if (boxType == 1)
                 {
                     playerBlueKentangCount += playerBlueCaring;
@@ -261,7 +262,7 @@ public class PlayerController : Agent
                     playerUI.UpdateUI(isPlayerRed, 0, playerBlueCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
                     SaveScore();
-                    SetReward(point * playerBlueCaring);
+                    AddReward((point * playerBlueCaring) / 300 - gameManager.GetPenalty());
                     return true;
                 }
                 if (boxType == 2)
@@ -273,7 +274,7 @@ public class PlayerController : Agent
                     playerUI.UpdateUI(isPlayerRed, 0, playerBlueCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
                     SaveScore();
-                    SetReward(point * playerBlueCaring);
+                    AddReward((point * playerBlueCaring) / 300 - gameManager.GetPenalty());
                     return true;
                 }
             }
@@ -311,5 +312,9 @@ public class PlayerController : Agent
     {
         EndEpisode();
         resetPlayer();
+    }
+    public void AddRewards(float reward)
+    {
+        AddReward(reward);
     }
 }

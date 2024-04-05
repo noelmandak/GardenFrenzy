@@ -20,6 +20,7 @@ public class PowerUpSpawner : MonoBehaviour
             float randomX = Random.Range(-15f, 15f);
             float randomY = Random.Range(-15f, 15f);
             Vector3 spawnPosition = new Vector3(randomX, randomY, 0f);
+            spawnPosition = gameObject.transform.TransformPoint(spawnPosition);
 
             GameObject prefabToSpawn = powerUpPrefabs[i];
             GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);

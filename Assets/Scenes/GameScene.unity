@@ -1708,6 +1708,7 @@ MonoBehaviour:
   activatePowerPopup: {fileID: 296925652}
   advancedSettingsPopup: {fileID: 1120274608}
   playerController: {fileID: 0}
+  anotherPlayer: {fileID: 0}
   activatePowerUp: {fileID: 0}
   powerUpSpawner: {fileID: 0}
   vegetableSpawner: {fileID: 0}
@@ -1789,6 +1790,8 @@ GameObject:
   - component: {fileID: 414416678}
   - component: {fileID: 414416679}
   - component: {fileID: 414416680}
+  - component: {fileID: 414416682}
+  - component: {fileID: 414416681}
   m_Layer: 0
   m_Name: Square (3)
   m_TagString: Untagged
@@ -1935,6 +1938,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!61 &414416681
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414416676}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &414416682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414416676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09728f8e885b2de43aa3765c6df559ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &422451167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,6 +2006,7 @@ GameObject:
   - component: {fileID: 422451168}
   - component: {fileID: 422451169}
   - component: {fileID: 422451170}
+  - component: {fileID: 422451171}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -2004,6 +2065,27 @@ MonoBehaviour:
   - {fileID: 1946112009}
   - {fileID: 1388678077}
   - {fileID: 1955129648}
+--- !u!114 &422451171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422451167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3f459601e058b469ea6ec8151cd242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 184003959}
+  pausePopup: {fileID: 1637828780}
+  activatePowerPopup: {fileID: 296925652}
+  advancedSettingsPopup: {fileID: 1120274608}
+  playerController: {fileID: 671460801}
+  anotherPlayer: {fileID: 2129943373}
+  activatePowerUp: {fileID: 296925657}
+  powerUpSpawner: {fileID: 422451170}
+  vegetableSpawner: {fileID: 422451169}
 --- !u!1 &478008898
 GameObject:
   m_ObjectHideFlags: 0
@@ -2016,6 +2098,8 @@ GameObject:
   - component: {fileID: 478008900}
   - component: {fileID: 478008901}
   - component: {fileID: 478008902}
+  - component: {fileID: 478008904}
+  - component: {fileID: 478008903}
   m_Layer: 0
   m_Name: Square (2)
   m_TagString: Untagged
@@ -2162,6 +2246,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!61 &478008903
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478008898}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &478008904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478008898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09728f8e885b2de43aa3765c6df559ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &479837138 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2699377629915809274, guid: 9c6463317d5917e4898b3187ec0d831d, type: 3}
@@ -2482,7 +2623,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -2508,7 +2649,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2521,7 +2662,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a3f459601e058b469ea6ec8151cd242, type: 3}
   m_Name: 
@@ -2531,6 +2672,7 @@ MonoBehaviour:
   activatePowerPopup: {fileID: 296925652}
   advancedSettingsPopup: {fileID: 1120274608}
   playerController: {fileID: 671460801}
+  anotherPlayer: {fileID: 2129943373}
   activatePowerUp: {fileID: 296925657}
   powerUpSpawner: {fileID: 422451170}
   vegetableSpawner: {fileID: 422451169}
@@ -2920,7 +3062,6 @@ GameObject:
   - component: {fileID: 671460801}
   - component: {fileID: 671460803}
   - component: {fileID: 671460806}
-  - component: {fileID: 671460805}
   - component: {fileID: 671460804}
   m_Layer: 0
   m_Name: Players
@@ -2944,7 +3085,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
+  MaxStep: 10000
   isRed: 1
   playerSpeed: 300
   playerRedGO: {fileID: 2129943364}
@@ -2952,9 +3093,22 @@ MonoBehaviour:
   playerRed: {fileID: 2129943371}
   playerBlue: {fileID: 932244519}
   maxCapacity: 5
+  anotherPlayer: {fileID: 2129943373}
+  gameManager: {fileID: 422451171}
+  playerRedType: 0
+  playerRedCaring: 0
+  playerRedKentangCount: 0
+  playerRedWortelCount: 0
+  playerRedScore: 0
+  playerRedPowerUp: 000000000000000000000000
+  playerBlueType: 0
+  playerBlueCaring: 0
+  playerBlueKentangCount: 0
+  playerBlueWortelCount: 0
+  playerBlueScore: 0
+  playerBluePowerUp: 000000000000000000000000
   powerUpUI: {fileID: 932692669}
   move_action: {fileID: 1710619443237962064, guid: ca5cc84a35b30e04780209a96e9d7d9e, type: 3}
-  cameraFollow: {fileID: 519420034}
 --- !u!4 &671460802
 Transform:
   m_ObjectHideFlags: 0
@@ -3004,24 +3158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DecisionPeriod: 5
-  TakeActionsBetweenDecisions: 1
---- !u!114 &671460805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 671460800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b6042bc9a5d4aa58d931eae49442e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 5000
+  DecisionPeriod: 1
+  TakeActionsBetweenDecisions: 0
 --- !u!114 &671460806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3035,7 +3173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 22
+    VectorObservationSize: 23
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
@@ -3044,11 +3182,11 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: bebb09ce020ce8c4a86ec56d01367b82, type: 3}
-  m_InferenceDevice: 0
+  m_Model: {fileID: 5022602860645237092, guid: 003a25aa59ec8fe4f8048b9e4e662df0, type: 3}
+  m_InferenceDevice: 2
   m_BehaviorType: 0
-  m_BehaviorName: CollectVegetables
-  TeamId: 0
+  m_BehaviorName: CollectVegetables_Blue
+  TeamId: 1
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
@@ -3833,6 +3971,8 @@ GameObject:
   - component: {fileID: 840739518}
   - component: {fileID: 840739519}
   - component: {fileID: 840739520}
+  - component: {fileID: 840739522}
+  - component: {fileID: 840739521}
   m_Layer: 0
   m_Name: Square (1)
   m_TagString: Untagged
@@ -3979,6 +4119,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!61 &840739521
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840739516}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &840739522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840739516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09728f8e885b2de43aa3765c6df559ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &874502754
 GameObject:
   m_ObjectHideFlags: 0
@@ -4213,7 +4410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &903719638
 Transform:
   m_ObjectHideFlags: 0
@@ -7797,6 +7994,8 @@ GameObject:
   - component: {fileID: 1685774284}
   - component: {fileID: 1685774285}
   - component: {fileID: 1685774286}
+  - component: {fileID: 1685774288}
+  - component: {fileID: 1685774287}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -7943,6 +8142,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!61 &1685774287
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685774282}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &1685774288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685774282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09728f8e885b2de43aa3765c6df559ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1686359893
 GameObject:
   m_ObjectHideFlags: 0
@@ -10134,6 +10390,9 @@ GameObject:
   - component: {fileID: 2129943368}
   - component: {fileID: 2129943371}
   - component: {fileID: 2129943372}
+  - component: {fileID: 2129943375}
+  - component: {fileID: 2129943373}
+  - component: {fileID: 2129943374}
   m_Layer: 0
   m_Name: PlayerRed
   m_TagString: PlayerRed
@@ -10274,6 +10533,67 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &2129943373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129943364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a197bc06103ecd4b8552b10befb7b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 10000
+  playerController: {fileID: 671460801}
+--- !u!114 &2129943374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129943364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 1
+  TakeActionsBetweenDecisions: 1
+--- !u!114 &2129943375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129943364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 23
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 2
+      BranchSizes: 
+    VectorActionSize: 02000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 1
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 5022602860645237092, guid: 003a25aa59ec8fe4f8048b9e4e662df0, type: 3}
+  m_InferenceDevice: 2
+  m_BehaviorType: 0
+  m_BehaviorName: CollectVegetables_Red
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
 --- !u!1 &2142526135
 GameObject:
   m_ObjectHideFlags: 0

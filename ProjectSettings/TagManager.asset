@@ -10,6 +10,8 @@ TagManager:
   - Blue
   - Purple
   - Yellow
+  - wortel
+  - kentang
   layers:
   - Default
   - TransparentFX

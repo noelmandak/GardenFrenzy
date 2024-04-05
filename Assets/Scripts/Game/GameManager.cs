@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
 
     public PlayerController playerController;
+    public AnotherPlayer anotherPlayer;
     public ActivatePowerUp activatePowerUp;
     public PowerUpSpawner powerUpSpawner;
     public VegetableSpawner vegetableSpawner;
@@ -31,6 +32,13 @@ public class GameManager : MonoBehaviour
         timer = duration;
    
     }
+
+    public float GetPenalty()
+    {
+        return (timer/duration) * 0.001f;
+    }
+
+    
 
     void Update()
     {
@@ -48,12 +56,25 @@ public class GameManager : MonoBehaviour
                 // Pindah ke scene GameOver
                 //SceneManager.LoadScene("GameOver");
             }
+
+            //playerController.AddRewards(-(Time.deltaTime/duration)*0.001f);
+            //anotherPlayer.AddRewards(-(Time.deltaTime / duration) * 0.001f);
         }
         if (isGameOver)
         {
+            if (playerController.playerRedScore < playerController.playerBlueScore)
+            {
+                playerController.AddRewards(2f);
+                anotherPlayer.AddRewards(-2f);
+            } else if (playerController.playerRedScore > playerController.playerBlueScore)
+            {
+                anotherPlayer.AddRewards(2f);
+                playerController.AddRewards(-2f);
+            } 
             vegetableSpawner.ResetAllVegetables();
             powerUpSpawner.ResetPowerUps();
             playerController.GameOver();
+            anotherPlayer.GameOver();
             timer = 100f;
             isGameOver = false;
             isPaused = false;

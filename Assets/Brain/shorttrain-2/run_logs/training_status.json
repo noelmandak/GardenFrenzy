@@ -1,0 +1,125 @@
+{
+    "CollectVegetables_Red": {
+        "checkpoints": [
+            {
+                "steps": 299999,
+                "file_path": "results\\shorttrain-2\\CollectVegetables_Red\\CollectVegetables_Red-299999.onnx",
+                "reward": 0.0,
+                "creation_time": 1712287877.674784,
+                "auxillary_file_paths": [
+                    "results\\shorttrain-2\\CollectVegetables_Red\\CollectVegetables_Red-299999.pt"
+                ]
+            },
+            {
+                "steps": 349998,
+                "file_path": "results\\shorttrain-2\\CollectVegetables_Red\\CollectVegetables_Red-349998.onnx",
+                "reward": 0.002170001156628132,
+                "creation_time": 1712288869.8985646,
+                "auxillary_file_paths": [
+                    "results\\shorttrain-2\\CollectVegetables_Red\\CollectVegetables_Red-349998.pt"
+                ]
+            },
+            {
+                "steps": 399998,
+                "file_path": "results\\shorttrain-2\\CollectVegetables_Red\\CollectVegetables_Red-399998.onnx",
+                "reward": null,
+                "creation_time": 1712289099.8410962,
+                "auxillary_file_paths": [
+                    "results\\shorttrain-2\\CollectVegetables_Red\\CollectVegetables_Red-399998.pt"
+                ]
+            },
+            {
+                "steps": 449997,
+                "file_path": "results\\shorttrain-2\\CollectVegetables_Red\\CollectVegetables_Red-449997.onnx",
+                "reward": 0.0009999999310821295,
+                "creation_time": 1712289854.192031,
+                "auxillary_file_paths": [
+                    "results\\shorttrain-2\\CollectVegetables_Red\\CollectVegetables_Red-449997.pt"
+                ]
+            },
+            {
+                "steps": 456021,
+                "file_path": "results\\shorttrain-2\\CollectVegetables_Red\\CollectVegetables_Red-456021.onnx",
+                "reward": 0.002096667420119047,
+                "creation_time": 1712289888.6709864,
+                "auxillary_file_paths": [
+                    "results\\shorttrain-2\\CollectVegetables_Red\\CollectVegetables_Red-456021.pt"
+                ]
+            }
+        ],
+        "elo": 1200.9581143914086,
+        "final_checkpoint": {
+            "steps": 456021,
+            "file_path": "results\\shorttrain-2\\CollectVegetables_Red.onnx",
+            "reward": 0.002096667420119047,
+            "creation_time": 1712289888.6709864,
+            "auxillary_file_paths": [
+                "results\\shorttrain-2\\CollectVegetables_Red\\CollectVegetables_Red-456021.pt"
+            ]
+        }
+    },
+    "CollectVegetables_Blue": {
+        "checkpoints": [
+            {
+                "steps": 369996,
+                "file_path": "results\\shorttrain-2\\CollectVegetables_Blue\\CollectVegetables_Blue-369996.onnx",
+                "reward": -0.04037956331613595,
+                "creation_time": 1712289397.3313053,
+                "auxillary_file_paths": [
+                    "results\\shorttrain-2\\CollectVegetables_Blue\\CollectVegetables_Blue-369996.pt"
+                ]
+            },
+            {
+                "steps": 379996,
+                "file_path": "results\\shorttrain-2\\CollectVegetables_Blue\\CollectVegetables_Blue-379996.onnx",
+                "reward": -0.03855992864312915,
+                "creation_time": 1712289436.0661447,
+                "auxillary_file_paths": [
+                    "results\\shorttrain-2\\CollectVegetables_Blue\\CollectVegetables_Blue-379996.pt"
+                ]
+            },
+            {
+                "steps": 389996,
+                "file_path": "results\\shorttrain-2\\CollectVegetables_Blue\\CollectVegetables_Blue-389996.onnx",
+                "reward": -0.03688726475927979,
+                "creation_time": 1712289491.2074184,
+                "auxillary_file_paths": [
+                    "results\\shorttrain-2\\CollectVegetables_Blue\\CollectVegetables_Blue-389996.pt"
+                ]
+            },
+            {
+                "steps": 399996,
+                "file_path": "results\\shorttrain-2\\CollectVegetables_Blue\\CollectVegetables_Blue-399996.onnx",
+                "reward": -0.03518647244737412,
+                "creation_time": 1712289553.0698783,
+                "auxillary_file_paths": [
+                    "results\\shorttrain-2\\CollectVegetables_Blue\\CollectVegetables_Blue-399996.pt"
+                ]
+            },
+            {
+                "steps": 400252,
+                "file_path": "results\\shorttrain-2\\CollectVegetables_Blue\\CollectVegetables_Blue-400252.onnx",
+                "reward": -0.03518647244737412,
+                "creation_time": 1712289888.7716439,
+                "auxillary_file_paths": [
+                    "results\\shorttrain-2\\CollectVegetables_Blue\\CollectVegetables_Blue-400252.pt"
+                ]
+            }
+        ],
+        "elo": 1194.3040591273502,
+        "final_checkpoint": {
+            "steps": 400252,
+            "file_path": "results\\shorttrain-2\\CollectVegetables_Blue.onnx",
+            "reward": -0.03518647244737412,
+            "creation_time": 1712289888.7716439,
+            "auxillary_file_paths": [
+                "results\\shorttrain-2\\CollectVegetables_Blue\\CollectVegetables_Blue-400252.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "2.2.2+cu118"
+    }
+}
