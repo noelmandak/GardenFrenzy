@@ -2,27 +2,32 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.VisualScripting;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
     public GameObject pausePopup;
     public GameObject activatePowerPopup;
     public GameObject advancedSettingsPopup;
+    public Slider timerSlider;
 
-    private float timer = 60f;
+    private float duration = 100f;
+    private float timer;
     private bool isPaused = false;
     private bool isActivatingPower = false;
     private bool isAdvancedSettings = false;
 
     public PlayerController playerController;
     public ActivatePowerUp activatePowerUp;
+    public PowerUpManager powerUpManager;
 
     private void Start()
     {
         isPaused = false;
         isActivatingPower = false;
         isAdvancedSettings = false;
-   
+        timerSlider.maxValue = duration;
+        timer = duration;
     }
 
     void Update()
@@ -32,6 +37,7 @@ public class GameManager : MonoBehaviour
             // Kurangi waktu seiring berjalannya waktu
             timer -= Time.deltaTime;
             UpdateTimerText();
+            timerSlider.value = timer;
 
             // Cek jika waktu habis
             if (timer <= 0f)
@@ -44,8 +50,12 @@ public class GameManager : MonoBehaviour
 
     void UpdateTimerText()
     {
-        // Tampilkan waktu dalam format yang diinginkan pada teks
-        timerText.text = "Time: " + Mathf.Round(timer).ToString();
+        int minutes = Mathf.FloorToInt(timer / 60);
+        int seconds = Mathf.FloorToInt(timer % 60);
+
+        // Format waktu menjadi "mm:ss"
+        string formattedTime = string.Format("{0:00}.{1:00}", minutes, seconds);
+        timerText.text = formattedTime;
     }
 
     // Fungsi untuk memanggil saat tombol pause ditekan
@@ -76,10 +86,26 @@ public class GameManager : MonoBehaviour
         if (currentPowerUpType > 0)
         {
             activatePowerUp.currentPowerUpType = currentPowerUpType;
-            SetActivatePower(true);
-            activatePowerUp.SetCommand();
+            //SetActivatePower(true);
+            //activatePowerUp.SetCommand();
+
+            Debug.Log($"powerup activated {currentPowerUpType}");
+            powerUpManager.ActivatePower(playerController.isRed, currentPowerUpType, GetStar());
+
         }
     }
+    
+    public int GetStar()
+    {
+        return Random.Range(1, 4);
+    }
+
+    public bool IsPaused()
+    {
+        return isPaused;
+    }
+
+
     public void OnAdvancedSettingsButtonClick()
     {
         // Tampilkan popup pause

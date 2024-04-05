@@ -9,11 +9,12 @@ using static UnityEngine.UI.ScrollRect;
 public class PlayerController : MonoBehaviour
 {
     public bool isRed = true;
-    public float playerSpeed = 300.0f;
+    public float playerSpeed = 250.0f;
     public Rigidbody2D playerRed;
     public Rigidbody2D playerBlue;
     private Rigidbody2D player;
     public int maxCapacity = 5;
+    public PowerUpManager PowerUpManager;
 
     private int playerRedType = 0;
     private int playerRedCaring = 0; //0 is none, 1 is kentang, 2 is wortel
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private int playerRedWortelCount = 0;
     private int playerRedScore = 0; 
     private int[] playerRedPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
+    public float playerRedSpeed = 250.0f;
 
 
 
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private int playerBlueWortelCount = 0;
     private int playerBlueScore = 0;
     private int[] playerBluePowerUp = new int[] { 0, 0, 0 };
+    public float playerBlueSpeed = 250.0f;
 
     private PlayerUI playerUI;
     public PowerUpUI powerUpUI;
@@ -51,24 +54,43 @@ public class PlayerController : MonoBehaviour
     }
     private void MoveObject(Vector2 movement)
     {
-        player = isRed ? playerRed : playerBlue;
-        player.velocity = playerSpeed * Time.deltaTime * movement;
-        cameraFollow.UpdateCamera(player.transform);
+        if (isRed)
+        {
+            playerRed.velocity = playerRedSpeed * Time.deltaTime * movement;
+            cameraFollow.UpdateCamera(playerRed.transform);
+        } else
+        {
+            playerBlue.velocity = playerBlueSpeed * Time.deltaTime * movement;
+            cameraFollow.UpdateCamera(playerBlue.transform);
+        }
     }
 
+    public void SetPlayerSpeed(bool isPlayerRed, float speed)
+    {
+        if (isPlayerRed) playerRedSpeed = speed;
+        else playerBlueSpeed = speed;
+    }
     public void SetPlayerSpeed(float speed)
     {
-        playerSpeed = speed;
+        if (isRed) playerRedSpeed = speed;
+        else playerBlueSpeed = speed;
     }
 
+    public float GetPlayerSpeed(bool isPlayerRed)
+    {
+        if (isPlayerRed) return playerRedSpeed;
+        return playerBlueSpeed;
+    }
     public float GetPlayerSpeed()
     {
-        return playerSpeed;
+        if (isRed) return playerRedSpeed;
+        return playerBlueSpeed;
     }
 
     public void ChangePlayer()
     {
         isRed = !isRed;
+        UpdatePowerUpButtonCurrentPlayer();
     }
 
     public bool CollectPowerUp(bool isPlayerRed, int powerUpType)
@@ -101,6 +123,12 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void UpdatePowerUpButtonCurrentPlayer()
+    {
+        if (isRed) powerUpUI.UpdatePowerUpButton(playerRedPowerUp);
+        else powerUpUI.UpdatePowerUpButton(playerBluePowerUp);
     }
     public bool CollectVegetable(bool isPlayerRed, int vegetableType)
     {

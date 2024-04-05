@@ -8,6 +8,7 @@ public class PowerUpUI : MonoBehaviour
 
     public void UpdatePowerUpButton(int[] playerPowerUps)
     {
+        Debug.Log($"Upate button {playerPowerUps[0]} {playerPowerUps[1]} {playerPowerUps[2]}");
         for (int i = 0; i < 3; i++)
         {
             int powerUpType = playerPowerUps[i];
