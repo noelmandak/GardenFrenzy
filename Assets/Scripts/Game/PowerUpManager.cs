@@ -97,7 +97,7 @@ public class PowerUpManager : MonoBehaviour
         {
 
             Debug.Log(playerController.GetPlayerSpeed(!playerController.isRed));
-            float speedMultiplier = 2f;
+            float speedMultiplier = 5f;
             playerController.SetPlayerSpeed(!isPlayerRed, playerController.GetPlayerSpeed(!isPlayerRed) / speedMultiplier);
             Debug.Log(playerController.GetPlayerSpeed(!playerController.isRed));
         }else if (powerUpType == 3)
@@ -129,7 +129,7 @@ public class PowerUpManager : MonoBehaviour
         else if (powerUpType == 2)
         {
             Debug.Log(playerController.GetPlayerSpeed(playerController.isRed));
-            playerController.SetPlayerSpeed(!isPlayerRed, playerController.GetPlayerSpeed(!isPlayerRed) * 2f);
+            playerController.SetPlayerSpeed(!isPlayerRed, playerController.GetPlayerSpeed(!isPlayerRed) * 5f);
             Debug.Log(playerController.GetPlayerSpeed(playerController.isRed));
         }
         else if (powerUpType == 3)
