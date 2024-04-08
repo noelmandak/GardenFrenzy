@@ -9,12 +9,15 @@ using static UnityEngine.UI.ScrollRect;
 public class PlayerController : MonoBehaviour
 {
     public bool isRed = true;
-    public float playerSpeed = 200.0f;
+    public float playerSpeed = 5;
     public Rigidbody2D playerRed;
     public Rigidbody2D playerBlue;
     private Rigidbody2D player;
     public int maxCapacity = 5;
     public PowerUpManager PowerUpManager;
+
+    public GameObject FearFieldRed;
+    public GameObject FearFieldBlue;
 
     private int playerRedType = 0;
     private int playerRedCaring = 0; //0 is none, 1 is kentang, 2 is wortel
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private int playerRedScore = 0; 
     private int[] playerRedPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
     public float playerRedSpeed;
+    public bool isPlayerRedDoublePoin = false;
 
 
 
@@ -33,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private int playerBlueScore = 0;
     private int[] playerBluePowerUp = new int[] { 0, 0, 0 };
     public float playerBlueSpeed;
+    public bool isPlayerBlueDoublePoin = false;
 
     private PlayerUI playerUI;
     public PowerUpUI powerUpUI;
@@ -58,11 +63,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isRed)
         {
-            playerRed.velocity = playerRedSpeed * Time.deltaTime * movement;
+            playerRed.velocity = playerRedSpeed * movement;
             cameraFollow.UpdateCamera(playerRed.transform);
         } else
         {
-            playerBlue.velocity = playerBlueSpeed * Time.deltaTime * movement;
+            playerBlue.velocity = playerBlueSpeed * movement;
             cameraFollow.UpdateCamera(playerBlue.transform);
         }
     }
@@ -178,7 +183,7 @@ public class PlayerController : MonoBehaviour
                 if (boxType == 1)
                 {
                     playerRedKentangCount += playerRedCaring;
-                    playerRedScore += point * playerRedCaring;
+                    playerRedScore += point * playerRedCaring * (isPlayerRedDoublePoin?2:1);
                     playerRedCaring = 0;
                     playerRedType = 0;
                     playerUI.UpdateUI(isPlayerRed, 0, playerRedCaring);
@@ -189,7 +194,7 @@ public class PlayerController : MonoBehaviour
                 if (boxType == 2)
                 {
                     playerRedWortelCount += playerRedCaring;
-                    playerRedScore += point * playerRedCaring;
+                    playerRedScore += point * playerRedCaring * (isPlayerRedDoublePoin ? 2 : 1);
                     playerRedCaring = 0;
                     playerRedType = 0;
                     playerUI.UpdateUI(isPlayerRed, 0, playerRedCaring);
@@ -205,7 +210,7 @@ public class PlayerController : MonoBehaviour
                 if (boxType == 1)
                 {
                     playerBlueKentangCount += playerBlueCaring;
-                    playerBlueScore += point * playerBlueCaring;
+                    playerBlueScore += point * playerBlueCaring * (isPlayerBlueDoublePoin ? 2 : 1);
                     playerBlueCaring = 0;
                     playerBlueType = 0;
                     playerUI.UpdateUI(isPlayerRed, 0, playerBlueCaring);
@@ -216,7 +221,7 @@ public class PlayerController : MonoBehaviour
                 if (boxType == 2)
                 {
                     playerBlueWortelCount += playerBlueCaring;
-                    playerBlueScore += point * playerBlueCaring;
+                    playerBlueScore += point * playerBlueCaring * (isPlayerBlueDoublePoin ? 2 : 1);
                     playerBlueCaring = 0;
                     playerBlueType = 0;
                     playerUI.UpdateUI(isPlayerRed, 0, playerBlueCaring);
@@ -240,7 +245,7 @@ public class PlayerController : MonoBehaviour
 
     public bool gameOverChecker()
     {
-        return (playerRedScore + playerBlueScore) == 300;
+        return (playerRedKentangCount + playerRedWortelCount + playerBlueKentangCount + playerBlueWortelCount) == 25;
     }
 
     public void claimBonusTimePoint(int bonusPoint)
@@ -270,5 +275,18 @@ public class PlayerController : MonoBehaviour
             powerUpUI.UpdatePowerUpButton(playerBluePowerUp);
             return powerUpType;
         }
+    }
+
+    public void SetDoublePoints(bool isPlayerRed, bool active)
+    {
+        if (isPlayerRed) isPlayerRedDoublePoin = active;
+        else isPlayerBlueDoublePoin = active;
+    }
+
+
+    public void SetFearField(bool isPlayerRed, bool active)
+    {
+        if (isPlayerRed) FearFieldRed.SetActive(active);
+        else FearFieldBlue.SetActive(active);
     }
 }
