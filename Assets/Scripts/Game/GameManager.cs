@@ -2,24 +2,32 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.VisualScripting;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
     public GameObject pausePopup;
     public GameObject activatePowerPopup;
     public GameObject advancedSettingsPopup;
+    public Slider timerSlider;
 
-    private float timer = 60f;
+    private float duration = 100f;
+    private float timer;
     private bool isPaused = false;
     private bool isActivatingPower = false;
     private bool isAdvancedSettings = false;
+
+    public PlayerController playerController;
+    public ActivatePowerUp activatePowerUp;
+    public PowerUpManager powerUpManager;
 
     private void Start()
     {
         isPaused = false;
         isActivatingPower = false;
         isAdvancedSettings = false;
-   
+        timerSlider.maxValue = duration;
+        timer = duration;
     }
 
     void Update()
@@ -29,6 +37,7 @@ public class GameManager : MonoBehaviour
             // Kurangi waktu seiring berjalannya waktu
             timer -= Time.deltaTime;
             UpdateTimerText();
+            timerSlider.value = timer;
 
             // Cek jika waktu habis
             if (timer <= 0f)
@@ -36,14 +45,32 @@ public class GameManager : MonoBehaviour
                 // Pindah ke scene GameOver
                 SceneManager.LoadScene("GameOver");
             }
+            if (playerController.gameOverChecker())
+            { 
+                int bonusPoint = (int)(duration-timer)*2;
+                playerController.claimBonusTimePoint(bonusPoint);
+                SceneManager.LoadScene("GameOver");
+            }
         }
     }
 
     void UpdateTimerText()
     {
-        // Tampilkan waktu dalam format yang diinginkan pada teks
-        timerText.text = "Time: " + Mathf.Round(timer).ToString();
+        if (timer>=0)
+        {
+            int minutes = Mathf.FloorToInt(timer / 60);
+            int seconds = Mathf.FloorToInt(timer % 60);
+
+            // Format waktu menjadi "mm:ss"
+            string formattedTime = string.Format("{0:00}.{1:00}", minutes, seconds);
+            timerText.text = formattedTime;
+        } else
+        {
+            timerText.text = "00:00";
+        }
     }
+
+    
 
     // Fungsi untuk memanggil saat tombol pause ditekan
     public void OnPauseButtonClick()
@@ -66,11 +93,33 @@ public class GameManager : MonoBehaviour
         SetActivatePower(false);
         SetAdvancedSettings(false);
     }
-    public void OnActivatePowerButtonClick()
+    public void OnActivatePowerButtonClick(int buttonIndex)
     {
         // Tampilkan popup pause
-        SetActivatePower(true);
+        int currentPowerUpType = playerController.ActivatePower(buttonIndex);
+        if (currentPowerUpType > 0)
+        {
+            activatePowerUp.currentPowerUpType = currentPowerUpType;
+            //SetActivatePower(true);
+            //activatePowerUp.SetCommand();
+
+            Debug.Log($"powerup activated {currentPowerUpType}");
+            powerUpManager.ActivatePower(playerController.isRed, currentPowerUpType, GetStar());
+
+        }
     }
+    
+    public int GetStar()
+    {
+        return Random.Range(1, 4);
+    }
+
+    public bool IsPaused()
+    {
+        return isPaused;
+    }
+
+
     public void OnAdvancedSettingsButtonClick()
     {
         // Tampilkan popup pause
