@@ -574,10 +574,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1686359894}
   m_HandleRect: {fileID: 2067255256}
   m_Direction: 0
-  m_MinValue: 100
-  m_MaxValue: 1000
+  m_MinValue: 0
+  m_MaxValue: 20
   m_WholeNumbers: 1
-  m_Value: 100
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1400,7 +1400,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 519420033}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: OnQuitButtonClick
+        m_MethodName: OnExitButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3063,6 +3063,7 @@ GameObject:
   - component: {fileID: 671460803}
   - component: {fileID: 671460806}
   - component: {fileID: 671460804}
+  - component: {fileID: 671460807}
   m_Layer: 0
   m_Name: Players
   m_TagString: Player
@@ -3087,7 +3088,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 10000
   isRed: 1
-  playerSpeed: 300
+  playerSpeed: 4
   playerRedGO: {fileID: 2129943364}
   playerBlueGO: {fileID: 932244517}
   playerRed: {fileID: 2129943371}
@@ -3182,7 +3183,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 003a25aa59ec8fe4f8048b9e4e662df0, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: f178f1bce1c182f43a2587af1c48a442, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: CollectVegetables_Blue
@@ -3190,6 +3191,22 @@ MonoBehaviour:
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
+--- !u!114 &671460807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671460800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 0
+  NumStepsToRecord: 0
+  DemonstrationName: blue_demo
+  DemonstrationDirectory: 
 --- !u!1 &691191084
 GameObject:
   m_ObjectHideFlags: 0
@@ -8232,7 +8249,7 @@ RectTransform:
   m_Father: {fileID: 1443443793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0.25, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8828,7 +8845,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Speed: 1000'
+  m_text: 'Speed: 5'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10330,8 +10347,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 919245812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0.25, y: 0}
+  m_AnchorMax: {x: 0.25, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10586,7 +10603,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 003a25aa59ec8fe4f8048b9e4e662df0, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: fa01992dd3a7a714b897032f0ce16c7c, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: CollectVegetables_Red

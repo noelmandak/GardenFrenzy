@@ -13,7 +13,7 @@ using Unity.MLAgents.Sensors;
 public class PlayerController : Agent
 {
     public bool isRed = true;
-    public float playerSpeed = 300.0f;
+    public float playerSpeed = 4.0f;
     public GameObject playerRedGO;
     public GameObject playerBlueGO;
     public Rigidbody2D playerRed;
@@ -76,13 +76,21 @@ public class PlayerController : Agent
         var y = actions.ContinuousActions[1];
         MovePlayer(!isRed, new Vector2(x, y));
     }
-    
+
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
+        Vector2 movement = move_action.action.ReadValue<Vector2>();
+        continuousActions[0] = movement.x;
+        continuousActions[1] = movement.y;
+    }
+
     private void Start()
     {
         playerUI = GetComponent<PlayerUI>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector2 movement = move_action.action.ReadValue<Vector2>();
         MoveObject(movement);
@@ -121,14 +129,14 @@ public class PlayerController : Agent
     private void MoveObject(Vector2 movement)
     {
         player = isRed ? playerRed : playerBlue;
-        player.velocity = playerSpeed * Time.deltaTime * movement;
+        player.velocity = playerSpeed * movement;
         //cameraFollow.UpdateCamera(player.transform);
     }
 
     public void MovePlayer(bool isPlayerRed, Vector2 movement)
     {
         player = isPlayerRed ? playerRed : playerBlue;
-        player.velocity = playerSpeed * Time.deltaTime * movement;
+        player.velocity = playerSpeed * movement;
     }
 
     public void SetPlayerSpeed(float speed)

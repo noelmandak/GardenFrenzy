@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 public class GameManager : MonoBehaviour
 {
@@ -35,7 +37,8 @@ public class GameManager : MonoBehaviour
 
     public float GetPenalty()
     {
-        return (timer/duration) * 0.001f;
+        //return (timer/duration) * 0.001f;
+        return 0;
     }
 
     
@@ -110,6 +113,7 @@ public class GameManager : MonoBehaviour
         SetActivatePower(false);
         SetAdvancedSettings(false);
     }
+
     public void OnActivatePowerButtonClick(int buttonIndex)
     {
         // Tampilkan popup pause
@@ -162,5 +166,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = isPaused ? 0f : 1f;
 
         advancedSettingsPopup.SetActive(isAdvancedSettings);
+    }
+
+    public void OnExitButtonClick()
+    {
+        Application.Quit();
     }
 }
