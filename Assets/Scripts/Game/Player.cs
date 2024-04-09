@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
 
-public class Player : MonoBehaviour
+public class Player : Agent
 {
     [SerializeField]
     private bool isRed;
 
+    private float initialPlayerSpeed = 0;
+    private Vector3 initialPosition;
     private float playerSpeed = 0;
     private int maxCapacity = 0 ;
     private int vegetableType = 0;  //0 = none, 1 = potato, 2 = carot
@@ -17,15 +22,72 @@ public class Player : MonoBehaviour
     private int[] playerPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
     private bool isDoublePointActive = false;
 
+    public GameObject potatoBox;
+    public GameObject carotBox;
+
     [SerializeField]
     private GameObject FearField;
 
+    private void Start()
+    {
+        initialPosition = gameObject.transform.position;
+    }
+
     public void Init(float speed, int capacity)
     {
+        initialPlayerSpeed = speed;
         playerSpeed = speed;
         maxCapacity = capacity;
     }
 
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        sensor.AddObservation(!isRed); 
+        sensor.AddObservation(vegetableType);
+        sensor.AddObservation(playerCaring);
+        sensor.AddObservation(potatoCount);
+        sensor.AddObservation(carotCount);
+        sensor.AddObservation(playerScore);
+        sensor.AddObservation(new Vector3(playerPowerUp[0], playerPowerUp[1], playerPowerUp[2]));
+
+        Vector3 dirToPotatoToBox = (potatoBox.transform.position - transform.position).normalized;
+        Vector3 dirToCarotToBox = (carotBox.transform.position - transform.position).normalized;
+        sensor.AddObservation(new Vector2(dirToPotatoToBox.x, dirToPotatoToBox.y));
+        sensor.AddObservation(new Vector2(dirToCarotToBox.x, dirToCarotToBox.y));
+    }
+    public override void OnActionReceived(ActionBuffers actions)
+    {
+        //Debug.Log(actions.ContinuousActions[0]);
+        //Debug.Log(actions.ContinuousActions[1]);
+        var x = actions.ContinuousActions[0];
+        var y = actions.ContinuousActions[1];
+        MovePlayer(new Vector2(x, y));
+
+        if (actions.DiscreteActions[0]>0) ActivatePower(0);
+        if (actions.DiscreteActions[1]>0) ActivatePower(1);
+        if (actions.DiscreteActions[2]>0) ActivatePower(2);
+
+    }
+
+    public void ResetPlayer()
+    {
+        playerSpeed = initialPlayerSpeed;
+        maxCapacity = 0;
+        vegetableType = 0;  //0 = none, 1 = potato, 2 = carot
+        playerCaring = 0;
+        potatoCount = 0;
+        carotCount = 0;
+        playerScore = 0;
+        playerPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
+        isDoublePointActive = false;
+        gameObject.transform.position = initialPosition;
+        Debug.Log("player reseted");
+    }
+    public void GameOver()
+    {
+        EndEpisode();
+        ResetPlayer();
+    }
     public float PlayerSpeed
     {
         get { return playerSpeed; }
@@ -68,6 +130,7 @@ public class Player : MonoBehaviour
         {
             if (playerPowerUp[i] != 0) continue;
             playerPowerUp[i] = powerUpType;
+            AddReward(0.05f);
             return true;
         }
         return false;
@@ -84,6 +147,7 @@ public class Player : MonoBehaviour
             if (this.playerCaring < maxCapacity)
             {
                 this.playerCaring++;
+                AddReward(0.01f);
                 return true;
             }
         }
@@ -96,9 +160,11 @@ public class Player : MonoBehaviour
         {
             if (boxType == 1) potatoCount += playerCaring; // Kotak adalah kentang
             if (boxType == 2) carotCount += playerCaring;// Kotak adalah wortel
-            playerScore += point * playerCaring * (isDoublePointActive ? 2 : 1);
+            int score = point * playerCaring * (isDoublePointActive ? 2 : 1);
+            playerScore += score;
             playerCaring = 0;
             vegetableType = 0;
+            AddReward(score*0.001f);
             return true;
 
         }

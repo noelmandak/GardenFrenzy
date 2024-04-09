@@ -29,7 +29,6 @@ public class PowerUpManager : MonoBehaviour
     }
     private IEnumerator RemovePowerUpAfterDuration(PowerUpClass powerUp)
     {
-        Debug.Log("masuk sini");
         while (!gameManager.IsPaused())         {
             yield return new WaitForSeconds(powerUp.duration);
             
@@ -85,7 +84,6 @@ public class PowerUpManager : MonoBehaviour
 
     private void ApplyPowerUpEffect(bool isPlayerRed, int powerUpType)
     {
-        Debug.Log($"Acctivate {isPlayerRed} {powerUpType}");
         if (powerUpType == 1)
         {
             float speedMultiplier = 2f;
@@ -106,7 +104,6 @@ public class PowerUpManager : MonoBehaviour
     }
     private void RemovePowerUpFromPlayer(bool isPlayerRed, int powerUpType)
     {
-        Debug.Log($"Remove {isPlayerRed} {powerUpType}");
         if (powerUpType == 1)
         {
             float speedMultiplier = 1/2f;

@@ -10,6 +10,8 @@ TagManager:
   - Blue
   - Purple
   - Yellow
+  - Potato
+  - Carot
   layers:
   - Default
   - TransparentFX
@@ -18,8 +20,8 @@ TagManager:
   - Water
   - UI
   - Minimap
-  - 
-  - 
+  - PlayerRed
+  - PlayerBlue
   - 
   - 
   - 
