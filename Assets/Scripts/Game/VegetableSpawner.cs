@@ -4,36 +4,32 @@ using UnityEngine;
 
 public class VegetableSpawner : MonoBehaviour
 {
-    public GameObject kentangPrefab;
-    public GameObject wortelPrefab;
-    public int jumlahKentang = 20; // Jumlah kentang yang akan di-spawn
-    public int jumlahWortel = 20; // Jumlah wortel yang akan di-spawn
+    public GameObject potatoPrefab;
+    public GameObject carotPrefab;
+    private int _totalPotato = 0; // Jumlah potato yang akan di-spawn
+    private int _totalCarot = 0; // Jumlah carot yang akan di-spawn
 
-    private GameObject[] spawnedVegetables; // Array untuk menyimpan semua objek kentang dan wortel yang sudah di-spawn
+    private GameObject[] spawnedVegetables; // Array untuk menyimpan semua objek potato dan carot yang sudah di-spawn
 
-    void Start()
+    public void Init(int totalPotato, int totalCarot)
     {
+        _totalPotato = totalPotato;
+        _totalCarot = totalCarot;
         SpawnVegetables();
     }
 
     void SpawnVegetables()
     {
-        // Menentukan jumlah titik spawn secara acak di dalam persegi
-        for (int i = 0; i < jumlahKentang + jumlahWortel; i++)
+        for (int i = 0; i < _totalPotato + _totalCarot; i++)
         {
-            float randomX = Random.Range(-18f, 18f);
-            float randomY = Random.Range(-18f, 18f);
+            float randomX = Random.Range(-15f, 15f);
+            float randomY = Random.Range(-15f, 15f);
             Vector3 spawnPosition = new Vector3(randomX, randomY, 0f);
 
-            // Memilih prefab yang akan di-spawn
-            bool isCarrot = (i < jumlahWortel);
+            bool isCarrot = (i < _totalCarot);
 
-            GameObject prefabToSpawn = isCarrot ? wortelPrefab : kentangPrefab;
-
-            // Menyimpan objek yang telah di-spawn ke dalam variabel
+            GameObject prefabToSpawn = isCarrot ? carotPrefab : potatoPrefab;
             GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-
-            // Menambahkan komponen Vegetable pada objek yang di-spawn
             Vegetable vegetableComponent = spawnedObject.AddComponent<Vegetable>();
             vegetableComponent.isCarrot = isCarrot;
         }
@@ -41,17 +37,16 @@ public class VegetableSpawner : MonoBehaviour
 
     public void RemoveAllVegetables()
     {
-        // Menghapus semua objek kentang dan wortel yang sudah di-spawn
-        spawnedVegetables = GameObject.FindGameObjectsWithTag("Kentang");
-        foreach (GameObject kentang in spawnedVegetables)
+        spawnedVegetables = GameObject.FindGameObjectsWithTag("Potato");
+        foreach (GameObject potato in spawnedVegetables)
         {
-            Destroy(kentang);
+            Destroy(potato);
         }
 
-        spawnedVegetables = GameObject.FindGameObjectsWithTag("Wortel");
-        foreach (GameObject wortel in spawnedVegetables)
+        spawnedVegetables = GameObject.FindGameObjectsWithTag("Carot");
+        foreach (GameObject carot in spawnedVegetables)
         {
-            Destroy(wortel);
+            Destroy(carot);
         }
     }
 }

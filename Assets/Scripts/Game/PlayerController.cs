@@ -247,7 +247,6 @@ public class PlayerController : MonoBehaviour
     {
         return (playerRedKentangCount + playerRedWortelCount + playerBlueKentangCount + playerBlueWortelCount) == 25;
     }
-
     public void claimBonusTimePoint(int bonusPoint)
     {
         if (playerRedScore >  playerBlueScore) playerRedScore += bonusPoint;

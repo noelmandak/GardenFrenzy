@@ -9,15 +9,13 @@ public class PowerUp : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("PlayerRed") || other.CompareTag("PlayerBlue"))
+        Player player = other.GetComponent<Player>();
+        if (player == null) player = other.GetComponentInParent<Player>(); // Example: Fearfield have the PlayerTag but not have the Player component, although its parent does.
+        if (player != null)
         {
-            PlayerController player = other.GetComponentInParent<PlayerController>();
-            if (player != null)
+            if (player.CollectPowerUp(powerUpType))
             {
-                if (player.CollectPowerUp(other.CompareTag("PlayerRed"), powerUpType))
-                {
-                    Destroy(gameObject);
-                }
+                Destroy(gameObject);
             }
         }
     }

@@ -10,21 +10,22 @@ public class AdvancedSettingsUI : MonoBehaviour
     
     public TextMeshProUGUI changePlayerButtonText;
 
-    public PlayerController playerController;
+    private GameManager gameManager;
     public Slider playerSpeedSlider;
 
 
     private void Start()
     {
-        speedText.text = "Speed: " + playerController.GetPlayerSpeed().ToString();
-        playerSpeedSlider.value = playerController.GetPlayerSpeed();
-        playerSpeedSlider.onValueChanged.AddListener((float value) => playerController.SetPlayerSpeed(value));
+        speedText.text = "Speed: " + gameManager.GetCurrentPlayer().PlayerSpeed.ToString();
+        playerSpeedSlider.value = gameManager.GetCurrentPlayer().PlayerSpeed;
+        playerSpeedSlider.onValueChanged.AddListener((float value) => gameManager.GetCurrentPlayer().PlayerSpeed = value);
     }
 
     // Update is called once per frame
     void Update()
     {
-        speedText.text = "Speed: " + playerController.GetPlayerSpeed().ToString();
-        changePlayerButtonText.text = "Play " + (playerController.isRed ? "Blue" : "Red");
+        Debug.Log(gameManager.GetCurrentPlayer().PlayerSpeed.ToString());
+        speedText.text = "Speed: " + gameManager.GetCurrentPlayer().PlayerSpeed.ToString();
+        changePlayerButtonText.text = "Play " + (gameManager.isCurretPlayerIsRed ? "Blue" : "Red");
     }
 }

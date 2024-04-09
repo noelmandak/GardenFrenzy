@@ -8,6 +8,7 @@ public class ActivatePowerUp : MonoBehaviour
 
     public int currentPowerUpType;
     public TextMeshProUGUI commandText;
+    public GameObject[] StarsGO;
 
     public void SetCommand()
     {
@@ -29,5 +30,32 @@ public class ActivatePowerUp : MonoBehaviour
 
         }
         commandText.text = $"\"Ayam\" with {emotion} Emotion";
+    }
+
+    public void SetStar(int star)
+    {
+        switch (star)
+        {
+            case 0:
+                StarsGO[0].SetActive(false); 
+                StarsGO[1].SetActive(false); 
+                StarsGO[2].SetActive(false); 
+                break;
+            case 1:
+                StarsGO[0].SetActive(true); 
+                StarsGO[1].SetActive(false); 
+                StarsGO[2].SetActive(false); 
+                break;
+            case 2:
+                StarsGO[0].SetActive(true); 
+                StarsGO[1].SetActive(true); 
+                StarsGO[2].SetActive(false); 
+                break;
+            case 3:
+                StarsGO[0].SetActive(true); 
+                StarsGO[1].SetActive(true); 
+                StarsGO[2].SetActive(true); 
+                break;
+        }
     }
 }

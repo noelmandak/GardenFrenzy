@@ -19,7 +19,6 @@ public class PowerUpUI : MonoBehaviour
 
     public void UpdatePowerUpButton(int[] playerPowerUps)
     {
-        Debug.Log($"Upate button {playerPowerUps[0]} {playerPowerUps[1]} {playerPowerUps[2]}");
         for (int i = 0; i < 3; i++)
         {
             int powerUpType = playerPowerUps[i];
@@ -69,9 +68,6 @@ public class PowerUpUI : MonoBehaviour
     }
     public void UpdateMessage(bool isPlayerRed, int[] powerUpType, float[] duration)
     {
-        Debug.Log(isPlayerRed);
-        Debug.Log(string.Join(", ", powerUpType));
-        Debug.Log(string.Join(", ", duration));
         string message = "";
         for (int i=0; i<powerUpType.Length;i++)
         {

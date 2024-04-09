@@ -6,13 +6,16 @@ using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
 {
-    
-    public PlayerController playerController;
     public PowerUpUI powerUpUI;
     private List<PowerUpClass> activePowerUps = new();
-    public GameManager gameManager;
     public GameObject[] RedPUEffect;
     public GameObject[] BluePUEffect;
+    private GameManager gameManager;
+
+    private void Start()
+    {
+        gameManager = GetComponent<GameManager>();
+    }
 
     public void ActivatePower(bool isPlayerRed, int powerUpType, int star)
     {
@@ -20,20 +23,16 @@ public class PowerUpManager : MonoBehaviour
 
         PowerUpClass powerUp = new(powerUpType, duration, isPlayerRed);
         activePowerUps.Add(powerUp);
-        Debug.Log($"powerup activated {powerUpType} stars {star}");
 
-        // Terapkan efek dari power up
         ApplyPowerUpEffect(isPlayerRed, powerUpType);
-        // Pastikan power up dihapus dari player ketika durasinya berakhir
         StartCoroutine(RemovePowerUpAfterDuration(powerUp));
     }
     private IEnumerator RemovePowerUpAfterDuration(PowerUpClass powerUp)
     {
-        while (!gameManager.IsPaused()) // Hanya lakukan penghitungan waktu jika permainan tidak dijeda
-        {
+        Debug.Log("masuk sini");
+        while (!gameManager.IsPaused())         {
             yield return new WaitForSeconds(powerUp.duration);
-
-            // Hapus power up dari player setelah durasinya berakhir
+            
             RemovePowerUpFromPlayer(powerUp.isRed, powerUp.powerUpType);
             break;
         }
@@ -48,7 +47,7 @@ public class PowerUpManager : MonoBehaviour
 
         for (int i = activePowerUps.Count - 1; i >= 0; i--)
         {
-            if (!gameManager.IsPaused()) // Hanya kurangi waktu jika permainan tidak dijeda
+            if (!gameManager.IsPaused()) 
             {
                 activePowerUps[i].UpdateDuration(Time.deltaTime);
                 if (activePowerUps[i].isRed) 
@@ -65,7 +64,6 @@ public class PowerUpManager : MonoBehaviour
 
             if (activePowerUps[i].IsExpired())
             {
-                // Hapus power up yang telah berakhir
                 activePowerUps.RemoveAt(i);
             }
 
@@ -87,60 +85,45 @@ public class PowerUpManager : MonoBehaviour
 
     private void ApplyPowerUpEffect(bool isPlayerRed, int powerUpType)
     {
-        // Terapkan efek power up sesuai dengan deskripsi yang diberikan
-        // Contoh: jika powerUpType adalah 1 (Angry), tingkatkan kecepatan player merah
+        Debug.Log($"Acctivate {isPlayerRed} {powerUpType}");
         if (powerUpType == 1)
         {
             float speedMultiplier = 2f;
-            playerController.SetPlayerSpeed(isPlayerRed, playerController.GetPlayerSpeed(isPlayerRed) * speedMultiplier);
+            (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).SetPlayerSpeed(speedMultiplier);
         }else if (powerUpType == 2)
         {
-
-            Debug.Log(playerController.GetPlayerSpeed(!playerController.isRed));
-            float speedMultiplier = 5f;
-            playerController.SetPlayerSpeed(!isPlayerRed, playerController.GetPlayerSpeed(!isPlayerRed) / speedMultiplier);
-            Debug.Log(playerController.GetPlayerSpeed(!playerController.isRed));
+            float speedMultiplier = 1/5f;
+            (isPlayerRed ? gameManager.GetPlayerBlue() : gameManager.GetPlayerRed()).SetPlayerSpeed(speedMultiplier);
         }else if (powerUpType == 3)
         {
-            playerController.SetFearField(isPlayerRed, true);
-
+            (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).SetFearField(true);
         }
         else if (powerUpType == 4)
         {
-            Debug.Log($"activate red{playerController.isPlayerRedDoublePoin} ~ blue{playerController.isPlayerBlueDoublePoin}");
-            playerController.SetDoublePoints(isPlayerRed,true);
-            Debug.Log($"activate red{playerController.isPlayerRedDoublePoin} ~ blue{playerController.isPlayerBlueDoublePoin}");
+            (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).SetDoublePoints(true);
         }
-        // Implementasikan efek-efek power up lainnya sesuai kebutuhan Anda
         SetPUEffect(isPlayerRed,powerUpType,true);
     }
     private void RemovePowerUpFromPlayer(bool isPlayerRed, int powerUpType)
     {
-        // Implementasikan penghapusan power up dari player sesuai dengan kebutuhan Anda
-        // Contoh: jika powerUpType adalah 1 (Angry), kurangi kecepatan player merah kembali ke nilai semula
-        Debug.Log($"powerup deactivated {powerUpType}");
+        Debug.Log($"Remove {isPlayerRed} {powerUpType}");
         if (powerUpType == 1)
         {
-            Debug.Log(playerController.GetPlayerSpeed(playerController.isRed));
-            playerController.SetPlayerSpeed(isPlayerRed, playerController.GetPlayerSpeed(isPlayerRed) / 2f);
-            Debug.Log(playerController.GetPlayerSpeed(playerController.isRed));
-        } 
-        // Implementasikan penghapusan power up lainnya sesuai kebutuhan Anda
+            float speedMultiplier = 1/2f;
+            (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).SetPlayerSpeed(speedMultiplier);
+        }
         else if (powerUpType == 2)
         {
-            Debug.Log(playerController.GetPlayerSpeed(playerController.isRed));
-            playerController.SetPlayerSpeed(!isPlayerRed, playerController.GetPlayerSpeed(!isPlayerRed) * 5f);
-            Debug.Log(playerController.GetPlayerSpeed(playerController.isRed));
+            float speedMultiplier = 5f;
+            (isPlayerRed ? gameManager.GetPlayerBlue() : gameManager.GetPlayerRed()).SetPlayerSpeed(speedMultiplier);
         }
         else if (powerUpType == 3)
         {
-            playerController.SetFearField(isPlayerRed,false);
+            (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).SetFearField(false);
         }
         else if (powerUpType == 4)
         {
-            Debug.Log($"deactive red{playerController.isPlayerRedDoublePoin} ~ blue{playerController.isPlayerBlueDoublePoin}");
-            playerController.SetDoublePoints(isPlayerRed,false);
-            Debug.Log($"deactive red{playerController.isPlayerRedDoublePoin} ~ blue{playerController.isPlayerBlueDoublePoin}");
+            (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).SetDoublePoints(false);
         }
         SetPUEffect(isPlayerRed, powerUpType, false);
     }

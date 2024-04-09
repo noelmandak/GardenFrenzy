@@ -7,14 +7,13 @@ public class PowerUpSpawner : MonoBehaviour
     public GameObject[] powerUpPrefabs;
     private GameObject[] spawnedPowerUps = new GameObject[4];
 
-    void Start()
+    public void Init()
     {
         SpawnPowerUps();
     }
 
     void SpawnPowerUps()
     {
-        // Menentukan jumlah titik spawn secara acak di dalam persegi
         for (int i = 0; i < 4; i++)
         {
             float randomX = Random.Range(-15f, 15f);

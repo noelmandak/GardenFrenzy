@@ -9,15 +9,13 @@ public class Vegetable : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("PlayerRed") || other.CompareTag("PlayerBlue"))
+        Player player = other.GetComponent<Player>();
+        if (player == null) player = other.GetComponentInParent<Player>(); // Example: Fearfield have the PlayerTag but not have the Player component, although its parent does.
+        if (player != null)
         {
-            PlayerController player = other.GetComponentInParent<PlayerController>();
-            if (player != null)
+            if (player.CollectVegetable(isCarrot ? 2 : 1))
             {
-                if (player.CollectVegetable(other.CompareTag("PlayerRed"), isCarrot ? 2 : 1))
-                {
-                    Destroy(gameObject);
-                }
+                Destroy(gameObject);
             }
         }
     }

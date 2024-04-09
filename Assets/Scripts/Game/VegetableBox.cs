@@ -12,10 +12,11 @@ public class VegetableBox : MonoBehaviour
     {
         if ((other.CompareTag("PlayerRed") && isRed) || (other.CompareTag("PlayerBlue") && !isRed))
         {
-            PlayerController player = other.GetComponentInParent<PlayerController>();
+            Player player = other.GetComponent<Player>();
+            if (player == null) player = other.GetComponentInParent<Player>(); // Example: Fearfield have the PlayerTag but not have the Player component, although its parent does.
             if (player != null)
             {
-                player.MoveToBox(other.CompareTag("PlayerRed"), isCarrot ? 2 : 1, pointValue);
+                player.MoveToBox(isCarrot ? 2 : 1, pointValue);
             }
         }
     }
