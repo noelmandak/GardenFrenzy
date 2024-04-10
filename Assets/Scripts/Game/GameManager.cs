@@ -79,10 +79,10 @@ public class GameManager : MonoBehaviour
             timer -= Time.deltaTime;
             if (GameOverChecker() || timer <= 0f)
             {
-                if (playerRed.GetScore() > playerBlue.GetScore()) playerRed.AddBonusPoint(100);
-                if (playerBlue.GetScore() > playerRed.GetScore()) playerRed.AddBonusPoint(100);
-                int bonusPoint = (int)(duration-timer)*2;
-                currentPlayer.AddBonusPoint(bonusPoint);
+                //if (playerRed.GetScore() > playerBlue.GetScore()) playerRed.AddBonusPoint(100);
+                //if (playerBlue.GetScore() > playerRed.GetScore()) playerBlue.AddBonusPoint(100);
+                //int bonusPoint = (int)(duration-timer)*2;
+                //currentPlayer.AddBonusPoint(bonusPoint);
 
                 if (isTraining)
                 {

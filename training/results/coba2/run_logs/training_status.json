@@ -1,0 +1,71 @@
+{
+    "CollectVegetableRed": {
+        "checkpoints": [
+            {
+                "steps": 499968,
+                "file_path": "results\\coba2\\CollectVegetableRed\\CollectVegetableRed-499968.onnx",
+                "reward": null,
+                "creation_time": 1712773085.7817993,
+                "auxillary_file_paths": [
+                    "results\\coba2\\CollectVegetableRed\\CollectVegetableRed-499968.pt"
+                ]
+            },
+            {
+                "steps": 500480,
+                "file_path": "results\\coba2\\CollectVegetableRed\\CollectVegetableRed-500480.onnx",
+                "reward": null,
+                "creation_time": 1712773239.761777,
+                "auxillary_file_paths": [
+                    "results\\coba2\\CollectVegetableRed\\CollectVegetableRed-500480.pt"
+                ]
+            }
+        ],
+        "elo": 1218.3933546716235,
+        "final_checkpoint": {
+            "steps": 500480,
+            "file_path": "results\\coba2\\CollectVegetableRed.onnx",
+            "reward": null,
+            "creation_time": 1712773239.761777,
+            "auxillary_file_paths": [
+                "results\\coba2\\CollectVegetableRed\\CollectVegetableRed-500480.pt"
+            ]
+        }
+    },
+    "CollectVegetableBlue": {
+        "checkpoints": [
+            {
+                "steps": 499952,
+                "file_path": "results\\coba2\\CollectVegetableBlue\\CollectVegetableBlue-499952.onnx",
+                "reward": null,
+                "creation_time": 1712773239.6584985,
+                "auxillary_file_paths": [
+                    "results\\coba2\\CollectVegetableBlue\\CollectVegetableBlue-499952.pt"
+                ]
+            },
+            {
+                "steps": 500720,
+                "file_path": "results\\coba2\\CollectVegetableBlue\\CollectVegetableBlue-500720.onnx",
+                "reward": null,
+                "creation_time": 1712773239.82843,
+                "auxillary_file_paths": [
+                    "results\\coba2\\CollectVegetableBlue\\CollectVegetableBlue-500720.pt"
+                ]
+            }
+        ],
+        "elo": 1171.8105761932245,
+        "final_checkpoint": {
+            "steps": 500720,
+            "file_path": "results\\coba2\\CollectVegetableBlue.onnx",
+            "reward": null,
+            "creation_time": 1712773239.82843,
+            "auxillary_file_paths": [
+                "results\\coba2\\CollectVegetableBlue\\CollectVegetableBlue-500720.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

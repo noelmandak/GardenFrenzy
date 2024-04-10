@@ -26,8 +26,8 @@ public class RLAgent : Agent
         PlayerProperties newPlayerProperties = player.GetPlayerProperties();
         if (playerProperties!=null)
         {
-            if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((newPlayerProperties.PlayerCaring - playerProperties.PlayerCaring) * 0.01f);
-            if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((newPlayerProperties.PlayerCaring - playerProperties.PlayerCaring) * 0.01f);
+            //if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((newPlayerProperties.PlayerCaring - playerProperties.PlayerCaring) * 0.01f);
+            //if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((newPlayerProperties.PlayerCaring - playerProperties.PlayerCaring) * 0.01f);
             if (newPlayerProperties.PlayerScore > playerProperties.PlayerScore) AddReward((newPlayerProperties.PlayerScore - playerProperties.PlayerScore) * 0.002f);
         }
         playerProperties = newPlayerProperties;
