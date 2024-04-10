@@ -65,10 +65,13 @@ public class GameManager : MonoBehaviour
         powerUpSpawner.Init();
 
         currentPlayer = isCurretPlayerIsRed ? playerRed : playerBlue;
+        Debug.Log("Started");
     }
 
     void Update()
     {
+        Debug.Log("Updated");
+
         if (!isPaused && !isActivatingPower && !isAdvancedSettings)
         {
             timer -= Time.deltaTime;

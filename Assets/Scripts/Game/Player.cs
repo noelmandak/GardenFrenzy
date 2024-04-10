@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Actuators;
-using Unity.MLAgents.Sensors;
 
-public class Player : Agent
+public class Player : MonoBehaviour
 {
     [SerializeField]
     private bool isRed;
@@ -40,34 +37,6 @@ public class Player : Agent
         maxCapacity = capacity;
     }
 
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        sensor.AddObservation(!isRed); 
-        sensor.AddObservation(vegetableType);
-        sensor.AddObservation(playerCaring);
-        sensor.AddObservation(potatoCount);
-        sensor.AddObservation(carotCount);
-        sensor.AddObservation(playerScore);
-        sensor.AddObservation(new Vector3(playerPowerUp[0], playerPowerUp[1], playerPowerUp[2]));
-
-        Vector3 dirToPotatoToBox = (potatoBox.transform.position - transform.position).normalized;
-        Vector3 dirToCarotToBox = (carotBox.transform.position - transform.position).normalized;
-        sensor.AddObservation(new Vector2(dirToPotatoToBox.x, dirToPotatoToBox.y));
-        sensor.AddObservation(new Vector2(dirToCarotToBox.x, dirToCarotToBox.y));
-    }
-    public override void OnActionReceived(ActionBuffers actions)
-    {
-        //Debug.Log(actions.ContinuousActions[0]);
-        //Debug.Log(actions.ContinuousActions[1]);
-        var x = actions.ContinuousActions[0];
-        var y = actions.ContinuousActions[1];
-        MovePlayer(new Vector2(x, y));
-
-        if (actions.DiscreteActions[0]>0) ActivatePower(0);
-        if (actions.DiscreteActions[1]>0) ActivatePower(1);
-        if (actions.DiscreteActions[2]>0) ActivatePower(2);
-
-    }
 
     public void ResetPlayer()
     {
@@ -82,11 +51,6 @@ public class Player : Agent
         isDoublePointActive = false;
         gameObject.transform.position = initialPosition;
         Debug.Log("player reseted");
-    }
-    public void GameOver()
-    {
-        EndEpisode();
-        ResetPlayer();
     }
     public float PlayerSpeed
     {
@@ -130,7 +94,6 @@ public class Player : Agent
         {
             if (playerPowerUp[i] != 0) continue;
             playerPowerUp[i] = powerUpType;
-            AddReward(0.05f);
             return true;
         }
         return false;
@@ -147,7 +110,6 @@ public class Player : Agent
             if (this.playerCaring < maxCapacity)
             {
                 this.playerCaring++;
-                AddReward(0.01f);
                 return true;
             }
         }
@@ -164,7 +126,6 @@ public class Player : Agent
             playerScore += score;
             playerCaring = 0;
             vegetableType = 0;
-            AddReward(score*0.001f);
             return true;
 
         }
@@ -196,5 +157,44 @@ public class Player : Agent
     {
         FearField.SetActive(active);
 
+    }
+
+    public PlayerProperties GetPlayerProperties()
+    {
+        Vector3 playerPowerup = new(playerPowerUp[0], playerPowerUp[1], playerPowerUp[2]);
+        Vector3 dirToPotatoToBox = (potatoBox.transform.position - transform.position).normalized;
+        Vector3 dirToCarotToBox = (carotBox.transform.position - transform.position).normalized;
+        return new PlayerProperties(isRed, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarotToBox);
+    }
+}
+
+
+public class PlayerProperties
+{
+    public bool IsRed { get; private set; }
+    public float PlayerSpeed { get; private set; }
+    public int MaxCapacity { get; private set; }
+    public int PlayerCaring { get; private set; }
+    public int VegetableType { get; private set; }
+    public int PotatoCount { get; private set; }
+    public int CarotCount { get; private set; }
+    public int PlayerScore { get; private set; }
+    public Vector3 PlayerPowerUp { get; private set; }
+    public Vector3 DirToPotatoBox { get; private set; }
+    public Vector3 DirToCarotBox { get; private set; }
+
+    public PlayerProperties(bool isRed, float speed, int capacity,int playerCaring, int vegetableType, int potatoCount, int carotCount, int playerScore, Vector3 playerPowerUp, Vector3 dirToPotatoBox, Vector3 dirToCarotBox)
+    {
+        IsRed = isRed;
+        PlayerSpeed = speed;
+        MaxCapacity = capacity;
+        PlayerCaring = playerCaring;
+        VegetableType = vegetableType;
+        PotatoCount = potatoCount;
+        CarotCount = carotCount;
+        PlayerScore = playerScore;
+        PlayerPowerUp = playerPowerUp;
+        DirToPotatoBox = dirToPotatoBox;
+        DirToCarotBox = dirToCarotBox;
     }
 }
