@@ -3274,6 +3274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79d73879c085444eb0875b2a34a6c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &532120022 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6846113743399341966, guid: 03f06e6ca3683e842b9e4652fc5ab773, type: 3}
+  m_PrefabInstance: {fileID: 5858461758540391551}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &538432861 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 731844993859488476, guid: 7c07b041c9fa4864ab805eefae4a8f2b, type: 3}
@@ -3829,7 +3834,7 @@ MonoBehaviour:
   isPlayerRedDoublePoin: 0
   playerBlueSpeed: 0
   isPlayerBlueDoublePoin: 0
-  powerUpUI: {fileID: 932692669}
+  powerUpUI: {fileID: 0}
   move_action: {fileID: 1710619443237962064, guid: ca5cc84a35b30e04780209a96e9d7d9e, type: 3}
   cameraFollow: {fileID: 519420034}
 --- !u!4 &671460802
@@ -3881,7 +3886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c214f540a225848ae47fa5a18c18b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpUI: {fileID: 932692669}
+  powerUpUI: {fileID: 0}
   RedPUEffect:
   - {fileID: 1039560622}
   - {fileID: 841923427}
@@ -5768,7 +5773,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 932692668}
-  - component: {fileID: 932692669}
   m_Layer: 5
   m_Name: ActivatePower
   m_TagString: Untagged
@@ -5798,24 +5802,6 @@ RectTransform:
   m_AnchoredPosition: {x: -390, y: 180}
   m_SizeDelta: {x: 387.39136, y: 247.48}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &932692669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 932692667}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 415abb8de8a4d1b438a7109861a03570, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PowerUpButtons:
-  - {fileID: 538432861}
-  - {fileID: 481049531}
-  - {fileID: 2103816508}
-  playerRedMessageText: {fileID: 103603823}
-  playerBlueMessageText: {fileID: 1196964447}
 --- !u!1 &933359759
 GameObject:
   m_ObjectHideFlags: 0
@@ -5949,6 +5935,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933359759}
   m_CullTransparentMesh: 1
+--- !u!1 &961127414 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4939246469655198226, guid: a038af5804927fc4f8f2b782a4a27bb5, type: 3}
+  m_PrefabInstance: {fileID: 8553132290310824311}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963469695
 GameObject:
   m_ObjectHideFlags: 0
@@ -7993,6 +7984,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289764376}
   m_CullTransparentMesh: 1
+--- !u!1 &1300050900 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3078836871173211189, guid: ecb704324f18bbb42afb10d195b8d083, type: 3}
+  m_PrefabInstance: {fileID: 7384410541153105552}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1304746732
 GameObject:
   m_ObjectHideFlags: 0
@@ -8611,6 +8607,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422474051}
   m_CullTransparentMesh: 1
+--- !u!1 &1435781368 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 680317716920844853, guid: 043ea06bb2af1ec4082bd310a637e1d7, type: 3}
+  m_PrefabInstance: {fileID: 148191500871200565}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1436562134
 GameObject:
   m_ObjectHideFlags: 0
@@ -11777,6 +11778,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954384515}
   m_CullTransparentMesh: 1
+--- !u!1 &1961726864 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8483184362529431447, guid: 137cd91315cd73c46a1f3c3373fcb85e, type: 3}
+  m_PrefabInstance: {fileID: 7226593053566132427}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1980680877 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2699377629915809274, guid: 9c6463317d5917e4898b3187ec0d831d, type: 3}
+  m_PrefabInstance: {fileID: 4448826448885045721}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1998750375
 GameObject:
   m_ObjectHideFlags: 0
@@ -11901,6 +11912,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2026078557}
+  - component: {fileID: 2026078563}
+  - component: {fileID: 2026078562}
+  - component: {fileID: 2026078561}
+  - component: {fileID: 2026078560}
+  - component: {fileID: 2026078559}
+  - component: {fileID: 2026078558}
   m_Layer: 0
   m_Name: GameEnv
   m_TagString: Untagged
@@ -11933,6 +11950,123 @@ Transform:
   - {fileID: 79994626}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2026078558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026078556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 415abb8de8a4d1b438a7109861a03570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowerUpButtons:
+  - {fileID: 538432861}
+  - {fileID: 481049531}
+  - {fileID: 2103816508}
+  playerRedMessageText: {fileID: 103603823}
+  playerBlueMessageText: {fileID: 1196964447}
+--- !u!114 &2026078559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026078556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19ed765ad533c14a8ae2808d33ca0a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRedKentangLogo: {fileID: 803215159}
+  playerRedWortelLogo: {fileID: 1436562134}
+  playerBlueKentangLogo: {fileID: 1804198370}
+  playerBlueWortelLogo: {fileID: 1063993947}
+  playerRedCounter: {fileID: 1506812976}
+  playerBlueCounter: {fileID: 1732438987}
+  playerRedScoreText: {fileID: 1273526946}
+  playerBlueScoreText: {fileID: 1012295536}
+--- !u!114 &2026078560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026078556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd6a594b35f136b46a20ef9dbf530d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpPrefabs:
+  - {fileID: 1300050900}
+  - {fileID: 961127414}
+  - {fileID: 532120022}
+  - {fileID: 1961726864}
+--- !u!114 &2026078561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026078556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baef1e95ac907d44bbe90dfab09de853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potatoPrefab: {fileID: 1980680877}
+  carotPrefab: {fileID: 1435781368}
+--- !u!114 &2026078562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026078556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88c214f540a225848ae47fa5a18c18b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpUI: {fileID: 2026078558}
+  RedPUEffect:
+  - {fileID: 1039560622}
+  - {fileID: 841923427}
+  - {fileID: 482193836}
+  - {fileID: 1160560379}
+  BluePUEffect:
+  - {fileID: 606767110}
+  - {fileID: 416753570}
+  - {fileID: 1895118765}
+  - {fileID: 732462149}
+--- !u!114 &2026078563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026078556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3f459601e058b469ea6ec8151cd242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText: {fileID: 184003959}
+  pausePopup: {fileID: 1637828780}
+  activatePowerPopup: {fileID: 296925652}
+  advancedSettingsPopup: {fileID: 1120274608}
+  activatePowerUp: {fileID: 296925657}
+  gameCanvas: {fileID: 1658618799}
+  timerSlider: {fileID: 97187555}
+  isCurretPlayerIsRed: 1
+  isDisplayUI: 1
+  move_action: {fileID: 1710619443237962064, guid: ca5cc84a35b30e04780209a96e9d7d9e, type: 3}
+  playerRed: {fileID: 2129943373}
+  playerBlue: {fileID: 932244523}
+  cameraFollow: {fileID: 519420034}
 --- !u!1 &2067255255
 GameObject:
   m_ObjectHideFlags: 0
