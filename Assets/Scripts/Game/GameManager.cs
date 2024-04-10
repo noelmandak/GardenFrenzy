@@ -86,6 +86,16 @@ public class GameManager : MonoBehaviour
 
                 if (isTraining)
                 {
+                    if (playerRed.GetScore() > playerBlue.GetScore())
+                    {
+                        AgentRed.AddReward(1f);
+                        AgentBlue.AddReward(-1f);
+                    }
+                    if (playerRed.GetScore() < playerBlue.GetScore())
+                    {
+                        AgentRed.AddReward(-1f);
+                        AgentBlue.AddReward(1f);
+                    }
                     timer = duration;
                     AgentRed.EndEpisode();
                     AgentBlue.EndEpisode();
@@ -120,8 +130,11 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 movement = move_action.action.ReadValue<Vector2>();
-        currentPlayer.MovePlayer(movement);
+        if (!isTraining)
+        {
+            Vector2 movement = move_action.action.ReadValue<Vector2>();
+            currentPlayer.MovePlayer(movement);
+        }
         if (isDisplayUI) cameraFollow.UpdateCamera(currentPlayer.transform);
     }
 

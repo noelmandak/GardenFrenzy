@@ -26,9 +26,9 @@ public class RLAgent : Agent
         PlayerProperties newPlayerProperties = player.GetPlayerProperties();
         if (playerProperties!=null)
         {
-            if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((playerProperties.PlayerCaring - newPlayerProperties.PlayerCaring) * 0.01f);
-            if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((playerProperties.PlayerCaring - newPlayerProperties.PlayerCaring) * 0.01f);
-            if (newPlayerProperties.PlayerScore > playerProperties.PlayerScore) AddReward((playerProperties.PlayerScore - newPlayerProperties.PlayerScore) * 0.002f);
+            if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((newPlayerProperties.PlayerCaring - playerProperties.PlayerCaring) * 0.01f);
+            if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((newPlayerProperties.PlayerCaring - playerProperties.PlayerCaring) * 0.01f);
+            if (newPlayerProperties.PlayerScore > playerProperties.PlayerScore) AddReward((newPlayerProperties.PlayerScore - playerProperties.PlayerScore) * 0.002f);
         }
         playerProperties = newPlayerProperties;
         sensor.AddObservation(playerProperties.IsRed ? 0 : 1); 
@@ -55,8 +55,6 @@ public class RLAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        //Debug.Log(actions.ContinuousActions[0]);
-        //Debug.Log(actions.ContinuousActions[1]);
         var x = actions.ContinuousActions[0];
         var y = actions.ContinuousActions[1];
         player.MovePlayer(new Vector2(x, y));

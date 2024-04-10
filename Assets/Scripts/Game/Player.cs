@@ -49,7 +49,6 @@ public class Player : MonoBehaviour
         playerPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
         isDoublePointActive = false;
         gameObject.transform.localPosition = initialPosition;
-        Debug.Log("player reseted");
     }
     public float PlayerSpeed
     {
