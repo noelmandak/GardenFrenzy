@@ -16,9 +16,16 @@ public class PowerUpSpawner : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            float randomX = Random.Range(-15f, 15f);
-            float randomY = Random.Range(-15f, 15f);
-            Vector3 spawnPosition = new Vector3(randomX, randomY, 0f);
+            float randomX;
+            float randomY;
+            bool validPosition;
+            do
+            {
+                randomX = Random.Range(-15f, 15f);
+                randomY = Random.Range(-15f, 15f);
+                validPosition = CheckPosition(randomX, randomY);
+            } while (!validPosition);
+            Vector3 spawnPosition = transform.TransformPoint(new Vector3(randomX, randomY, 0f));
 
             GameObject prefabToSpawn = powerUpPrefabs[i];
             GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
@@ -28,14 +35,23 @@ public class PowerUpSpawner : MonoBehaviour
             spawnedPowerUps[i] = spawnedObject;
         }
     }
-
-    public void RemoveAllPowerUps()
+    bool CheckPosition(float x, float y)
     {
-        foreach (GameObject powerUp in spawnedPowerUps)
+        if ((Mathf.Abs(x) < 4f && Mathf.Abs(y) < 1f) || (Mathf.Abs(x) > 12 && Mathf.Abs(y) > 12))
         {
-            Destroy(powerUp);
+            return false;
         }
+        return true;
+    }
 
+    void RemoveAllPowerUps()
+    {
+        foreach (GameObject powerUp in spawnedPowerUps) Destroy(powerUp);
+    }
+    public void ResetPowerUps()
+    {
+        RemoveAllPowerUps();
+        SpawnPowerUps();
     }
 }
 

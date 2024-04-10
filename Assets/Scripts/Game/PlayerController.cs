@@ -188,7 +188,6 @@ public class PlayerController : MonoBehaviour
                     playerRedType = 0;
                     playerUI.UpdateUI(isPlayerRed, 0, playerRedCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
-                    SaveScore();
                     return true;
                 }
                 if (boxType == 2)
@@ -199,7 +198,6 @@ public class PlayerController : MonoBehaviour
                     playerRedType = 0;
                     playerUI.UpdateUI(isPlayerRed, 0, playerRedCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
-                    SaveScore();
                     return true;
                 }
             }
@@ -215,7 +213,6 @@ public class PlayerController : MonoBehaviour
                     playerBlueType = 0;
                     playerUI.UpdateUI(isPlayerRed, 0, playerBlueCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
-                    SaveScore();
                     return true;
                 }
                 if (boxType == 2)
@@ -226,7 +223,6 @@ public class PlayerController : MonoBehaviour
                     playerBlueType = 0;
                     playerUI.UpdateUI(isPlayerRed, 0, playerBlueCaring);
                     playerUI.UpdateScore(playerRedScore, playerBlueScore);
-                    SaveScore();
                     return true;
                 }
             }
@@ -256,7 +252,6 @@ public class PlayerController : MonoBehaviour
             playerRedScore += bonusPoint / 2;
             playerBlueScore += bonusPoint / 2;
         }
-        SaveScore();
     }
     public int ActivatePower(int index)
     {

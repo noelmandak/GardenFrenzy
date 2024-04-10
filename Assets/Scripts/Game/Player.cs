@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        initialPosition = gameObject.transform.position;
+        initialPosition = gameObject.transform.localPosition;
     }
 
     public void Init(float speed, int capacity)
@@ -41,7 +41,6 @@ public class Player : MonoBehaviour
     public void ResetPlayer()
     {
         playerSpeed = initialPlayerSpeed;
-        maxCapacity = 0;
         vegetableType = 0;  //0 = none, 1 = potato, 2 = carot
         playerCaring = 0;
         potatoCount = 0;
@@ -49,7 +48,7 @@ public class Player : MonoBehaviour
         playerScore = 0;
         playerPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
         isDoublePointActive = false;
-        gameObject.transform.position = initialPosition;
+        gameObject.transform.localPosition = initialPosition;
         Debug.Log("player reseted");
     }
     public float PlayerSpeed
@@ -61,6 +60,11 @@ public class Player : MonoBehaviour
     public int GetScore()
     {
         return playerScore;
+    }
+
+    public void ResetSpeed()
+    {
+        playerSpeed = initialPlayerSpeed;
     }
 
     public int GetVegetableType()
@@ -162,8 +166,8 @@ public class Player : MonoBehaviour
     public PlayerProperties GetPlayerProperties()
     {
         Vector3 playerPowerup = new(playerPowerUp[0], playerPowerUp[1], playerPowerUp[2]);
-        Vector3 dirToPotatoToBox = (potatoBox.transform.position - transform.position).normalized;
-        Vector3 dirToCarotToBox = (carotBox.transform.position - transform.position).normalized;
+        Vector3 dirToPotatoToBox = (potatoBox.transform.localPosition - transform.localPosition).normalized;
+        Vector3 dirToCarotToBox = (carotBox.transform.localPosition - transform.localPosition).normalized;
         return new PlayerProperties(isRed, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarotToBox);
     }
 }

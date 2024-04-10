@@ -104,24 +104,10 @@ public class PowerUpManager : MonoBehaviour
     }
     private void RemovePowerUpFromPlayer(bool isPlayerRed, int powerUpType)
     {
-        if (powerUpType == 1)
-        {
-            float speedMultiplier = 1/2f;
-            (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).SetPlayerSpeed(speedMultiplier);
-        }
-        else if (powerUpType == 2)
-        {
-            float speedMultiplier = 5f;
-            (isPlayerRed ? gameManager.GetPlayerBlue() : gameManager.GetPlayerRed()).SetPlayerSpeed(speedMultiplier);
-        }
-        else if (powerUpType == 3)
-        {
-            (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).SetFearField(false);
-        }
-        else if (powerUpType == 4)
-        {
-            (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).SetDoublePoints(false);
-        }
+        if (powerUpType == 1) (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).ResetSpeed();
+        if (powerUpType == 2) (isPlayerRed ? gameManager.GetPlayerBlue() : gameManager.GetPlayerRed()).ResetSpeed();
+        if (powerUpType == 3) (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).SetFearField(false);
+        if (powerUpType == 4) (isPlayerRed ? gameManager.GetPlayerRed() : gameManager.GetPlayerBlue()).SetDoublePoints(false);
         SetPUEffect(isPlayerRed, powerUpType, false);
     }
 
@@ -129,6 +115,14 @@ public class PowerUpManager : MonoBehaviour
     {
         if (isPlayerRed) RedPUEffect[powerUpType - 1].SetActive(active);
         else BluePUEffect[powerUpType - 1].SetActive(active);
+    }
+    public void ResetPowerUps()
+    {
+        foreach (PowerUpClass powerUp in activePowerUps)
+        {
+            RemovePowerUpFromPlayer(powerUp.isRed, powerUp.powerUpType);
+        }
+        activePowerUps.Clear();
     }
 }
 

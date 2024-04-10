@@ -35,13 +35,18 @@ public class GameManager : MonoBehaviour
     private Player currentPlayer;
     public bool isCurretPlayerIsRed = true;
     public bool isDisplayUI = true;
+    public bool isTraining;
 
 
     [SerializeField]
     private InputActionReference move_action;
     public Player playerRed;
     public Player playerBlue;
+    public RLAgent AgentRed;
+    public RLAgent AgentBlue;
     public CameraFollow cameraFollow;
+
+
 
     private void Start()
     {
@@ -65,25 +70,36 @@ public class GameManager : MonoBehaviour
         powerUpSpawner.Init();
 
         currentPlayer = isCurretPlayerIsRed ? playerRed : playerBlue;
-        Debug.Log("Started");
     }
 
     void Update()
     {
-        Debug.Log("Updated");
-
         if (!isPaused && !isActivatingPower && !isAdvancedSettings)
         {
             timer -= Time.deltaTime;
-            if (timer <= 0f)
+            if (GameOverChecker() || timer <= 0f)
             {
-                SceneManager.LoadScene("GameOver");
-            }
-            if (GameOverChecker())
-            { 
+                if (playerRed.GetScore() > playerBlue.GetScore()) playerRed.AddBonusPoint(100);
+                if (playerBlue.GetScore() > playerRed.GetScore()) playerRed.AddBonusPoint(100);
                 int bonusPoint = (int)(duration-timer)*2;
                 currentPlayer.AddBonusPoint(bonusPoint);
-                SceneManager.LoadScene("GameOver");
+
+                if (isTraining)
+                {
+                    timer = duration;
+                    AgentRed.EndEpisode();
+                    AgentBlue.EndEpisode();
+                    playerRed.ResetPlayer();
+                    playerBlue.ResetPlayer();
+                    powerUpManager.ResetPowerUps();
+                    vegetableSpawner.ResetAllVegetables();
+                    powerUpSpawner.ResetPowerUps();
+                }
+                else
+                {
+                    SaveScore();
+                    SceneManager.LoadScene("GameOver");
+                }
             }
         }
         UpdateUI();
@@ -148,7 +164,8 @@ public class GameManager : MonoBehaviour
 
     public void SaveScore()
     {
-        PlayerPrefs.SetString("LastScore", currentPlayer.GetScore().ToString());
+        PlayerPrefs.SetString("RedScore", playerRed.GetScore().ToString());
+        PlayerPrefs.SetString("BlueScore", playerBlue.GetScore().ToString());
     }
     
     public void OnPauseButtonClick()
@@ -199,8 +216,9 @@ public class GameManager : MonoBehaviour
 
     public void OnQuitButtonClick()
     {
-        SceneManager.LoadScene("GameOver");
+        SaveScore();
         SetPause(false);
+        SceneManager.LoadScene("GameOver");
     }
 
     void SetPause(bool isPaused)

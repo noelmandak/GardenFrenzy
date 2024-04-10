@@ -13,6 +13,8 @@ public class RLAgent : Agent
     [SerializeField]
     private InputActionReference move_action;
 
+    public bool isReceivedInput;
+
     private void Start()
     {
         player = GetComponent<Player>();
@@ -42,10 +44,13 @@ public class RLAgent : Agent
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
-        Vector2 movement = move_action.action.ReadValue<Vector2>();
-        continuousActions[0] = movement.x;
-        continuousActions[1] = movement.y;
+        if (isReceivedInput)
+        {
+            ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
+            Vector2 movement = move_action.action.ReadValue<Vector2>();
+            continuousActions[0] = movement.x;
+            continuousActions[1] = movement.y;
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actions)
