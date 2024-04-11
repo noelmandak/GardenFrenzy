@@ -5,6 +5,8 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using UnityEngine.InputSystem;
+using Google.Protobuf.WellKnownTypes;
+using UnityEngine.UIElements.Experimental;
 
 public class RLAgent : Agent
 {
@@ -14,10 +16,21 @@ public class RLAgent : Agent
     private InputActionReference move_action;
 
     public bool isReceivedInput;
-
+    int timer = 1;
     private void Start()
     {
         player = GetComponent<Player>();
+    }
+
+    private void FixedUpdate()
+    {
+        timer += 1;
+    }
+
+    public override void OnEpisodeBegin()
+    {
+        base.OnEpisodeBegin();
+        timer = 1;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -28,7 +41,14 @@ public class RLAgent : Agent
         {
             //if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((newPlayerProperties.PlayerCaring - playerProperties.PlayerCaring) * 0.01f);
             //if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((newPlayerProperties.PlayerCaring - playerProperties.PlayerCaring) * 0.01f);
-            if (newPlayerProperties.PlayerScore > playerProperties.PlayerScore) AddReward((newPlayerProperties.PlayerScore - playerProperties.PlayerScore) * 0.002f);
+            if (newPlayerProperties.PlayerScore > playerProperties.PlayerScore)
+            {
+                int totalVegetables = newPlayerProperties.CarotCount + newPlayerProperties.PotatoCount;
+                float scoreChange = ((newPlayerProperties.PlayerScore - playerProperties.PlayerScore) / 80) * 0.1f; // Get rewarded for each point earned, to cover the possibility of different vegetables having different point values.
+                float vegetableScore = (Mathf.Pow(totalVegetables, 2) / 64) * 0.01f; // Ensuring the agent will collect vegetables until none are left.
+                float totalReward = scoreChange + vegetableScore;
+                AddReward(totalReward);
+            }   
         }
         playerProperties = newPlayerProperties;
         sensor.AddObservation(playerProperties.IsRed ? 0 : 1); 

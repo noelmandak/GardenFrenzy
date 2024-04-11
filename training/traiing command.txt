@@ -1,0 +1,9 @@
+mlagents-learn config\defaultConfig-6M.yaml --run-id=simpleEnv3-5 --env=env-3\GardenFrenzy --num-env=2 --initialize-from=simpleEnv3-4 --force
+
+mlagents-learn config\defaultConfig.yaml --run-id=simpleEnv4-1 
+
+mlagents-learn config\defaultConfig-1M.yaml --run-id=simpleEnv4-2 --env=env-4\GardenFrenzy --num-env=2 --initialize-from=simpleEnv4-1
+
+mlagents-learn config\defaultConfig-1M.yaml --run-id=simpleEnv4-2 --env=env-4\GardenFrenzy --num-env=2 --initialize-from=simpleEnv4-1 --base-port=5011 --force
+
+mlagents-learn config\defaultConfig-6M.yaml --run-id=simpleEnv4-3 --env=env-4\GardenFrenzy --num-env=6 --initialize-from=simpleEnv4-2 --base-port=5011 --force

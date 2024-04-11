@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
     public Slider timerSlider;
 
     private float playerSpeed = 5;
-    private int maxCapacity = 5;
-    private int totalPotato = 15;
-    private int totalCarot = 10;
-    private float duration = 100f;
+    private int maxCapacity = 2;
+    private int totalPotato = 1;
+    private int totalCarot = 1;
+    private float duration = 15f;
     private float timer;
     private bool isPaused = false;
     private bool isActivatingPower = false;
@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         playerBlue.Init(playerSpeed, maxCapacity);
         vegetableSpawner.Init(totalPotato, totalCarot);
         powerUpSpawner.Init();
+        playerRed.RandomizePosition();
 
         currentPlayer = isCurretPlayerIsRed ? playerRed : playerBlue;
     }
@@ -81,29 +82,35 @@ public class GameManager : MonoBehaviour
             {
                 //if (playerRed.GetScore() > playerBlue.GetScore()) playerRed.AddBonusPoint(100);
                 //if (playerBlue.GetScore() > playerRed.GetScore()) playerBlue.AddBonusPoint(100);
-                //int bonusPoint = (int)(duration-timer)*2;
-                //currentPlayer.AddBonusPoint(bonusPoint);
+                //playerRed.AddBonusPoint(bonusPoint);
 
                 if (isTraining)
                 {
-                    if (playerRed.GetScore() > playerBlue.GetScore())
-                    {
-                        AgentRed.AddReward(1f);
-                        AgentBlue.AddReward(-1f);
-                    }
-                    if (playerRed.GetScore() < playerBlue.GetScore())
-                    {
-                        AgentRed.AddReward(-1f);
-                        AgentBlue.AddReward(1f);
-                    }
+
+                    float timerPenalty = (timer / duration) * -0.001f; // Give the agent a penalty if it becomes stuck somewhere.
+                    AgentRed.AddReward(timerPenalty);
+
+                    if (GameOverChecker()) AgentRed.AddReward(1f); // Give the agent a reward if it finished the level.
+
+                    //if (playerRed.GetScore() > playerBlue.GetScore())
+                    //{
+                    //    AgentRed.AddReward(1f);
+                    //    AgentBlue.AddReward(-1f);
+                    //}
+                    //if (playerRed.GetScore() < playerBlue.GetScore())
+                    //{
+                    //    AgentRed.AddReward(-1f);
+                    //    AgentBlue.AddReward(1f);
+                    //}
                     timer = duration;
                     AgentRed.EndEpisode();
                     AgentBlue.EndEpisode();
-                    playerRed.ResetPlayer();
                     playerBlue.ResetPlayer();
                     powerUpManager.ResetPowerUps();
                     vegetableSpawner.ResetAllVegetables();
                     powerUpSpawner.ResetPowerUps();
+                    playerRed.RandomizePosition();
+                    playerRed.ResetPlayer();
                 }
                 else
                 {
@@ -135,7 +142,7 @@ public class GameManager : MonoBehaviour
             Vector2 movement = move_action.action.ReadValue<Vector2>();
             currentPlayer.MovePlayer(movement);
         }
-        if (isDisplayUI) cameraFollow.UpdateCamera(currentPlayer.transform);
+        if (isDisplayUI && cameraFollow) cameraFollow.UpdateCamera(currentPlayer.transform);
     }
 
     bool GameOverChecker()

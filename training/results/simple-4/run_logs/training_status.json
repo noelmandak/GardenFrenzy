@@ -1,0 +1,38 @@
+{
+    "CollectVegetableRed": {
+        "checkpoints": [
+            {
+                "steps": 499952,
+                "file_path": "results\\simple-4\\CollectVegetableRed\\CollectVegetableRed-499952.onnx",
+                "reward": 0.005625000223517418,
+                "creation_time": 1712780327.1005046,
+                "auxillary_file_paths": [
+                    "results\\simple-4\\CollectVegetableRed\\CollectVegetableRed-499952.pt"
+                ]
+            },
+            {
+                "steps": 500336,
+                "file_path": "results\\simple-4\\CollectVegetableRed\\CollectVegetableRed-500336.onnx",
+                "reward": 0.005625000223517418,
+                "creation_time": 1712780327.2037508,
+                "auxillary_file_paths": [
+                    "results\\simple-4\\CollectVegetableRed\\CollectVegetableRed-500336.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500336,
+            "file_path": "results\\simple-4\\CollectVegetableRed.onnx",
+            "reward": 0.005625000223517418,
+            "creation_time": 1712780327.2037508,
+            "auxillary_file_paths": [
+                "results\\simple-4\\CollectVegetableRed\\CollectVegetableRed-500336.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

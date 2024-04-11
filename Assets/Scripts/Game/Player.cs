@@ -169,6 +169,23 @@ public class Player : MonoBehaviour
         Vector3 dirToCarotToBox = (carotBox.transform.localPosition - transform.localPosition).normalized;
         return new PlayerProperties(isRed, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarotToBox);
     }
+    public void RandomizePosition()
+    {
+        float randomXPlayer = Random.Range(-8f, 8f);
+        float randomYPlayer = Random.Range(-8f, 8f);
+        transform.localPosition = new Vector3(randomXPlayer, randomYPlayer, transform.localPosition.z);
+
+        float randomXPotatoBox = Random.Range(-8f, 8f);
+        float randomYPotatoBox = Random.Range(-8f, 8f);
+        Vector3 potatoBoxPosition = new Vector3(randomXPotatoBox, randomYPotatoBox, potatoBox.transform.localPosition.z);
+        potatoBox.transform.localPosition = potatoBoxPosition;
+
+        float randomXCarotBox = Random.Range(-8f, 8f);
+        float randomYCarotBox = Random.Range(-8f, 8f);
+        Vector3 carotBoxPosition = new Vector3(randomXCarotBox, randomYCarotBox, carotBox.transform.localPosition.z);
+        carotBox.transform.localPosition = carotBoxPosition;
+
+    }
 }
 
 

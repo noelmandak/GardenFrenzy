@@ -28,8 +28,8 @@ public class VegetableSpawner : MonoBehaviour
             bool validPosition;
             do
             {
-                randomX = Random.Range(-15f, 15f);
-                randomY = Random.Range(-15f, 15f);
+                randomX = Random.Range(-8f, 8f);
+                randomY = Random.Range(-8f, 8f);
                 validPosition = CheckPosition(randomX, randomY);
             } while (!validPosition);
             Vector3 spawnPosition = transform.TransformPoint(new Vector3(randomX, randomY, 0f));
@@ -46,10 +46,10 @@ public class VegetableSpawner : MonoBehaviour
 
     bool CheckPosition(float x, float y)
     {
-        if ((Mathf.Abs(x) < 4f && Mathf.Abs(y) < 1f) || (Mathf.Abs(x) > 12 && Mathf.Abs(y) > 12))
-        {
-            return false;
-        }
+        //if ((Mathf.Abs(x) < 4f && Mathf.Abs(y) < 1f) || (Mathf.Abs(x) > 12 && Mathf.Abs(y) > 12))
+        //{
+        //    return false;
+        //}
         return true;
     }
 
