@@ -25,9 +25,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject FearField;
 
+    private RLAgent agent;
+
     private void Start()
     {
         initialPosition = gameObject.transform.localPosition;
+        agent = gameObject.GetComponent<RLAgent>();
     }
 
     public void Init(float speed, int capacity)
@@ -116,6 +119,7 @@ public class Player : MonoBehaviour
                 return true;
             }
         }
+        agent.AddReward(-0.00001f);
         return false;
     }
 
@@ -132,6 +136,10 @@ public class Player : MonoBehaviour
             return true;
 
         }
+        if (vegetableType != 0)
+        {
+            agent.AddReward(-0.00001f);
+        }
         return false;
     }
 
@@ -139,6 +147,7 @@ public class Player : MonoBehaviour
     {
         int powerUpType = playerPowerUp[index];
         if (powerUpType > 0) playerPowerUp[index] = 0;
+        else agent.AddReward(-0.00000001f);
         return powerUpType;
     }
 

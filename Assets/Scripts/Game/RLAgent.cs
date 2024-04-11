@@ -14,12 +14,14 @@ public class RLAgent : Agent
     private PlayerProperties playerProperties;
     [SerializeField]
     private InputActionReference move_action;
+    private PowerUpManager powerUpManager;
 
     public bool isReceivedInput;
     int timer = 1;
     private void Start()
     {
         player = GetComponent<Player>();
+        powerUpManager = GetComponentInParent<PowerUpManager>();
     }
 
     private void FixedUpdate()
@@ -43,15 +45,16 @@ public class RLAgent : Agent
             //if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((newPlayerProperties.PlayerCaring - playerProperties.PlayerCaring) * 0.01f);
             if (newPlayerProperties.PlayerScore > playerProperties.PlayerScore)
             {
-                int totalVegetables = newPlayerProperties.CarotCount + newPlayerProperties.PotatoCount;
-                float scoreChange = ((newPlayerProperties.PlayerScore - playerProperties.PlayerScore) / 80) * 0.1f; // Get rewarded for each point earned, to cover the possibility of different vegetables having different point values.
-                float vegetableScore = (Mathf.Pow(totalVegetables, 2) / 64) * 0.01f; // Ensuring the agent will collect vegetables until none are left.
-                float totalReward = scoreChange + vegetableScore;
-                AddReward(totalReward);
+                //int totalVegetables = newPlayerProperties.CarotCount + newPlayerProperties.PotatoCount;
+                //float scoreChange = ((newPlayerProperties.PlayerScore - playerProperties.PlayerScore) / 20) * 0.1f; // Get rewarded for each point earned, to cover the possibility of different vegetables having different point values.
+                //float vegetableScore = (Mathf.Pow(totalVegetables, 2) / 4) * 0.01f; // Ensuring the agent will collect vegetables until none are left.
+                //float totalReward = scoreChange + vegetableScore;
+                //AddReward(totalReward);
             }   
         }
         playerProperties = newPlayerProperties;
         sensor.AddObservation(playerProperties.IsRed ? 0 : 1); 
+        sensor.AddObservation(playerProperties.MaxCapacity);
         sensor.AddObservation(playerProperties.VegetableType);
         sensor.AddObservation(playerProperties.PlayerCaring);
         sensor.AddObservation(playerProperties.PotatoCount);
@@ -78,10 +81,27 @@ public class RLAgent : Agent
         var x = actions.ContinuousActions[0];
         var y = actions.ContinuousActions[1];
         player.MovePlayer(new Vector2(x, y));
+        PlayerProperties playerProperties = player.GetPlayerProperties();
+        if (actions.DiscreteActions[0] > 0 && (int)playerProperties.PlayerPowerUp[0] > 0)
+        {
+            powerUpManager.ActivatePower(playerProperties.IsRed, (int)playerProperties.PlayerPowerUp[0], GetStar());
+            player.ActivatePower(0);
+        }
+        if (actions.DiscreteActions[1] > 0 && (int)playerProperties.PlayerPowerUp[1] > 0) 
+        {
+            powerUpManager.ActivatePower(playerProperties.IsRed, (int)playerProperties.PlayerPowerUp[1], GetStar());
+            player.ActivatePower(1);
+        }
+        if (actions.DiscreteActions[2] > 0 && (int)playerProperties.PlayerPowerUp[2] > 0) 
+        {
+            powerUpManager.ActivatePower(playerProperties.IsRed, (int)playerProperties.PlayerPowerUp[2], GetStar());
+            player.ActivatePower(2);
+         }
 
-        if (actions.DiscreteActions[0] > 0) player.ActivatePower(0);
-        if (actions.DiscreteActions[1] > 0) player.ActivatePower(1);
-        if (actions.DiscreteActions[2] > 0) player.ActivatePower(2);
+    }
 
+    public int GetStar()
+    {
+        return Random.Range(1, 4);
     }
 }

@@ -308,6 +308,10 @@ PrefabInstance:
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 519420034}
+    - target: {fileID: 1568205027462884870, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 3705163783369658452, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
       propertyPath: cameraFollow
       value: 
@@ -363,6 +367,14 @@ PrefabInstance:
     - target: {fileID: 7428538913234743577, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533350041919371303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 6e35e3f798cd031488433b43c506e60c, type: 3}
+    - target: {fileID: 8533350041919371303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

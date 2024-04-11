@@ -1,0 +1,18 @@
+
+
+
+simple-1 --> smallenv that has a potatobox and 10 potato
+simple-2 --> smallenv that has a carotbox and 10 carot
+simple-3 --> same env, but has potato and carot
+
+simpleEnv4 --> Randomize agent, potatoBox and carotBox Position
+
+2. has 2 carot and 2 potato, only get reward if can get all (6M steps) (can collect but cant distinguis potato or carot)
+3. has 2 carot and 2 potato, get reward each agent get point (6M steps) (scoreChange)
+4. has 4 carot and 4 potato, and make later vegetable more valuable (6M steps)(vegetableScore)
+5. has 1 carot and 1 potato, get reward in scoreChange and vegetableScore, add get time penalty (500K steps)
+6. has 1 carot and 1 potato, get reward in scoreChange, add get time penalty (check vegetableScore is mather or not) (500K steps) 
+7. has 1 carot and 1 potato, same as 5 but in (3M steps) --> stuck in localminima
+8. has 1 carot and 1 potato, only get reward if can get all (6M steps) --> need more steps
+8.1 retrain 6M Steps from 8
+8.2 retrain 6M Steps from 8 and add time penalty

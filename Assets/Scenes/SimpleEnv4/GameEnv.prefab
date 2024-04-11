@@ -1152,7 +1152,7 @@ MonoBehaviour:
   gameCanvas: {fileID: 5862706702102940319}
   timerSlider: {fileID: 7047271517545002241}
   isCurretPlayerIsRed: 1
-  isDisplayUI: 1
+  isDisplayUI: 0
   isTraining: 1
   move_action: {fileID: 1710619443237962064, guid: ca5cc84a35b30e04780209a96e9d7d9e, type: 3}
   playerRed: {fileID: 7692713693705210543}
@@ -4050,7 +4050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 14
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
@@ -8851,9 +8851,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8595500179637387088}
-  - component: {fileID: 8153718315302558963}
-  - component: {fileID: 4291554735582113621}
-  - component: {fileID: 1400852946480071116}
   m_Layer: 0
   m_Name: Players
   m_TagString: Player
@@ -8878,76 +8875,6 @@ Transform:
   - {fileID: 3769680741887102603}
   m_Father: {fileID: 8798566780072795571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8153718315302558963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5601586188101873129}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1dcef268472c2b4aba043ad4ceed2fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isRed: 1
-  playerSpeed: 5
-  playerRed: {fileID: 7080452546791198791}
-  playerBlue: {fileID: 2113650109212266276}
-  maxCapacity: 5
-  PowerUpManager: {fileID: 1400852946480071116}
-  FearFieldRed: {fileID: 1126972676166862497}
-  FearFieldBlue: {fileID: 2621413018876423028}
-  playerRedSpeed: 0
-  isPlayerRedDoublePoin: 0
-  playerBlueSpeed: 0
-  isPlayerBlueDoublePoin: 0
-  powerUpUI: {fileID: 0}
-  move_action: {fileID: 1710619443237962064, guid: ca5cc84a35b30e04780209a96e9d7d9e, type: 3}
-  cameraFollow: {fileID: 0}
---- !u!114 &4291554735582113621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5601586188101873129}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b19ed765ad533c14a8ae2808d33ca0a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerRedKentangLogo: {fileID: 8908672775266177236}
-  playerRedWortelLogo: {fileID: 252938742450703739}
-  playerBlueKentangLogo: {fileID: 1216351016410392676}
-  playerBlueWortelLogo: {fileID: 3938824791631500708}
-  playerRedCounter: {fileID: 1087186198034471680}
-  playerBlueCounter: {fileID: 2934570070525170694}
-  playerRedScoreText: {fileID: 5979469490389335309}
-  playerBlueScoreText: {fileID: 7380471215880282803}
---- !u!114 &1400852946480071116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5601586188101873129}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88c214f540a225848ae47fa5a18c18b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerUpUI: {fileID: 0}
-  RedPUEffect:
-  - {fileID: 1408903555546836202}
-  - {fileID: 4009900184891138386}
-  - {fileID: 2200538844061887582}
-  - {fileID: 7378852276864570600}
-  BluePUEffect:
-  - {fileID: 4242090605201688730}
-  - {fileID: 2302522422021572915}
-  - {fileID: 4479720006636719566}
-  - {fileID: 745071457453949141}
 --- !u!1 &5624676957284564291
 GameObject:
   m_ObjectHideFlags: 0
@@ -14524,7 +14451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 13
+    VectorObservationSize: 14
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
@@ -14533,7 +14460,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 7f72568c9339b9040817304947fcda20, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 6e35e3f798cd031488433b43c506e60c, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: CollectVegetableRed
@@ -14598,7 +14525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Record: 1
+  Record: 0
   NumStepsToRecord: 0
   DemonstrationName: differentiateVegetable
   DemonstrationDirectory: record
