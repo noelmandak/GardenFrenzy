@@ -21,7 +21,7 @@ public class VegetableSpawner : MonoBehaviour
 
     void SpawnVegetables()
     {
-        for (int i = 0; i < _totalPotato + _totalCarot; i++)
+        for (int i = 0; i < 1; i++)
         {
             float randomX;
             float randomY;
@@ -34,7 +34,8 @@ public class VegetableSpawner : MonoBehaviour
             } while (!validPosition);
             Vector3 spawnPosition = transform.TransformPoint(new Vector3(randomX, randomY, 0f));
 
-            bool isCarrot = (i < _totalCarot);
+            //bool isCarrot = (i < _totalCarot);
+            bool isCarrot = Random.Range(1, 3) == 2; //random 1=potato 2=carot
 
             GameObject prefabToSpawn = isCarrot ? carotPrefab : potatoPrefab;
             GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
@@ -42,6 +43,34 @@ public class VegetableSpawner : MonoBehaviour
             vegetableComponent.isCarrot = isCarrot;
             spawnedVegetables[i] = spawnedObject;
         }
+    }
+
+    public void SpawnAVegetable(int vegetableType) //potato = 1 carot =2
+    {
+        float randomX;
+        float randomY;
+        bool validPosition;
+        do
+        {
+            randomX = Random.Range(-8f, 8f);
+            randomY = Random.Range(-8f, 8f);
+            validPosition = CheckPosition(randomX, randomY);
+        } while (!validPosition);
+
+        Vector3 spawnPosition = transform.TransformPoint(new Vector3(randomX, randomY, 0f));
+
+        bool isCarrot = (vegetableType == 2);
+
+        GameObject prefabToSpawn = isCarrot ? carotPrefab : potatoPrefab;
+        GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+        Vegetable vegetableComponent = spawnedObject.AddComponent<Vegetable>();
+        vegetableComponent.isCarrot = isCarrot;
+        spawnedVegetables[0] = spawnedObject;
+    }
+
+    public void RemoveAVegetable()
+    {
+        if (spawnedVegetables[0]) Destroy(spawnedVegetables[0]);
     }
 
     bool CheckPosition(float x, float y)
@@ -52,6 +81,7 @@ public class VegetableSpawner : MonoBehaviour
         //}
         return true;
     }
+
 
     void RemoveAllVegetables()
     {

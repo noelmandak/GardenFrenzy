@@ -15,24 +15,20 @@ public class RLAgent : Agent
     [SerializeField]
     private InputActionReference move_action;
     private PowerUpManager powerUpManager;
+    private GameManager gameManager;
 
     public bool isReceivedInput;
-    int timer = 1;
     private void Start()
     {
         player = GetComponent<Player>();
         powerUpManager = GetComponentInParent<PowerUpManager>();
+        gameManager = GetComponentInParent<GameManager>();
     }
 
-    private void FixedUpdate()
-    {
-        timer += 1;
-    }
 
     public override void OnEpisodeBegin()
     {
         base.OnEpisodeBegin();
-        timer = 1;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -46,16 +42,19 @@ public class RLAgent : Agent
             if (newPlayerProperties.PlayerScore > playerProperties.PlayerScore)
             {
                 //int totalVegetables = newPlayerProperties.CarotCount + newPlayerProperties.PotatoCount;
-                //float scoreChange = ((newPlayerProperties.PlayerScore - playerProperties.PlayerScore) / 20) * 0.1f; // Get rewarded for each point earned, to cover the possibility of different vegetables having different point values.
+                //float scoreChange = ((newPlayerProperties.PlayerScore - playerProperties.PlayerScore) / (gameManager.GetTotalVegetables()*10)) * 0.01f; // Get rewarded for each point earned, to cover the possibility of different vegetables having different point values.
                 //float vegetableScore = (Mathf.Pow(totalVegetables, 2) / 4) * 0.01f; // Ensuring the agent will collect vegetables until none are left.
                 //float totalReward = scoreChange + vegetableScore;
-                //AddReward(totalReward);
+                //AddReward(scoreChange);
             }   
         }
         playerProperties = newPlayerProperties;
         sensor.AddObservation(playerProperties.IsRed ? 0 : 1); 
+        sensor.AddObservation(playerProperties.IsDoublePointActive ? 1 : 0); 
+        sensor.AddObservation(playerProperties.IsFearFieldActive ? 1 : 0); 
         sensor.AddObservation(playerProperties.MaxCapacity);
-        sensor.AddObservation(playerProperties.VegetableType);
+        sensor.AddObservation((playerProperties.VegetableType == 1) ? 1 : 0); // potato
+        sensor.AddObservation((playerProperties.VegetableType == 2) ? 1 : 0); // carot
         sensor.AddObservation(playerProperties.PlayerCaring);
         sensor.AddObservation(playerProperties.PotatoCount);
         sensor.AddObservation(playerProperties.CarotCount);

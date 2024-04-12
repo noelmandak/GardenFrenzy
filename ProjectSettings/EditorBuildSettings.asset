@@ -35,9 +35,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SimpleEnv3/TrainingRL.unity
     guid: 6604ab4366c6b1c4e92b04dbaa115ba3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SimpleEnv4/TrainingRL.unity
     guid: b2314b4048b5e3c40a4f82b2df2be825
+  - enabled: 0
+    path: Assets/Scenes/SimpleEnv5/TrainingRL.unity
+    guid: 4124d70974f3c5d4e90241f39e6da6e6
+  - enabled: 1
+    path: Assets/Scenes/SceneEnv5/TrainingRL.unity
+    guid: 2826853ff6b8fd049854feca6faf28e9
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: c46c8eaf3d2bd214aaa1766a0e8b5c81, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fcb5dc100210b0f49a5466d4145ffb03, type: 2}
