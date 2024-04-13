@@ -26,11 +26,13 @@ public class Player : MonoBehaviour
     private GameObject FearField;
 
     private RLAgent agent;
+    private GameManager gameManager;
 
     private void Start()
     {
         initialPosition = gameObject.transform.localPosition;
         agent = gameObject.GetComponent<RLAgent>();
+        gameManager = gameObject.GetComponentInParent<GameManager>();
     }
 
     public void Init(float speed, int capacity)
@@ -49,6 +51,7 @@ public class Player : MonoBehaviour
         potatoCount = 0;
         carotCount = 0;
         playerScore = 0;
+        maxCapacity = Random.Range(1, 4);
         playerPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
         isDoublePointActive = false;
         gameObject.transform.localPosition = initialPosition;
@@ -118,8 +121,10 @@ public class Player : MonoBehaviour
                 this.playerCaring++;
                 return true;
             }
+            agent.AddReward(-0.001f);
         }
-        agent.AddReward(-0.00001f);
+        agent.AddReward(-0.001f);
+        gameManager.resetGame();
         return false;
     }
 
@@ -133,14 +138,15 @@ public class Player : MonoBehaviour
             playerScore += score;
             playerCaring = 0;
             vegetableType = 0;
-            agent.AddReward(0.01f);
             return true;
 
         }
+        agent.AddReward(-0.001f);
         if (vegetableType != 0)
         {
             agent.AddReward(-0.001f);
         }
+        gameManager.resetGame();
         return false;
     }
 

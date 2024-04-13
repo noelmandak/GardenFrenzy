@@ -42,7 +42,8 @@ behaviors:
         strength: 0.01
         gamma: 0.99
         encoding_size: 128
-        demo_path: demo/differentiateVeg_10menit.demo
+        demo_path: demo/differentiateVeg2_5menit.demo
+        # demo_path: demo/differentiateVeg_10menit.demo
         learning_rate: 3.0e-4
         use_actions: false
         use_vail: false
@@ -56,7 +57,8 @@ behaviors:
     self_play: null
     # behavior cloning
     behavioral_cloning:
-      demo_path: demo/differentiateVeg_10menit.demo
+      demo_path: demo/differentiateVeg2_5menit.demo
+      # demo_path: demo/differentiateVeg_10menit.demo
       strength: 0.5
       steps: 150000
       batch_size: 512

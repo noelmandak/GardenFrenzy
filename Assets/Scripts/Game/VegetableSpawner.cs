@@ -21,7 +21,7 @@ public class VegetableSpawner : MonoBehaviour
 
     void SpawnVegetables()
     {
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < (_totalPotato+_totalCarot); i++)
         {
             float randomX;
             float randomY;
@@ -34,8 +34,8 @@ public class VegetableSpawner : MonoBehaviour
             } while (!validPosition);
             Vector3 spawnPosition = transform.TransformPoint(new Vector3(randomX, randomY, 0f));
 
-            //bool isCarrot = (i < _totalCarot);
-            bool isCarrot = Random.Range(1, 3) == 2; //random 1=potato 2=carot
+            bool isCarrot = (i < _totalCarot);
+            //bool isCarrot = Random.Range(1, 3) == 2; //random 1=potato 2=carot
 
             GameObject prefabToSpawn = isCarrot ? carotPrefab : potatoPrefab;
             GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);

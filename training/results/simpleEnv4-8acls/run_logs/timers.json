@@ -1,0 +1,47 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1712988944",
+        "python_version": "3.8.0 (tags/v3.8.0:fa919fd, Oct 14 2019, 19:37:50) [MSC v.1916 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\CIT\\Documents\\TA Game\\mlagents\\venv3.8\\Scripts\\mlagents-learn config\\defaultConfig-3M.yaml --run-id=simpleEnv4-8acls",
+        "mlagents_version": "0.29.0",
+        "mlagents_envs_version": "0.29.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.2.2+cpu",
+        "numpy_version": "1.21.2",
+        "end_time_seconds": "1712988955"
+    },
+    "total": 11.3135723,
+    "count": 1,
+    "self": 10.009613600000002,
+    "children": {
+        "run_training.setup": {
+            "total": 0.10017459999999989,
+            "count": 1,
+            "self": 0.10017459999999989
+        },
+        "TrainerController.start_learning": {
+            "total": 1.2037841,
+            "count": 1,
+            "self": 0.0004185000000003214,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 1.2033562999999998,
+                    "count": 1,
+                    "self": 1.2033562999999998
+                },
+                "trainer_threads": {
+                    "total": 1.09999999997612e-06,
+                    "count": 1,
+                    "self": 1.09999999997612e-06
+                },
+                "TrainerController._save_models": {
+                    "total": 8.19999999990273e-06,
+                    "count": 1,
+                    "self": 8.19999999990273e-06
+                }
+            }
+        }
+    }
+}

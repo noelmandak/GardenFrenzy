@@ -41,11 +41,11 @@ public class RLAgent : Agent
             //if (newPlayerProperties.PlayerCaring > playerProperties.PlayerCaring) AddReward((newPlayerProperties.PlayerCaring - playerProperties.PlayerCaring) * 0.01f);
             if (newPlayerProperties.PlayerScore > playerProperties.PlayerScore)
             {
-                //int totalVegetables = newPlayerProperties.CarotCount + newPlayerProperties.PotatoCount;
-                //float scoreChange = ((newPlayerProperties.PlayerScore - playerProperties.PlayerScore) / (gameManager.GetTotalVegetables()*10)) * 0.01f; // Get rewarded for each point earned, to cover the possibility of different vegetables having different point values.
-                //float vegetableScore = (Mathf.Pow(totalVegetables, 2) / 4) * 0.01f; // Ensuring the agent will collect vegetables until none are left.
-                //float totalReward = scoreChange + vegetableScore;
-                //AddReward(scoreChange);
+                int totalVegetables = newPlayerProperties.CarotCount + newPlayerProperties.PotatoCount;
+                float scoreChange = ((newPlayerProperties.PlayerScore - playerProperties.PlayerScore) / (gameManager.GetTotalVegetables() * 10)) * 0.01f; // Get rewarded for each point earned, to cover the possibility of different vegetables having different point values.
+                float vegetableScore = (Mathf.Pow(totalVegetables, 2) / Mathf.Pow(gameManager.GetTotalVegetables(),2)) * 0.01f; // Ensuring the agent will collect vegetables until none are left.
+                float totalReward = scoreChange + vegetableScore;
+                AddReward(totalReward);
             }   
         }
         playerProperties = newPlayerProperties;
@@ -55,7 +55,7 @@ public class RLAgent : Agent
         sensor.AddObservation(playerProperties.MaxCapacity);
         sensor.AddObservation((playerProperties.VegetableType == 1) ? 1 : 0); // potato
         sensor.AddObservation((playerProperties.VegetableType == 2) ? 1 : 0); // carot
-        sensor.AddObservation(playerProperties.PlayerCaring);
+        sensor.AddObservation(playerProperties.PlayerCaring/playerProperties.MaxCapacity);
         sensor.AddObservation(playerProperties.PotatoCount);
         sensor.AddObservation(playerProperties.CarotCount);
         sensor.AddObservation(playerProperties.PlayerScore);
