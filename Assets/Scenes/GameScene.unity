@@ -305,9 +305,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1207393230851574303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: isTraining
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207393230851574303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 519420034}
+    - target: {fileID: 1568205027462884870, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_BehaviorType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3705163783369658452, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
       propertyPath: cameraFollow
       value: 
@@ -364,6 +372,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8533350041919371303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 7f72568c9339b9040817304947fcda20, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
