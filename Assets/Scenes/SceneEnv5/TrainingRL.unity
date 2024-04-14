@@ -4099,14 +4099,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameEnv
       objectReference: {fileID: 0}
-    - target: {fileID: 6279713418883459891, guid: a459e75e69b1fbc4ea63f07dc66a04e4, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6279713418883459891, guid: a459e75e69b1fbc4ea63f07dc66a04e4, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8798566780072795571, guid: a459e75e69b1fbc4ea63f07dc66a04e4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

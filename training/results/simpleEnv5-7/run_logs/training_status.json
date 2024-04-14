@@ -2,103 +2,103 @@
     "CollectVegetableRed": {
         "checkpoints": [
             {
-                "steps": 3999957,
-                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-3999957.onnx",
-                "reward": -0.005424999770184513,
-                "creation_time": 1712979733.7150524,
+                "steps": 9999998,
+                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-9999998.onnx",
+                "reward": null,
+                "creation_time": 1712989810.018435,
                 "auxillary_file_paths": [
-                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-3999957.pt"
+                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-9999998.pt"
                 ]
             },
             {
-                "steps": 4499956,
-                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-4499956.onnx",
-                "reward": -0.0067039997215033505,
-                "creation_time": 1712980391.1500835,
+                "steps": 10499938,
+                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-10499938.onnx",
+                "reward": -0.009081087833003628,
+                "creation_time": 1712990475.029488,
                 "auxillary_file_paths": [
-                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-4499956.pt"
+                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-10499938.pt"
                 ]
             },
             {
-                "steps": 4999944,
-                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-4999944.onnx",
-                "reward": 0.059852741618669825,
-                "creation_time": 1712981048.0841467,
+                "steps": 10999962,
+                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-10999962.onnx",
+                "reward": -0.00034338539553573354,
+                "creation_time": 1712991157.0148022,
                 "auxillary_file_paths": [
-                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-4999944.pt"
+                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-10999962.pt"
                 ]
             },
             {
-                "steps": 5499956,
-                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-5499956.onnx",
-                "reward": -0.009283642515323922,
-                "creation_time": 1712981704.0441635,
+                "steps": 11499939,
+                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-11499939.onnx",
+                "reward": -0.013596860329724021,
+                "creation_time": 1712991862.9094083,
                 "auxillary_file_paths": [
-                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-5499956.pt"
+                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-11499939.pt"
                 ]
             },
             {
-                "steps": 5999993,
-                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-5999993.onnx",
-                "reward": 0.0004031934179490943,
-                "creation_time": 1712982364.1132748,
+                "steps": 11999998,
+                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-11999998.onnx",
+                "reward": -0.009118999523707316,
+                "creation_time": 1712992558.6522396,
                 "auxillary_file_paths": [
-                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-5999993.pt"
+                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-11999998.pt"
                 ]
             },
             {
-                "steps": 6499958,
-                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-6499958.onnx",
-                "reward": -0.007638199640496168,
-                "creation_time": 1712983028.6798782,
+                "steps": 12499943,
+                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-12499943.onnx",
+                "reward": -0.010607949506083968,
+                "creation_time": 1712993249.0591552,
                 "auxillary_file_paths": [
-                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-6499958.pt"
+                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-12499943.pt"
                 ]
             },
             {
-                "steps": 6999958,
-                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-6999958.onnx",
-                "reward": -0.008324749539315234,
-                "creation_time": 1712983690.1947136,
+                "steps": 12999952,
+                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-12999952.onnx",
+                "reward": 0.01604582454820047,
+                "creation_time": 1712993940.581692,
                 "auxillary_file_paths": [
-                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-6999958.pt"
+                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-12999952.pt"
                 ]
             },
             {
-                "steps": 7499993,
-                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-7499993.onnx",
-                "reward": -0.005893624676900799,
-                "creation_time": 1712984356.717894,
+                "steps": 13499950,
+                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-13499950.onnx",
+                "reward": -0.009275454134860245,
+                "creation_time": 1712994629.7949162,
                 "auxillary_file_paths": [
-                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-7499993.pt"
+                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-13499950.pt"
                 ]
             },
             {
-                "steps": 7999993,
-                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-7999993.onnx",
-                "reward": -0.0102250521568318,
-                "creation_time": 1712985024.042432,
+                "steps": 13999993,
+                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-13999993.onnx",
+                "reward": -0.008923949619929771,
+                "creation_time": 1712995326.3847826,
                 "auxillary_file_paths": [
-                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-7999993.pt"
+                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-13999993.pt"
                 ]
             },
             {
-                "steps": 8498631,
-                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-8498631.onnx",
-                "reward": -0.006162071114106636,
-                "creation_time": 1712985691.8214555,
+                "steps": 14121894,
+                "file_path": "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-14121894.onnx",
+                "reward": -0.0073529996690922415,
+                "creation_time": 1712995499.4005291,
                 "auxillary_file_paths": [
-                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-8498631.pt"
+                    "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-14121894.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 8498631,
+            "steps": 14121894,
             "file_path": "results\\simpleEnv5-7\\CollectVegetableRed.onnx",
-            "reward": -0.006162071114106636,
-            "creation_time": 1712985691.8214555,
+            "reward": -0.0073529996690922415,
+            "creation_time": 1712995499.4005291,
             "auxillary_file_paths": [
-                "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-8498631.pt"
+                "results\\simpleEnv5-7\\CollectVegetableRed\\CollectVegetableRed-14121894.pt"
             ]
         }
     },

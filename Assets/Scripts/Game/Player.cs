@@ -121,10 +121,13 @@ public class Player : MonoBehaviour
                 this.playerCaring++;
                 return true;
             }
-            agent.AddReward(-0.001f);
+            if (gameManager.gamePlayCounter>100000) agent.AddReward(-0.0001f);
         }
-        agent.AddReward(-0.001f);
-        gameManager.resetGame();
+        if (gameManager.gamePlayCounter > 100000)
+        {
+            agent.AddReward(-0.0001f);
+            gameManager.resetGame();
+        }
         return false;
     }
 
@@ -141,12 +144,14 @@ public class Player : MonoBehaviour
             return true;
 
         }
-        agent.AddReward(-0.001f);
         if (vegetableType != 0)
         {
-            agent.AddReward(-0.001f);
+            if (gameManager.gamePlayCounter > 100000) agent.AddReward(-0.001f);
         }
-        gameManager.resetGame();
+        if (gameManager.gamePlayCounter > 100000) { 
+            agent.AddReward(-0.001f); 
+            gameManager.resetGame();
+        }
         return false;
     }
 

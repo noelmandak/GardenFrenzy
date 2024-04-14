@@ -16,9 +16,9 @@ public class GameManager : MonoBehaviour
 
     private float playerSpeed = 5;
     private int maxCapacity = 1;
-    private int totalPotato = 3;
-    private int totalCarot = 3;
-    private float duration = 30f;
+    private int totalPotato = 1;
+    private int totalCarot = 1;
+    private float duration = 60f;
     private float timer;
     private bool isPaused = false;
     private bool isActivatingPower = false;
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     public RLAgent AgentBlue;
     public CameraFollow cameraFollow;
 
+    public int gamePlayCounter = 0;
 
 
     private void Start()
@@ -117,6 +118,7 @@ public class GameManager : MonoBehaviour
                     powerUpSpawner.ResetPowerUps();
                     playerRed.RandomizePosition();
                     playerRed.ResetPlayer();
+                    gamePlayCounter++;
                 }
                 else
                 {
