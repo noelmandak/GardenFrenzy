@@ -92,5 +92,11 @@ public class VegetableSpawner : MonoBehaviour
         RemoveAllVegetables();
         SpawnVegetables();
     }
+
+    public void ResetAllVegetables(int totalPotato, int totalCarot)
+    {
+        RemoveAllVegetables();
+        Init(totalPotato, totalCarot);
+    }
 }
 

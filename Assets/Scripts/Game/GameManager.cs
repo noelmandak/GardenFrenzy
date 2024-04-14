@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Slider timerSlider;
 
     private float playerSpeed = 5;
-    private int maxCapacity = 1;
+    private int maxCapacity = 5;
     private int totalPotato = 1;
     private int totalCarot = 1;
     private float duration = 60f;
@@ -96,8 +96,8 @@ public class GameManager : MonoBehaviour
                     //AgentRed.AddReward(timerPenalty);
 
                     //float timerPenalty = ((duration - timer) / duration) * -0.001f; // Give the agent a penalty if it becomes stuck somewhere.
-                    float timerBonus = ((duration - timer) / duration) * 0.05f; // Give the agent a bonus point based on how quickly the agent can finish the level.
-                    if (GameOverChecker()) AgentRed.AddReward(0.1f+timerBonus); // Give the agent a reward if it finished the level.
+                    //float timerBonus = ((duration - timer) / duration) * 0.05f; // Give the agent a bonus point based on how quickly the agent can finish the level.
+                    //if (GameOverChecker()) AgentRed.AddReward(0.1f+timerBonus); // Give the agent a reward if it finished the level.
 
                     //if (playerRed.GetScore() > playerBlue.GetScore())
                     //{
@@ -109,12 +109,17 @@ public class GameManager : MonoBehaviour
                     //    AgentRed.AddReward(-1f);
                     //    AgentBlue.AddReward(1f);
                     //}
+
+                    
+                    totalPotato = Random.Range(1, 11);
+                    totalCarot = Random.Range(1, 11);;
+
                     timer = duration;
                     AgentRed.EndEpisode();
                     AgentBlue.EndEpisode();
                     playerBlue.ResetPlayer();
                     powerUpManager.ResetPowerUps();
-                    vegetableSpawner.ResetAllVegetables();
+                    vegetableSpawner.ResetAllVegetables(totalPotato, totalCarot);
                     powerUpSpawner.ResetPowerUps();
                     playerRed.RandomizePosition();
                     playerRed.ResetPlayer();
@@ -128,6 +133,12 @@ public class GameManager : MonoBehaviour
             }
         }
         UpdateUI();
+    }
+
+    public float GetTimeBonus()
+    {
+        return ((duration - timer) / duration);
+
     }
     public int GetTotalVegetables()
     {

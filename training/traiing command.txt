@@ -46,4 +46,12 @@ mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv5-9 --env=env-5.8
 
 mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv5-10 --env=env-5.8\GardenFrenzy --base-port=5014 --force  (+-12 jam, max reward 0.1)
 
+mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv6-1 --env=env-6.1\GardenFrenzy --base-port=5012 --force  (+-12 jam)
 
+
+
+mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv6-2 --env=env-6.2\GardenFrenzy --base-port=5013 --force  (+-12 jam)
+
+mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv6-3 --env=env-6.3\GardenFrenzy --initialize-from=simpleEnv6-2 --base-port=5012 --force
+
+mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv6-4 --env=env-6.3\GardenFrenzy --initialize-from=simpleEnv6-4 --base-port=5012 --force

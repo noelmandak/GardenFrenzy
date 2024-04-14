@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : MonoBehaviour
 {
@@ -51,7 +52,8 @@ public class Player : MonoBehaviour
         potatoCount = 0;
         carotCount = 0;
         playerScore = 0;
-        maxCapacity = Random.Range(1, 4);
+        //maxCapacity = Random.Range(1, 6);
+        Debug.Log($"Capacity = {maxCapacity}");
         playerPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
         isDoublePointActive = false;
         gameObject.transform.localPosition = initialPosition;
@@ -119,39 +121,44 @@ public class Player : MonoBehaviour
             if (this.playerCaring < maxCapacity)
             {
                 this.playerCaring++;
+                agent.AddReward(0.0001f);
                 return true;
             }
-            if (gameManager.gamePlayCounter>100000) agent.AddReward(-0.0001f);
+            //if (gameManager.gamePlayCounter>100000) agent.AddReward(-0.0001f);
         }
-        if (gameManager.gamePlayCounter > 100000)
-        {
-            agent.AddReward(-0.0001f);
-            gameManager.resetGame();
-        }
+        agent.AddReward(-0.000001f);
+        //if (gameManager.gamePlayCounter > 100000)
+        //{
+        //    agent.AddReward(-0.0001f);
+        //    gameManager.resetGame();
+        //}
         return false;
     }
 
     public bool MoveToBox(int boxType, int point)
     {
+        int score = point * playerCaring * (isDoublePointActive ? 2 : 1);
         if (boxType == vegetableType)
         {
             if (boxType == 1) potatoCount += playerCaring; // Kotak adalah kentang
             if (boxType == 2) carotCount += playerCaring;// Kotak adalah wortel
-            int score = point * playerCaring * (isDoublePointActive ? 2 : 1);
             playerScore += score;
             playerCaring = 0;
             vegetableType = 0;
+            agent.AddReward(0.001f * score + gameManager.GetTimeBonus()*0.1f);
             return true;
 
         }
         if (vegetableType != 0)
         {
-            if (gameManager.gamePlayCounter > 100000) agent.AddReward(-0.001f);
+            agent.AddReward(-0.00001f * score);
+            //if (gameManager.gamePlayCounter > 100000) agent.AddReward(-0.001f);
         }
-        if (gameManager.gamePlayCounter > 100000) { 
-            agent.AddReward(-0.001f); 
-            gameManager.resetGame();
-        }
+
+        //if (gameManager.gamePlayCounter > 100000) { 
+        //    agent.AddReward(-0.001f); 
+        //    gameManager.resetGame();
+        //}
         return false;
     }
 
@@ -185,7 +192,7 @@ public class Player : MonoBehaviour
 
     public PlayerProperties GetPlayerProperties()
     {
-        Vector3 playerPowerup = new(playerPowerUp[0], playerPowerUp[1], playerPowerUp[2]);
+        Vector3 playerPowerup = new(playerPowerUp[0] / 4, playerPowerUp[1] / 4, playerPowerUp[2] / 4);
         Vector3 dirToPotatoToBox = (potatoBox.transform.localPosition - transform.localPosition).normalized;
         Vector3 dirToCarotToBox = (carotBox.transform.localPosition - transform.localPosition).normalized;
         return new PlayerProperties(isRed, isDoublePointActive, FearField.activeSelf, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarotToBox);

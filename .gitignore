@@ -74,3 +74,4 @@ crashlytics-build.properties
 # Python virtual environtment
 training/venv3.8
 training/env*
+training/results/simpleEnv6-*/run_logs/Player-0.log
