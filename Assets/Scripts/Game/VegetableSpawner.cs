@@ -28,8 +28,8 @@ public class VegetableSpawner : MonoBehaviour
             bool validPosition;
             do
             {
-                randomX = Random.Range(-8f, 8f);
-                randomY = Random.Range(-8f, 8f);
+                randomX = Random.Range(-5f, 5f);
+                randomY = Random.Range(-5f, 5f);
                 validPosition = CheckPosition(randomX, randomY);
             } while (!validPosition);
             Vector3 spawnPosition = transform.TransformPoint(new Vector3(randomX, randomY, 0f));

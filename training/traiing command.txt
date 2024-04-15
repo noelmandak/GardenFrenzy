@@ -54,4 +54,13 @@ mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv6-2 --env=env-6.2
 
 mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv6-3 --env=env-6.3\GardenFrenzy --initialize-from=simpleEnv6-2 --base-port=5012 --force
 
-mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv6-4 --env=env-6.3\GardenFrenzy --initialize-from=simpleEnv6-4 --base-port=5012 --force
+mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv6-4 --env=env-6.4\GardenFrenzy --initialize-from=simpleEnv6-3 --base-port=5013 --force
+
+mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv7-1 --env=env-7.1\GardenFrenzy --base-port=5012 --force
+
+mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv7-2 --env=env-7.2\GardenFrenzy --base-port=5012 --resume (nice model)
+
+mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv7-3 --env=env-7.3\GardenFrenzy --base-port=5013 --resume
+
+
+mlagents-learn config\defaultConfig-30M.yaml --run-id=simpleEnv7-4 --env=env-7.4\GardenFrenzy --base-port=5012 --initialize-from=simpleEnv7-2 --force 

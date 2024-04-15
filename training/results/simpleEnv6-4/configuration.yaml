@@ -46,7 +46,7 @@ behaviors:
           deterministic: false
         learning_rate: 0.0003
         encoding_size: 256
-    init_path: results\simpleEnv6-3\CollectVegetableRed\checkpoint.pt
+    init_path: null
     keep_checkpoints: 20
     checkpoint_interval: 1000000
     max_steps: 30000000
@@ -76,10 +76,10 @@ engine_settings:
 environment_parameters: null
 checkpoint_settings:
   run_id: simpleEnv6-4
-  initialize_from: simpleEnv6-3
+  initialize_from: null
   load_model: false
-  resume: false
-  force: true
+  resume: true
+  force: false
   train_model: false
   inference: false
   results_dir: results

@@ -93,6 +93,7 @@ public class RLAgent : Agent
             player.ActivatePower(2);
          }
 
+        AddReward(-0.000001f);
     }
 
     public int GetStar()

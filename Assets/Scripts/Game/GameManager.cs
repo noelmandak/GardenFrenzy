@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private int maxCapacity = 5;
     private int totalPotato = 1;
     private int totalCarot = 1;
-    private float duration = 60f;
+    private float duration = 100;
     private float timer;
     private bool isPaused = false;
     private bool isActivatingPower = false;
@@ -96,8 +96,8 @@ public class GameManager : MonoBehaviour
                     //AgentRed.AddReward(timerPenalty);
 
                     //float timerPenalty = ((duration - timer) / duration) * -0.001f; // Give the agent a penalty if it becomes stuck somewhere.
-                    //float timerBonus = ((duration - timer) / duration) * 0.05f; // Give the agent a bonus point based on how quickly the agent can finish the level.
-                    //if (GameOverChecker()) AgentRed.AddReward(0.1f+timerBonus); // Give the agent a reward if it finished the level.
+                    float timerBonus = ((duration - timer) / duration) * 0.05f; // Give the agent a bonus point based on how quickly the agent can finish the level.
+                    if (GameOverChecker()) AgentRed.AddReward(0.5f+timerBonus); // Give the agent a reward if it finished the level.
 
                     //if (playerRed.GetScore() > playerBlue.GetScore())
                     //{

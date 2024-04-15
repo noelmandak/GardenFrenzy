@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         potatoCount = 0;
         carotCount = 0;
         playerScore = 0;
-        //maxCapacity = Random.Range(1, 6);
+        maxCapacity = Random.Range(1, 6);
         Debug.Log($"Capacity = {maxCapacity}");
         playerPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
         isDoublePointActive = false;
@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
             }
             //if (gameManager.gamePlayCounter>100000) agent.AddReward(-0.0001f);
         }
-        agent.AddReward(-0.000001f);
+        agent.AddReward(-0.00001f);
         //if (gameManager.gamePlayCounter > 100000)
         //{
         //    agent.AddReward(-0.0001f);
@@ -199,17 +199,17 @@ public class Player : MonoBehaviour
     }
     public void RandomizePosition()
     {
-        float randomXPlayer = Random.Range(-8f, 8f);
-        float randomYPlayer = Random.Range(-8f, 8f);
+        float randomXPlayer = Random.Range(-5f, 5f);
+        float randomYPlayer = Random.Range(-5f, 5f);
         transform.localPosition = new Vector3(randomXPlayer, randomYPlayer, transform.localPosition.z);
 
-        float randomXPotatoBox = Random.Range(-8f, 8f);
-        float randomYPotatoBox = Random.Range(-8f, 8f);
+        float randomXPotatoBox = Random.Range(-5f, 5f);
+        float randomYPotatoBox = Random.Range(-5f, 5f);
         Vector3 potatoBoxPosition = new Vector3(randomXPotatoBox, randomYPotatoBox, potatoBox.transform.localPosition.z);
         potatoBox.transform.localPosition = potatoBoxPosition;
 
-        float randomXCarotBox = Random.Range(-8f, 8f);
-        float randomYCarotBox = Random.Range(-8f, 8f);
+        float randomXCarotBox = Random.Range(-5f, 5f);
+        float randomYCarotBox = Random.Range(-5f, 5f);
         Vector3 carotBoxPosition = new Vector3(randomXCarotBox, randomYCarotBox, carotBox.transform.localPosition.z);
         carotBox.transform.localPosition = carotBoxPosition;
 

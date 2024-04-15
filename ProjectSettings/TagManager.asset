@@ -12,6 +12,7 @@ TagManager:
   - Yellow
   - Potato
   - Carot
+  - Wall
   layers:
   - Default
   - TransparentFX
