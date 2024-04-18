@@ -31,15 +31,17 @@ public class RLAgent : Agent
             if (newPlayerProperties.PlayerScore > playerProperties.PlayerScore) AddReward((newPlayerProperties.PlayerScore - playerProperties.PlayerScore) * 0.002f);
         }
         playerProperties = newPlayerProperties;
-        sensor.AddObservation(playerProperties.IsRed ? 0 : 1); 
-        sensor.AddObservation(playerProperties.VegetableType);
-        sensor.AddObservation(playerProperties.PlayerCaring);
-        sensor.AddObservation(playerProperties.PotatoCount);
-        sensor.AddObservation(playerProperties.CarotCount);
+        sensor.AddObservation(playerProperties.IsRed ? 0 : 1);
+        sensor.AddObservation(playerProperties.IsDoublePointActive ? 1 : 0);
+        sensor.AddObservation(playerProperties.IsFearFieldActive ? 1 : 0);
+        sensor.AddObservation((playerProperties.PlayerCaring < playerProperties.MaxCapacity) ? 1 : 0); // is player can collect more
+        sensor.AddObservation((playerProperties.VegetableType == 1) ? 1 : 0); // potato
+        sensor.AddObservation((playerProperties.VegetableType == 2) ? 1 : 0); // carot
         sensor.AddObservation(playerProperties.PlayerScore);
         sensor.AddObservation(playerProperties.PlayerPowerUp);
-        sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
-        sensor.AddObservation(new Vector2(playerProperties.DirToCarotBox.x, playerProperties.DirToCarotBox.y));
+        if (playerProperties.VegetableType == 1) sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
+        else if (playerProperties.VegetableType == 2) sensor.AddObservation(new Vector2(playerProperties.DirToCarotBox.x, playerProperties.DirToCarotBox.y));
+        else sensor.AddObservation(new Vector2(0, 0));
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)

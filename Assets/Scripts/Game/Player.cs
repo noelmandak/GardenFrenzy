@@ -167,7 +167,7 @@ public class Player : MonoBehaviour
         Vector3 playerPowerup = new(playerPowerUp[0], playerPowerUp[1], playerPowerUp[2]);
         Vector3 dirToPotatoToBox = (potatoBox.transform.localPosition - transform.localPosition).normalized;
         Vector3 dirToCarotToBox = (carotBox.transform.localPosition - transform.localPosition).normalized;
-        return new PlayerProperties(isRed, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarotToBox);
+        return new PlayerProperties(isRed, isDoublePointActive, FearField.activeSelf, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarotToBox);
     }
 }
 
@@ -175,6 +175,8 @@ public class Player : MonoBehaviour
 public class PlayerProperties
 {
     public bool IsRed { get; private set; }
+    public bool IsDoublePointActive { get; private set; }
+    public bool IsFearFieldActive { get; private set; }
     public float PlayerSpeed { get; private set; }
     public int MaxCapacity { get; private set; }
     public int PlayerCaring { get; private set; }
@@ -186,9 +188,11 @@ public class PlayerProperties
     public Vector3 DirToPotatoBox { get; private set; }
     public Vector3 DirToCarotBox { get; private set; }
 
-    public PlayerProperties(bool isRed, float speed, int capacity,int playerCaring, int vegetableType, int potatoCount, int carotCount, int playerScore, Vector3 playerPowerUp, Vector3 dirToPotatoBox, Vector3 dirToCarotBox)
+    public PlayerProperties(bool isRed, bool isDoublePointActive, bool isFearFieldActive, float speed, int capacity, int playerCaring, int vegetableType, int potatoCount, int carotCount, int playerScore, Vector3 playerPowerUp, Vector3 dirToPotatoBox, Vector3 dirToCarotBox)
     {
         IsRed = isRed;
+        IsDoublePointActive = isDoublePointActive;
+        IsFearFieldActive = isFearFieldActive;
         PlayerSpeed = speed;
         MaxCapacity = capacity;
         PlayerCaring = playerCaring;
