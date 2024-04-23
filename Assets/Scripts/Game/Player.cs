@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.MLAgents.Integrations.Match3;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [SerializeField]
     private bool isRed;
-
+    private bool isFacingRight = true;
     private float initialPlayerSpeed = 0;
     private Vector3 initialPosition;
     private float playerSpeed = 0;
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
     private int playerScore = 0;
     private int[] playerPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
     private bool isDoublePointActive = false;
+    private bool isInField = false;
+    private bool isInDirtPath = false;
 
     public GameObject potatoBox;
     public GameObject carotBox;
@@ -25,9 +28,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject FearField;
 
+    private Animator animator;
+
     private void Start()
     {
         initialPosition = gameObject.transform.localPosition;
+        animator = GetComponent<Animator>();
     }
 
     public void Init(float speed, int capacity)
@@ -87,7 +93,27 @@ public class Player : MonoBehaviour
 
     public void MovePlayer(Vector2 movement)
     {
-        gameObject.GetComponent<Rigidbody2D>().velocity = movement * playerSpeed;
+        float tileSpeed = (isInField ? -1.5f : 0) + (isInDirtPath ? 1.5f : 0);
+        gameObject.GetComponent<Rigidbody2D>().velocity = movement * (playerSpeed + tileSpeed);
+
+        animator.SetFloat("Velocity", Mathf.Abs(movement.x) + Mathf.Abs(movement.x));
+
+        if (movement.x > 0) isFacingRight = true;
+        else if (movement.x < 0) isFacingRight = false;
+        Flip();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Field")) isInField = true;
+        if (other.CompareTag("DirtPath")) isInDirtPath = true;
+        
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Field")) isInField = false;
+        if (other.CompareTag("DirtPath")) isInDirtPath = false;
     }
 
     public bool CollectPowerUp(int powerUpType)
@@ -167,7 +193,21 @@ public class Player : MonoBehaviour
         Vector3 playerPowerup = new(playerPowerUp[0], playerPowerUp[1], playerPowerUp[2]);
         Vector3 dirToPotatoToBox = (potatoBox.transform.localPosition - transform.localPosition).normalized;
         Vector3 dirToCarotToBox = (carotBox.transform.localPosition - transform.localPosition).normalized;
-        return new PlayerProperties(isRed, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarotToBox);
+        return new PlayerProperties(isRed, isDoublePointActive, FearField.activeSelf, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarotToBox);
+    }
+
+    private void Flip()
+    {
+        Vector3 theScale = transform.localScale;
+        if ((isFacingRight && (theScale.x < 0)) || !isFacingRight && (theScale.x > 0))
+        {
+            transform.localScale = new Vector3(-theScale.x, theScale.y, theScale.z);
+            foreach (Transform child in transform)
+            {
+                Vector3 childScale = child.localScale;
+                child.localScale = new Vector3(-childScale.x, childScale.y, childScale.z);
+            }
+        }
     }
 }
 
@@ -175,6 +215,8 @@ public class Player : MonoBehaviour
 public class PlayerProperties
 {
     public bool IsRed { get; private set; }
+    public bool IsDoublePointActive { get; private set; }
+    public bool IsFearFieldActive { get; private set; }
     public float PlayerSpeed { get; private set; }
     public int MaxCapacity { get; private set; }
     public int PlayerCaring { get; private set; }
@@ -186,9 +228,11 @@ public class PlayerProperties
     public Vector3 DirToPotatoBox { get; private set; }
     public Vector3 DirToCarotBox { get; private set; }
 
-    public PlayerProperties(bool isRed, float speed, int capacity,int playerCaring, int vegetableType, int potatoCount, int carotCount, int playerScore, Vector3 playerPowerUp, Vector3 dirToPotatoBox, Vector3 dirToCarotBox)
+    public PlayerProperties(bool isRed, bool isDoublePointActive, bool isFearFieldActive, float speed, int capacity, int playerCaring, int vegetableType, int potatoCount, int carotCount, int playerScore, Vector3 playerPowerUp, Vector3 dirToPotatoBox, Vector3 dirToCarotBox)
     {
         IsRed = isRed;
+        IsDoublePointActive = isDoublePointActive;
+        IsFearFieldActive = isFearFieldActive;
         PlayerSpeed = speed;
         MaxCapacity = capacity;
         PlayerCaring = playerCaring;
