@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
 
     private float playerSpeed = 5;
     private int maxCapacity = 5;
-    private int totalPotato = 15;
-    private int totalCarot = 10;
+    public int totalPotato = 5;
+    public int totalCarot = 5;
     private float duration = 100f;
     private float timer;
     private bool isPaused = false;

@@ -12,17 +12,21 @@ TagManager:
   - Yellow
   - Potato
   - Carot
+  - Wall
+  - Field
+  - Obstacle
+  - DirtPath
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - Minimap
   - PlayerRed
   - PlayerBlue
-  - 
+  - Obstacle
   - 
   - 
   - 
@@ -48,4 +52,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 346186909
     locked: 0

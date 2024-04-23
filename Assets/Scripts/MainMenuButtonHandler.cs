@@ -17,7 +17,7 @@ public class MainMenuButtonHandler : MonoBehaviour
     public void OnPlayButtonClick()
     {
         // Pindah ke scene Game
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("Level1");
     }
 
     // Fungsi untuk tombol Player History
