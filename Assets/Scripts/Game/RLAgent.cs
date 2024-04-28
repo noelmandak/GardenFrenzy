@@ -61,9 +61,9 @@ public class RLAgent : Agent
         var y = actions.ContinuousActions[1];
         player.MovePlayer(new Vector2(x, y));
 
-        if (actions.DiscreteActions[0] > 0) player.ActivatePower(0);
-        if (actions.DiscreteActions[1] > 0) player.ActivatePower(1);
-        if (actions.DiscreteActions[2] > 0) player.ActivatePower(2);
+        if (actions.DiscreteActions[0] > 0) player.CheckPowerupType(0);
+        if (actions.DiscreteActions[1] > 0) player.CheckPowerupType(1);
+        if (actions.DiscreteActions[2] > 0) player.CheckPowerupType(2);
 
     }
 }

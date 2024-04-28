@@ -2,15 +2,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine.InputSystem;
+using System;
+using System.Collections.Generic;
+using System.Collections;
+using UnityEngine.Networking;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
     public GameObject pausePopup;
     public GameObject activatePowerPopup;
     public GameObject advancedSettingsPopup;
-    public ActivatePowerUp activatePowerUp;
+    public ActivatePowerUpUI activatePowerUp;
     public GameObject gameCanvas;
     public Slider timerSlider;
 
@@ -20,7 +23,7 @@ public class GameManager : MonoBehaviour
     public int totalCarot = 5;
     private float duration = 100f;
     private float timer;
-    private bool isPaused = false;
+    public bool isPaused { get; private set; }
     private bool isActivatingPower = false;
     private bool isAdvancedSettings = false;
 
@@ -46,8 +49,26 @@ public class GameManager : MonoBehaviour
     public RLAgent AgentBlue;
     public CameraFollow cameraFollow;
 
+    private DateTime startTime;
+    private DateTime endTime;
 
+    private List<string> friendlyWords = new List<string> {
+        "Hello", "Smile", "Love", "Happy", "Friend",
+        "Cheerful", "Kindness", "Joy", "Gratitude", "Sunshine"
+    };
 
+    public List<EmotionHistory> emotionList = new List<EmotionHistory>();
+
+    public string GetRandomWord()
+    {
+        // Generate a random index
+        int randomIndex = UnityEngine.Random.Range(0, friendlyWords.Count);
+
+        // Get the word at the random index
+        string randomWord = friendlyWords[randomIndex];
+
+        return randomWord;
+    }
     private void Start()
     {
         powerUpManager = gameObject.GetComponent<PowerUpManager>();
@@ -70,6 +91,8 @@ public class GameManager : MonoBehaviour
         powerUpSpawner.Init();
 
         currentPlayer = isCurretPlayerIsRed ? playerRed : playerBlue;
+
+        startTime = DateTime.Now;
     }
 
     void Update()
@@ -107,7 +130,8 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    SaveScore();
+                    // Simpan data ke database
+                    SaveGame();
                     SceneManager.LoadScene("GameOver");
                 }
             }
@@ -175,13 +199,56 @@ public class GameManager : MonoBehaviour
         currentPlayer = isCurretPlayerIsRed ? playerRed : playerBlue;
     }
 
-    public void SaveScore()
+    public void SaveGame()
     {
+
+        endTime = DateTime.Now;
+        TimeSpan duration = endTime - startTime;
+        int durationInSeconds = (int)duration.TotalSeconds;
+        GameData gameData = new GameData();
+        string savedUserId = PlayerPrefs.GetString("UserId", "");
+
+        gameData.user_id = savedUserId;
+        gameData.score = playerBlue.GetScore();
+        gameData.time_play = startTime;
+        gameData.duration = durationInSeconds;
+        gameData.emotion_history = emotionList;
+        string json = JsonUtility.ToJson(gameData);
+        Debug.Log(json);
+
+        StartCoroutine(PostRequest(gameData));
         PlayerPrefs.SetString("RedScore", playerRed.GetScore().ToString());
         PlayerPrefs.SetString("BlueScore", playerBlue.GetScore().ToString());
         PlayerPrefs.SetString("LastScore", currentPlayer.GetScore().ToString());
     }
-    
+
+    IEnumerator PostRequest(GameData gameData)
+    {
+        Debug.Log("Start kirim");
+        // Konversi GameData menjadi JSON
+        string jsonData = JsonUtility.ToJson(gameData);
+
+        // Kirim request POST
+        string url = "https://lizard-alive-suitably.ngrok-free.app/history/save_game";
+        UnityWebRequest request = UnityWebRequest.PostWwwForm(url, "POST");
+        request.SetRequestHeader("Content-Type", "application/json");
+        byte[] byteData = System.Text.Encoding.UTF8.GetBytes(jsonData);
+        request.uploadHandler = new UploadHandlerRaw(byteData);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        yield return request.SendWebRequest();
+
+        // Cek jika terjadi error saat mengirim request
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError(request.error);
+        }
+        else
+        {
+            // Cetak response
+            Debug.Log("Response: " + request.downloadHandler.text);
+        }
+    }
+
     public void OnPauseButtonClick()
     {
         SetPause(true);
@@ -192,30 +259,28 @@ public class GameManager : MonoBehaviour
         SetPause(false);
     }
     
+
     public void OnOkButtonClick()
     {
+
         SetActivatePower(false);
-        SetAdvancedSettings(false);
+        
     }
     
     public void OnActivatePowerButtonClick(int buttonIndex)
     {
-        int currentPowerUpType = currentPlayer.ActivatePower(buttonIndex);
+        int currentPowerUpType = currentPlayer.CheckPowerupType(buttonIndex); // 0 = None, 1 = angry, 2 = sad, 3 = fear, 4 = joy
         if (currentPowerUpType > 0)
         {
-            int star = GetStar();
-            activatePowerUp.currentPowerUpType = currentPowerUpType;
-            activatePowerUp.SetCommand();
-            activatePowerUp.SetStar(star);
-            powerUpManager.ActivatePower(isCurretPlayerIsRed, currentPowerUpType, star);
+            string word = GetRandomWord();
             SetActivatePower(true);
-
+            powerUpManager.StartActivatePowerUp(isCurretPlayerIsRed, word, currentPowerUpType);
         }
     }
     
-    public int GetStar()
+    public float GetRandomEmotionScore()
     {
-        return Random.Range(1, 4);
+        return UnityEngine.Random.Range(0, 100);
     }
 
     public bool IsPaused()
@@ -230,7 +295,7 @@ public class GameManager : MonoBehaviour
 
     public void OnQuitButtonClick()
     {
-        SaveScore();
+        SaveGame();
         SetPause(false);
         SceneManager.LoadScene("GameOver");
     }
@@ -239,22 +304,46 @@ public class GameManager : MonoBehaviour
     {
         this.isPaused = isPaused;
         pausePopup.SetActive(isPaused);
-        Time.timeScale = isPaused ? 0f : 1f;
+        //Time.timeScale = isPaused ? 0f : 1f;
     }
 
     void SetActivatePower(bool isActivatePowerUp)
     {
         bool isPaused = isActivatePowerUp;
         this.isPaused = isPaused;
-        Time.timeScale = isPaused ? 0f : 1f;
+        //Time.timeScale = isPaused ? 0f : 1f;
+        activatePowerUp.CloseResults();
         activatePowerPopup.SetActive(isActivatePowerUp);
+        powerUpManager.predictedEmotion = "";
     }
     
     void SetAdvancedSettings(bool isAdvancedSettings)
     {
         bool isPaused = isAdvancedSettings;
         this.isPaused = isPaused;
-        Time.timeScale = isPaused ? 0f : 1f;
+        //Time.timeScale = isPaused ? 0f : 1f;
         advancedSettingsPopup.SetActive(isAdvancedSettings);
     }
+}
+
+
+[System.Serializable]
+public class GameData
+{
+    public string user_id;
+    public string history_id;
+    public int score;
+    public DateTime time_play;
+    public int duration; 
+    public List<EmotionHistory> emotion_history = new List<EmotionHistory>();
+}
+
+[System.Serializable]
+public class EmotionHistory
+{
+    public string word;
+    public string emotion_target;
+    public string voice_emotion;
+    public float percentage;
+    public DateTime time_stamp;
 }

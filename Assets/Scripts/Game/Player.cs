@@ -29,11 +29,13 @@ public class Player : MonoBehaviour
     private GameObject FearField;
 
     private Animator animator;
+    GameManager gameManager;
 
     private void Start()
     {
         initialPosition = gameObject.transform.localPosition;
         animator = GetComponent<Animator>();
+        gameManager = GetComponentInParent<GameManager>();
     }
 
     public void Init(float speed, int capacity)
@@ -93,6 +95,11 @@ public class Player : MonoBehaviour
 
     public void MovePlayer(Vector2 movement)
     {
+        if (gameManager.isPaused)
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            return;
+        }
         float tileSpeed = (isInField ? -1.5f : 0) + (isInDirtPath ? 1.5f : 0);
         gameObject.GetComponent<Rigidbody2D>().velocity = movement * (playerSpeed + tileSpeed);
 
@@ -161,7 +168,7 @@ public class Player : MonoBehaviour
         return false;
     }
 
-    public int ActivatePower(int index)
+    public int CheckPowerupType(int index)
     {
         int powerUpType = playerPowerUp[index];
         if (powerUpType > 0) playerPowerUp[index] = 0;

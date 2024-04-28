@@ -90,6 +90,7 @@ public class LoginSignupManager : MonoBehaviour
             else
             {
                 PlayerPrefs.SetString("Username", email);
+                PlayerPrefs.SetString("UserId", "0");
                 PlayerPrefs.Save();
                 SceneManager.LoadScene("MainMenu");
             }
@@ -128,6 +129,7 @@ public class LoginSignupManager : MonoBehaviour
         {
             Debug.Log("Error: " + webRequest.error);
             PlayerPrefs.SetString("Username", username);
+            PlayerPrefs.SetString("UserId", "0");
             PlayerPrefs.Save();
             SceneManager.LoadScene("MainMenu");
         }
