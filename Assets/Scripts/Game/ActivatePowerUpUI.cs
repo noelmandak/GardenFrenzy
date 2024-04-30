@@ -39,6 +39,7 @@ public class ActivatePowerUpUI : MonoBehaviour
 
     public void OpenPopupRecording(string word, string emotion)
     {
+        AudioManager.Instance.musicSource.mute = true;
         PopupRecording.SetActive(true);
         WordText.text = $"\"{word}\"";
         EmotionText.text = $"Emotion: {emotion}";
@@ -107,7 +108,9 @@ public class ActivatePowerUpUI : MonoBehaviour
 
     public void CloseResults()
     {
-        PopupResult.SetActive(false);
+        PopupResult.SetActive(false); 
+        AudioManager.Instance.musicSource.mute = false;
+
     }
 
     public void SetStar(int star)

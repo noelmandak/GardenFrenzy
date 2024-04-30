@@ -14,6 +14,7 @@ public class MainMenuManager : MonoBehaviour
 
         // Menampilkan username pada komponen Text
         usernameText.text = "Welcome, " + savedUsername + "!";
+        AudioManager.Instance.PlayMusic("menu_nofrog");
 
     }
 

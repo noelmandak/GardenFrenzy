@@ -123,6 +123,13 @@ public class PowerUpManager : MonoBehaviour
 
     public void ApplyPowerUp(bool isPlayerRed, int powerUpType, int star)
     {
+        switch (powerUpType)
+        {
+            case 1: AudioManager.Instance.PlaySFX("powerupangry"); break;
+            case 2: AudioManager.Instance.PlaySFX("powerupsad"); break;
+            case 3: AudioManager.Instance.PlaySFX("powerupfear"); break;
+            case 4: AudioManager.Instance.PlaySFX("powerupjoy"); break;
+        }
         float duration = GetDuration(star);
 
         PowerUpClass powerUp = new(powerUpType, duration, isPlayerRed);

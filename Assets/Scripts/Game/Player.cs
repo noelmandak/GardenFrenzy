@@ -130,6 +130,13 @@ public class Player : MonoBehaviour
         {
             if (playerPowerUp[i] != 0) continue;
             playerPowerUp[i] = powerUpType;
+            switch(powerUpType)
+            {
+                case 1: AudioManager.Instance.PlaySFX("pickuppowerup1"); break;
+                case 2: AudioManager.Instance.PlaySFX("pickuppowerup2"); break;
+                case 3: AudioManager.Instance.PlaySFX("pickuppowerup3"); break;
+                case 4: AudioManager.Instance.PlaySFX("pickuppowerup4"); break;
+            }
             return true;
         }
         return false;
@@ -145,6 +152,8 @@ public class Player : MonoBehaviour
         {
             if (this.playerCaring < maxCapacity)
             {
+                if (vegetableType == 1) AudioManager.Instance.PlaySFX("pickuppotato");
+                if (vegetableType == 2) AudioManager.Instance.PlaySFX("pickupcarrot");
                 this.playerCaring++;
                 return true;
             }
@@ -156,8 +165,16 @@ public class Player : MonoBehaviour
     {
         if (boxType == vegetableType)
         {
-            if (boxType == 1) potatoCount += playerCaring; // Kotak adalah kentang
-            if (boxType == 2) carotCount += playerCaring;// Kotak adalah wortel
+            if (boxType == 1) // Kotak adalah kentang
+            {
+                potatoCount += playerCaring; 
+                AudioManager.Instance.PlaySFX("droppotato");
+            }
+            if (boxType == 2) // Kotak adalah wortel
+            {
+                carotCount += playerCaring;
+                AudioManager.Instance.PlaySFX("dropcarrot");
+            }
             int score = point * playerCaring * (isDoublePointActive ? 2 : 1);
             playerScore += score;
             playerCaring = 0;

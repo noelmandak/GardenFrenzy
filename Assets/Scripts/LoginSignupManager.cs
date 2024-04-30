@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using System;
 using UnityEngine.Networking;
+using System.Net;
 
 public class LoginSignupManager : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class LoginSignupManager : MonoBehaviour
 
     public void OnLoginButtonClick()
     {
+        AudioManager.Instance.PlaySFX("buttonpress1");
         string email = emailInput.text;
         string password = passwordInput.text;
 
@@ -41,7 +43,9 @@ public class LoginSignupManager : MonoBehaviour
         }
         else
         {
-            DisplayErrorMessage("Email or Password cannot be empty!");
+            SSTools.ShowMessage("No microphone found.", SSTools.Position.bottom, SSTools.Time.twoSecond);
+
+            //DisplayErrorMessage("Email or Password cannot be empty!");
         }
     }
 
@@ -86,18 +90,21 @@ public class LoginSignupManager : MonoBehaviour
             if (webRequest.error == "HTTP/1.1 401 Unauthorized")
             {
                 DisplayErrorMessage("Incorrect Email or Password!");
+
             }
             else
             {
-                PlayerPrefs.SetString("Username", email);
-                PlayerPrefs.SetString("UserId", "0");
-                PlayerPrefs.Save();
-                SceneManager.LoadScene("MainMenu");
+                SSTools.ShowMessage("Error: " + webRequest.error, SSTools.Position.bottom, SSTools.Time.twoSecond);
+                //PlayerPrefs.SetString("Username", email);
+                //PlayerPrefs.SetString("UserId", "0");
+                //PlayerPrefs.Save();
+                //SceneManager.LoadScene("MainMenu");
             }
         }
         else
         {
             Debug.Log("Received: " + webRequest.downloadHandler.text);
+            SSTools.ShowMessage("Login Success", SSTools.Position.bottom, SSTools.Time.twoSecond);
 
             var jsonResponse = JsonUtility.FromJson<LoginResponse>(webRequest.downloadHandler.text);
 
@@ -105,6 +112,7 @@ public class LoginSignupManager : MonoBehaviour
             PlayerPrefs.SetString("Username", jsonResponse.username);
             PlayerPrefs.Save();
             SceneManager.LoadScene("MainMenu");
+
         }
     }
     IEnumerator SignInRequest(string username, string email, string password)
@@ -128,13 +136,16 @@ public class LoginSignupManager : MonoBehaviour
             webRequest.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.Log("Error: " + webRequest.error);
-            PlayerPrefs.SetString("Username", username);
-            PlayerPrefs.SetString("UserId", "0");
-            PlayerPrefs.Save();
-            SceneManager.LoadScene("MainMenu");
+            SSTools.ShowMessage("Error: " + webRequest.error, SSTools.Position.bottom, SSTools.Time.twoSecond);
+
+            //PlayerPrefs.SetString("Username", username);
+            //PlayerPrefs.SetString("UserId", "0");
+            //PlayerPrefs.Save();
+            //SceneManager.LoadScene("MainMenu");
         }
         else
         {
+            SSTools.ShowMessage("Sign In Success", SSTools.Position.bottom, SSTools.Time.twoSecond);
             Debug.Log("Received: " + webRequest.downloadHandler.text);
 
             var jsonResponse = JsonUtility.FromJson<LoginResponse>(webRequest.downloadHandler.text);
@@ -153,6 +164,7 @@ public class LoginSignupManager : MonoBehaviour
 
     public void OnSigninButtonClick()
     {
+        AudioManager.Instance.PlaySFX("buttonpress1");
         string username = usernameInput.text;
         string email = emailInput.text;
         string password = passwordInput.text;
@@ -164,11 +176,14 @@ public class LoginSignupManager : MonoBehaviour
         else
         {
             DisplayErrorMessage("Username, Email, or Password cannot be empty!");
+            SSTools.ShowMessage("Username, Email, or Password cannot be empty!", SSTools.Position.bottom, SSTools.Time.twoSecond);
+
         }
     }
     public void OnChangeButtonClick()
     {
       
+        AudioManager.Instance.PlaySFX("buttonpress1");
         if (mode == "login")
         {
             mode = "signin";

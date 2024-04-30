@@ -7,6 +7,7 @@ public class MainMenuButtonHandler : MonoBehaviour
 {
     public void OnLogoutButtonClick()
     {
+        AudioManager.Instance.PlaySFX("buttonpress1");
         // Menghapus username yang tersimpan
         PlayerPrefs.DeleteKey("Username");
 
@@ -16,6 +17,7 @@ public class MainMenuButtonHandler : MonoBehaviour
     // Fungsi untuk tombol Play
     public void OnPlayButtonClick()
     {
+        AudioManager.Instance.PlaySFX("buttonpress1");
         // Pindah ke scene Game
         SceneManager.LoadScene("Level1");
     }
@@ -23,6 +25,7 @@ public class MainMenuButtonHandler : MonoBehaviour
     // Fungsi untuk tombol Player History
     public void OnPlayerHistoryButtonClick()
     {
+        AudioManager.Instance.PlaySFX("buttonpress1");
         // Pindah ke scene Player History
         SceneManager.LoadScene("PlayerHistory");
     }
@@ -30,6 +33,7 @@ public class MainMenuButtonHandler : MonoBehaviour
     // Fungsi untuk tombol Settings
     public void OnSettingsButtonClick()
     {
+        AudioManager.Instance.PlaySFX("buttonpress1");
         // Pindah ke scene Settings
         SceneManager.LoadScene("Settings");
     }
@@ -38,6 +42,7 @@ public class MainMenuButtonHandler : MonoBehaviour
     public void OnExitButtonClick()
     {
         // Keluar dari aplikasi (hanya berfungsi di build)
+        AudioManager.Instance.PlaySFX("buttonpress1");
         Application.Quit();
     }
 }

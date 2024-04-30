@@ -251,11 +251,13 @@ public class GameManager : MonoBehaviour
 
     public void OnPauseButtonClick()
     {
+        AudioManager.Instance.PlaySFX("buttonpress1");
         SetPause(true);
     }
     
     public void OnContinueButtonClick()
     {
+        AudioManager.Instance.PlaySFX("buttonpress1");
         SetPause(false);
     }
     
@@ -263,6 +265,7 @@ public class GameManager : MonoBehaviour
     public void OnOkButtonClick()
     {
 
+        AudioManager.Instance.PlaySFX("buttonpress1");
         SetActivatePower(false);
         
     }
@@ -272,6 +275,7 @@ public class GameManager : MonoBehaviour
         int currentPowerUpType = currentPlayer.CheckPowerupType(buttonIndex); // 0 = None, 1 = angry, 2 = sad, 3 = fear, 4 = joy
         if (currentPowerUpType > 0)
         {
+            AudioManager.Instance.PlaySFX("buttonpress1");
             string word = GetRandomWord();
             SetActivatePower(true);
             powerUpManager.StartActivatePowerUp(isCurretPlayerIsRed, word, currentPowerUpType);
@@ -290,11 +294,13 @@ public class GameManager : MonoBehaviour
 
     public void OnAdvancedSettingsButtonClick()
     {
+        AudioManager.Instance.PlaySFX("buttonpress1");
         SetAdvancedSettings(true);
     }
 
     public void OnQuitButtonClick()
     {
+        AudioManager.Instance.PlaySFX("buttonpress1");
         SaveGame();
         SetPause(false);
         SceneManager.LoadScene("GameOver");

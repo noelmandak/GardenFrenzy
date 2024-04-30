@@ -9,6 +9,9 @@ public class GameOverUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.Instance.PlaySFX("gameover");
+        AudioManager.Instance.StopMusic();
+
         scoreText.text = PlayerPrefs.GetString("LastScore");
     }
 

@@ -8,6 +8,7 @@ public class NavigationManager : MonoBehaviour
     public void GoToMainMenu()
     {
         Debug.Log("Back");
+        AudioManager.Instance.PlaySFX("buttonpress1");
         SceneManager.LoadScene("MainMenu");
     }
 }
