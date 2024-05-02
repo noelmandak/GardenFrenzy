@@ -73,12 +73,14 @@ public class PowerUpManager : MonoBehaviour
 
         DateTime timeStamp = DateTime.Now;
 
-        EmotionHistory emotionData = new EmotionHistory();
-        emotionData.word = targetWord;
-        emotionData.emotion_target = targetEmotion;
-        emotionData.voice_emotion = predictedEmotion;
-        emotionData.percentage = percentage;
-        emotionData.time_stamp = timeStamp;
+        EmotionHistory emotionData = new()
+        {
+            word = targetWord,
+            emotion_target = targetEmotion,
+            voice_emotion = predictedEmotion,
+            percentage = percentage,
+            time_stamp = timeStamp.ToString()
+        };
 
 
         gameManager.emotionList.Add(emotionData);

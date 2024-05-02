@@ -51,6 +51,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 506820d94b5c36045a9a033cae96cc56, type: 3}
   - name: menu_nofrog
     clip: {fileID: 8300000, guid: 53eee87f0af4e054da4e41e28f33b620, type: 3}
+  - name: ingame
+    clip: {fileID: 8300000, guid: 0651b2c9d1d344d448ae0c2f89954496, type: 3}
+  - name: ingame_2
+    clip: {fileID: 8300000, guid: d5350019c4425c049b64ca23aba1d95d, type: 3}
   sfxSounds:
   - name: openapp_1
     clip: {fileID: 8300000, guid: b952ff3b79ff59941b2a2526a3615af3, type: 3}
@@ -64,6 +68,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 29ea1121507f44041af5bd6bda37f016, type: 3}
   - name: pickupcarrot
     clip: {fileID: 8300000, guid: 750672d41ffab62408c7317b7f536f78, type: 3}
+  - name: droppotato
+    clip: {fileID: 8300000, guid: ad4727e5583162e4c959283bbb82e6c2, type: 3}
+  - name: dropcarrot
+    clip: {fileID: 8300000, guid: f4142a0de758d74429d895ce7c6c4be3, type: 3}
   - name: pickuppowerup1
     clip: {fileID: 8300000, guid: 81fd427ac13f64d4ea3b3224c307d4ee, type: 3}
   - name: pickuppowerup2
@@ -84,8 +92,6 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 9e5702ba6f8930a40b717bd9975fba38, type: 3}
   - name: walk1
     clip: {fileID: 8300000, guid: 38e0bf7c231aa794a92d13b5f4afcfb7, type: 3}
-  - name: 
-    clip: {fileID: 0}
   - name: walk2
     clip: {fileID: 8300000, guid: a895bad9cc2c02e438e6dab7a0bd91a9, type: 3}
   - name: walk3

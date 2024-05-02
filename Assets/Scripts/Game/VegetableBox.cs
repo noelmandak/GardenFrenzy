@@ -8,7 +8,7 @@ public class VegetableBox : MonoBehaviour
     public bool isCarrot = false;
     public bool isRed = false;
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if ((other.CompareTag("PlayerRed") && isRed) || (other.CompareTag("PlayerBlue") && !isRed))
         {

@@ -93,6 +93,8 @@ public class GameManager : MonoBehaviour
         currentPlayer = isCurretPlayerIsRed ? playerRed : playerBlue;
 
         startTime = DateTime.Now;
+        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayMusic("ingame_4");
     }
 
     void Update()
@@ -210,7 +212,7 @@ public class GameManager : MonoBehaviour
 
         gameData.user_id = savedUserId;
         gameData.score = playerBlue.GetScore();
-        gameData.time_play = startTime;
+        gameData.timeplay = startTime.ToString();
         gameData.duration = durationInSeconds;
         gameData.emotion_history = emotionList;
         string json = JsonUtility.ToJson(gameData);
@@ -339,7 +341,7 @@ public class GameData
     public string user_id;
     public string history_id;
     public int score;
-    public DateTime time_play;
+    public string timeplay;
     public int duration; 
     public List<EmotionHistory> emotion_history = new List<EmotionHistory>();
 }
@@ -351,5 +353,5 @@ public class EmotionHistory
     public string emotion_target;
     public string voice_emotion;
     public float percentage;
-    public DateTime time_stamp;
+    public string time_stamp;
 }
