@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/PlayerHistory.unity
     guid: 4200b9988f2feb34b9ed1a021b392cfd
   - enabled: 1
-    path: Assets/Scenes/ScoreBoard.unity
+    path: Assets/Scenes/Leaderboard.unity
     guid: 8611acc4a91371f45a787189ef51e70c
   - enabled: 1
     path: Assets/Scenes/Settings.unity

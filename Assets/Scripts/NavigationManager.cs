@@ -30,11 +30,11 @@ public class NavigationManager : MonoBehaviour
     }
 
     // Fungsi untuk tombol Player History
-    public void OnScoreBoardButtonClick()
+    public void OnLeaderboardButtonClick()
     {
         AudioManager.Instance.PlaySFX("buttonpress1");
         // Pindah ke scene Player History
-        SceneManager.LoadScene("ScoreBoard");
+        SceneManager.LoadScene("Leaderboard");
     }
     // Fungsi untuk tombol Player History
     public void OnPlayerHistoryButtonClick()

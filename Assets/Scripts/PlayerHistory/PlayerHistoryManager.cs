@@ -47,8 +47,8 @@ public class PlayerHistoryManager : MonoBehaviour
         {
             GameObject row = Instantiate(RowTemplate, HistoryTableContainer);
             row.GetComponent<PlayerHistoryRowComponent>().SetRowValue(historyData);
+            row.SetActive(true);
         }
-        RowTemplate.SetActive(false);
     }
 }
 
