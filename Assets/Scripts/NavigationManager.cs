@@ -36,6 +36,12 @@ public class NavigationManager : MonoBehaviour
         // Pindah ke scene Player History
         SceneManager.LoadScene("Leaderboard");
     }
+    public void OnAboutButtonClick()
+    {
+        AudioManager.Instance.PlaySFX("buttonpress1");
+        // Pindah ke scene Player History
+        SceneManager.LoadScene("About");
+    }
     // Fungsi untuk tombol Player History
     public void OnPlayerHistoryButtonClick()
     {

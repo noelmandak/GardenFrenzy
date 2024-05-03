@@ -38,6 +38,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 1c2be3e09320a3b4eabf2af27823f293
+  - enabled: 1
+    path: Assets/Scenes/About.unity
+    guid: 7b96e8ffce5903644a264642279cf7e0
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: c46c8eaf3d2bd214aaa1766a0e8b5c81, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fcb5dc100210b0f49a5466d4145ffb03, type: 2}
