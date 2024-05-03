@@ -35,14 +35,27 @@ public class PowerUpSpawner : MonoBehaviour
             spawnedPowerUps[i] = spawnedObject;
         }
     }
+
     bool CheckPosition(float x, float y)
     {
-        if ((Mathf.Abs(x) < 4f && Mathf.Abs(y) < 1f) || (Mathf.Abs(x) > 12 && Mathf.Abs(y) > 12))
+        Vector2 spawnPosition = new Vector2(x, y);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition, 1f);
+        foreach (Collider2D collider in colliders)
         {
-            return false;
+            if (collider.CompareTag("Obstacle")) return false;
+            if (collider.CompareTag("Player")) return false;
         }
         return true;
     }
+
+    //bool CheckPosition(float x, float y)
+    //{
+    //    if ((Mathf.Abs(x) < 4f && Mathf.Abs(y) < 1f) || (Mathf.Abs(x) > 12 && Mathf.Abs(y) > 12))
+    //    {
+    //        return false;
+    //    }
+    //    return true;
+    //}
 
     void RemoveAllPowerUps()
     {

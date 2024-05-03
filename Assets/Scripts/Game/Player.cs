@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.MLAgents.Integrations.Match3;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -7,7 +8,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private bool isRed;
-
+    private bool isFacingRight = true;
     private float initialPlayerSpeed = 0;
     private Vector3 initialPosition;
     private float playerSpeed = 0;
@@ -19,6 +20,8 @@ public class Player : MonoBehaviour
     private int playerScore = 0;
     private int[] playerPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
     private bool isDoublePointActive = false;
+    private bool isInField = false;
+    private bool isInDirtPath = false;
 
     public GameObject potatoBox;
     public GameObject carotBox;
@@ -28,12 +31,14 @@ public class Player : MonoBehaviour
 
     private RLAgent agent;
     private GameManager gameManager;
+    private Animator animator;
 
     private void Start()
     {
         initialPosition = gameObject.transform.localPosition;
         agent = gameObject.GetComponent<RLAgent>();
-        gameManager = gameObject.GetComponentInParent<GameManager>();
+        animator = GetComponent<Animator>();
+        gameManager = GetComponentInParent<GameManager>();
     }
 
     public void Init(float speed, int capacity)
@@ -95,7 +100,32 @@ public class Player : MonoBehaviour
 
     public void MovePlayer(Vector2 movement)
     {
-        gameObject.GetComponent<Rigidbody2D>().velocity = movement * playerSpeed;
+        if (gameManager.isPaused)
+        {
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            return;
+        }
+        float tileSpeed = (isInField ? -1.5f : 0) + (isInDirtPath ? 1.5f : 0);
+        gameObject.GetComponent<Rigidbody2D>().velocity = movement * (playerSpeed + tileSpeed);
+
+        animator.SetFloat("Velocity", Mathf.Abs(movement.x) + Mathf.Abs(movement.x));
+
+        if (movement.x > 0) isFacingRight = true;
+        else if (movement.x < 0) isFacingRight = false;
+        Flip();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Field")) isInField = true;
+        if (other.CompareTag("DirtPath")) isInDirtPath = true;
+        
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Field")) isInField = false;
+        if (other.CompareTag("DirtPath")) isInDirtPath = false;
     }
 
     public bool CollectPowerUp(int powerUpType)
@@ -105,6 +135,13 @@ public class Player : MonoBehaviour
         {
             if (playerPowerUp[i] != 0) continue;
             playerPowerUp[i] = powerUpType;
+            switch(powerUpType)
+            {
+                case 1: AudioManager.Instance.PlaySFX("pickuppowerup1"); break;
+                case 2: AudioManager.Instance.PlaySFX("pickuppowerup2"); break;
+                case 3: AudioManager.Instance.PlaySFX("pickuppowerup3"); break;
+                case 4: AudioManager.Instance.PlaySFX("pickuppowerup4"); break;
+            }
             return true;
         }
         return false;
@@ -120,6 +157,8 @@ public class Player : MonoBehaviour
         {
             if (this.playerCaring < maxCapacity)
             {
+                if (vegetableType == 1) AudioManager.Instance.PlaySFX("pickuppotato");
+                if (vegetableType == 2) AudioManager.Instance.PlaySFX("pickupcarrot");
                 this.playerCaring++;
                 agent.AddReward(0.0001f);
                 return true;
@@ -140,8 +179,16 @@ public class Player : MonoBehaviour
         int score = point * playerCaring * (isDoublePointActive ? 2 : 1);
         if (boxType == vegetableType)
         {
-            if (boxType == 1) potatoCount += playerCaring; // Kotak adalah kentang
-            if (boxType == 2) carotCount += playerCaring;// Kotak adalah wortel
+            if (boxType == 1) // Kotak adalah kentang
+            {
+                potatoCount += playerCaring; 
+                AudioManager.Instance.PlaySFX("droppotato");
+            }
+            if (boxType == 2) // Kotak adalah wortel
+            {
+                carotCount += playerCaring;
+                AudioManager.Instance.PlaySFX("dropcarrot");
+            }
             playerScore += score;
             playerCaring = 0;
             vegetableType = 0;
@@ -162,7 +209,7 @@ public class Player : MonoBehaviour
         return false;
     }
 
-    public int ActivatePower(int index)
+    public int CheckPowerupType(int index)
     {
         int powerUpType = playerPowerUp[index];
         if (powerUpType > 0) playerPowerUp[index] = 0;
@@ -195,7 +242,7 @@ public class Player : MonoBehaviour
         Vector3 playerPowerup = new(playerPowerUp[0] / 4, playerPowerUp[1] / 4, playerPowerUp[2] / 4);
         Vector3 dirToPotatoToBox = (potatoBox.transform.localPosition - transform.localPosition).normalized;
         Vector3 dirToCarotToBox = (carotBox.transform.localPosition - transform.localPosition).normalized;
-        return new PlayerProperties(isRed, isDoublePointActive, FearField.activeSelf, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarotToBox);
+        return new PlayerProperties(isRed, isDoublePointActive, FearField.activeSelf, isDoublePointActive, FearField.activeSelf, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarotToBox);
     }
     public void RandomizePosition()
     {
@@ -213,6 +260,20 @@ public class Player : MonoBehaviour
         Vector3 carotBoxPosition = new Vector3(randomXCarotBox, randomYCarotBox, carotBox.transform.localPosition.z);
         carotBox.transform.localPosition = carotBoxPosition;
 
+    }
+
+    private void Flip()
+    {
+        Vector3 theScale = transform.localScale;
+        if ((isFacingRight && (theScale.x < 0)) || !isFacingRight && (theScale.x > 0))
+        {
+            transform.localScale = new Vector3(-theScale.x, theScale.y, theScale.z);
+            foreach (Transform child in transform)
+            {
+                Vector3 childScale = child.localScale;
+                child.localScale = new Vector3(-childScale.x, childScale.y, childScale.z);
+            }
+        }
     }
 }
 
@@ -233,7 +294,7 @@ public class PlayerProperties
     public Vector3 DirToPotatoBox { get; private set; }
     public Vector3 DirToCarotBox { get; private set; }
 
-    public PlayerProperties(bool isRed, bool isDoublePointActive, bool isFearFieldActive, float speed, int capacity,int playerCaring, int vegetableType, int potatoCount, int carotCount, int playerScore, Vector3 playerPowerUp, Vector3 dirToPotatoBox, Vector3 dirToCarotBox)
+    public PlayerProperties(bool isRed, bool isDoublePointActive, bool isFearFieldActive, bool isDoublePointActive, bool isFearFieldActive, float speed, int capacity, int playerCaring, int vegetableType, int potatoCount, int carotCount, int playerScore, Vector3 playerPowerUp, Vector3 dirToPotatoBox, Vector3 dirToCarotBox)
     {
         IsRed = isRed;
         IsDoublePointActive = isDoublePointActive;

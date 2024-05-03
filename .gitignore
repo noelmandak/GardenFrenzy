@@ -70,8 +70,8 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-
 # Python virtual environtment
 training/venv3.8
 training/env*
 training/results/simpleEnv6-*/run_logs/Player-0.log
+/[Aa]ssets/record

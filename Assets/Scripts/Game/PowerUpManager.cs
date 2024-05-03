@@ -1,4 +1,5 @@
 using Google.Protobuf.WellKnownTypes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -11,14 +12,126 @@ public class PowerUpManager : MonoBehaviour
     public GameObject[] RedPUEffect;
     public GameObject[] BluePUEffect;
     private GameManager gameManager;
+    private SpeechRecord speechRecord;
+
+    public ActivatePowerUpUI activatePowerUpUI;
+    private bool isCurrentPlayerIsRed;
+
+
+    public string targetWord;
+    public string targetEmotion;
+    public string predictedEmotion = "";
+    public float percentage = 0f;
+    public int star = 0;
+    public int durationPU = 0;
+    public string skill = "";
+    public int currentPowerUpType;
 
     private void Start()
     {
         gameManager = GetComponent<GameManager>();
+        speechRecord = GetComponent<SpeechRecord>();
     }
 
-    public void ActivatePower(bool isPlayerRed, int powerUpType, int star)
+    public void StartActivatePowerUp(bool isPlayerRed, string word, int powerupType)
     {
+        targetWord = word;
+        isCurrentPlayerIsRed = isPlayerRed;
+        currentPowerUpType = powerupType;
+        switch (powerupType)
+        {
+            case 1:
+                targetEmotion  = "Angry";
+                skill = "speed up self movement";
+                break;
+            case 2:
+                targetEmotion = "Sad";
+                skill = "slow down opponent movement";
+                break;
+            case 3:
+                targetEmotion = "Fear";
+                skill = "fear field";
+                break;
+            case 4:
+                targetEmotion = "Joy";
+                skill = "double points";
+                break;
+
+        }
+        Debug.Log("hehe");
+        Debug.Log(activatePowerUpUI);
+
+        activatePowerUpUI.OpenPopupRecording(word, targetEmotion);
+    }
+
+    public void ProcessResults()
+    {
+        star = GetStar(percentage);
+        if (targetEmotion != predictedEmotion) star = 0;
+        durationPU = (int)GetDuration(star);
+        activatePowerUpUI.ShowResults(targetWord, targetEmotion, predictedEmotion, percentage, star, skill, durationPU);
+
+        DateTime timeStamp = DateTime.Now;
+
+        EmotionHistory emotionData = new()
+        {
+            word = targetWord,
+            emotion_target = targetEmotion,
+            voice_emotion = predictedEmotion,
+            percentage = percentage,
+            time_stamp = timeStamp.ToString()
+        };
+
+
+        gameManager.emotionList.Add(emotionData);
+        if (star > 0) ApplyPowerUp(isCurrentPlayerIsRed, currentPowerUpType, star);
+    }
+
+
+    public int GetStar(float emotionScore)
+    {
+        if (emotionScore >= 90 && emotionScore <= 100) return 3;
+        else if (emotionScore >= 50 && emotionScore <= 89) return 2;
+        else if (emotionScore >= 10 && emotionScore <= 49) return 1;
+        else if (emotionScore >= 0 && emotionScore <= 9) return 0;
+        else
+        {
+            Debug.LogError("Nilai emosi di luar rentang yang diharapkan.");
+            return -1;
+        }
+    }
+
+
+
+    private IEnumerator StartGetReadyTimer()
+    {
+        int countDown = 3;
+        while (countDown > 0)
+        {
+            activatePowerUpUI.SetGetReadyText(countDown);
+            yield return new WaitForSeconds(1f); // Tunggu satu detik
+            countDown--;
+        }
+        activatePowerUpUI.SetGetReadyText(countDown);
+        yield return new WaitForSeconds(1f); // Tunggu satu detik lagi sebelum merekam
+
+        activatePowerUpUI.GetReadyTimer.SetActive(false);
+        activatePowerUpUI.RecordingParent.SetActive(true);
+        activatePowerUpUI.ProcessText.text = "Recording...";
+        speechRecord.RecordFor3Seconds();
+
+        StartCoroutine(activatePowerUpUI.MoveSlider());
+    }
+
+    public void ApplyPowerUp(bool isPlayerRed, int powerUpType, int star)
+    {
+        switch (powerUpType)
+        {
+            case 1: AudioManager.Instance.PlaySFX("powerupangry"); break;
+            case 2: AudioManager.Instance.PlaySFX("powerupsad"); break;
+            case 3: AudioManager.Instance.PlaySFX("powerupfear"); break;
+            case 4: AudioManager.Instance.PlaySFX("powerupjoy"); break;
+        }
         float duration = GetDuration(star);
 
         PowerUpClass powerUp = new(powerUpType, duration, isPlayerRed);

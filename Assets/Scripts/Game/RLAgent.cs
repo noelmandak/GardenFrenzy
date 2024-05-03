@@ -47,10 +47,10 @@ public class RLAgent : Agent
             //}   
         }
         playerProperties = newPlayerProperties;
-        sensor.AddObservation(playerProperties.IsRed ? 0 : 1); 
-        sensor.AddObservation(playerProperties.IsDoublePointActive ? 1 : 0); 
-        sensor.AddObservation(playerProperties.IsFearFieldActive ? 1 : 0); 
-        sensor.AddObservation((playerProperties.PlayerCaring<playerProperties.MaxCapacity) ? 1 : 0); // is player can collect more
+        sensor.AddObservation(playerProperties.IsRed ? 0 : 1);
+        sensor.AddObservation(playerProperties.IsDoublePointActive ? 1 : 0);
+        sensor.AddObservation(playerProperties.IsFearFieldActive ? 1 : 0);
+        sensor.AddObservation((playerProperties.PlayerCaring < playerProperties.MaxCapacity) ? 1 : 0); // is player can collect more
         sensor.AddObservation((playerProperties.VegetableType == 1) ? 1 : 0); // potato
         sensor.AddObservation((playerProperties.VegetableType == 2) ? 1 : 0); // carot
         sensor.AddObservation(playerProperties.PlayerScore);
@@ -80,17 +80,17 @@ public class RLAgent : Agent
         if (actions.DiscreteActions[0] > 0 && (int)playerProperties.PlayerPowerUp[0] > 0)
         {
             powerUpManager.ActivatePower(playerProperties.IsRed, (int)playerProperties.PlayerPowerUp[0], GetStar());
-            player.ActivatePower(0);
+            player.CheckPowerupType(0);
         }
         if (actions.DiscreteActions[1] > 0 && (int)playerProperties.PlayerPowerUp[1] > 0) 
         {
             powerUpManager.ActivatePower(playerProperties.IsRed, (int)playerProperties.PlayerPowerUp[1], GetStar());
-            player.ActivatePower(1);
+            player.CheckPowerupType(1);
         }
         if (actions.DiscreteActions[2] > 0 && (int)playerProperties.PlayerPowerUp[2] > 0) 
         {
             powerUpManager.ActivatePower(playerProperties.IsRed, (int)playerProperties.PlayerPowerUp[2], GetStar());
-            player.ActivatePower(2);
+            player.CheckPowerupType(2);
          }
 
         AddReward(-0.000001f);

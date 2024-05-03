@@ -304,18 +304,98 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 71988554463088777, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004912141021037021, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_SensorName
+      value: RayPerceptionSensorRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004912141021037021, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_SphereCastRadius
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004912141021037021, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_RayLayerMask.m_Bits
+      value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004912141021037021, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_DetectableTags.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004912141021037021, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_DetectableTags.Array.data[6]
+      value: PlayerRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1004912141021037021, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_DetectableTags.Array.data[7]
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1084270898097875390, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207393230851574303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: isTraining
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1207393230851574303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 519420034}
+    - target: {fileID: 1262176381956375389, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: isReceivedInput
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568205027462884870, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: TeamId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568205027462884870, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 02af1c58b0a3242419edc0cd3c463a79, type: 3}
+    - target: {fileID: 1568205027462884870, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_BehaviorType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1568205027462884870, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
-      value: 14
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625474200019619045, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_SphereCastRadius
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625474200019619045, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_DetectableTags.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1625474200019619045, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_DetectableTags.Array.data[7]
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2703236129611764635, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2871036686643909192, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     - target: {fileID: 3705163783369658452, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 519420034}
+    - target: {fileID: 4818303047217975892, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 4919379667618477878, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 5154539062490939391, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
       propertyPath: m_Name
       value: GameEnv
@@ -368,13 +448,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7647317272266198474, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533350041919371303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: TeamId
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8533350041919371303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 6e35e3f798cd031488433b43c506e60c, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: 4cf6f264b0023524caa02d8c0cb7a0f1, type: 3}
+    - target: {fileID: 8533350041919371303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_BehaviorName
+      value: CollectVegetableRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 8533350041919371303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_BehaviorType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8533350041919371303, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
-      value: 14
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8785527936128549614, guid: f7145a3bb6041d142b4bc32329fb8943, type: 3}
+      propertyPath: m_TagString
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
