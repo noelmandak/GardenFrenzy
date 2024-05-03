@@ -107,7 +107,12 @@ public class LoginSignupManager : MonoBehaviour
         // Send request
         yield return webRequest.SendWebRequest();
 
-        if (webRequest.result == UnityWebRequest.Result.ConnectionError ||
+
+        if (webRequest.error == "HTTP/1.1 400 Bad Request")
+        {
+            SSTools.ShowMessage("Username or email already taken!", SSTools.Position.bottom, SSTools.Time.twoSecond);
+        }
+        else if (webRequest.result == UnityWebRequest.Result.ConnectionError ||
             webRequest.result == UnityWebRequest.Result.ProtocolError)
         {
             Debug.Log("Error: " + webRequest.error);
