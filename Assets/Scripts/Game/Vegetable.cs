@@ -23,8 +23,8 @@ public class Vegetable : MonoBehaviour
         {
             if (player.GetPlayerProperties().IsRed) redCount++;
             else blueCount++;
-            if (redCount > 10) agent.AddReward(redCount * -0.000001f);
-            if (blueCount > 10) agent.AddReward(blueCount * -0.000001f);
+            if (redCount > 10) agent.AddReward(-0.0000001f);
+            if (blueCount > 10) agent.AddReward(-0.0000001f);
 
             if (player.CollectVegetable(isCarrot ? 2 : 1))
             {

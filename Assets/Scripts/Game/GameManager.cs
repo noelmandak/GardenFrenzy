@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     private float playerSpeed = 5;
     private int maxCapacity = 5;
     public int totalPotato = 5;
-    public int totalCarot = 5;
+    public int totalCarrot = 5;
     private float duration = 100f;
     private float timer;
     public bool isPaused { get; private set; }
@@ -87,19 +87,14 @@ public class GameManager : MonoBehaviour
 
         playerRed.Init(playerSpeed, maxCapacity);
         playerBlue.Init(playerSpeed, maxCapacity);
-        vegetableSpawner.Init(totalPotato, totalCarot);
+        vegetableSpawner.Init(totalPotato, totalCarrot);
         powerUpSpawner.Init();
         playerRed.RandomizePosition();
 
         currentPlayer = isCurretPlayerIsRed ? playerRed : playerBlue;
         startTime = DateTime.Now;
-        AudioManager.Instance.StopMusic();
-        AudioManager.Instance.PlayMusic("ingame_4");
-    }
-
-    public void resetGame()
-    {
-        timer = 0;
+        //AudioManager.Instance.StopMusic();
+        //AudioManager.Instance.PlayMusic("ingame_4");
     }
 
     public void resetGame()
@@ -140,19 +135,18 @@ public class GameManager : MonoBehaviour
                     //}
 
                     
-                    totalPotato = Random.Range(1, 11);
-                    totalCarot = Random.Range(1, 11);;
+                    totalPotato = UnityEngine.Random.Range(1, 11);
+                    totalCarrot = UnityEngine.Random.Range(1, 11);;
 
                     timer = duration;
                     AgentRed.EndEpisode();
                     AgentBlue.EndEpisode();
                     playerBlue.ResetPlayer();
                     powerUpManager.ResetPowerUps();
-                    vegetableSpawner.ResetAllVegetables(totalPotato, totalCarot);
+                    vegetableSpawner.ResetAllVegetables(totalPotato, totalCarrot);
                     powerUpSpawner.ResetPowerUps();
                     playerRed.RandomizePosition();
                     playerRed.ResetPlayer();
-                    gamePlayCounter++;
                 }
                 else
                 {
@@ -172,7 +166,7 @@ public class GameManager : MonoBehaviour
     }
     public int GetTotalVegetables()
     {
-        return totalPotato + totalCarot;
+        return totalPotato + totalCarrot;
     }
 
     public Player GetCurrentPlayer()
@@ -200,7 +194,7 @@ public class GameManager : MonoBehaviour
 
     bool GameOverChecker()
     {
-        return (playerRed.GetTotalCollectedVegetables() + playerBlue.GetTotalCollectedVegetables()) == (totalPotato + totalCarot);
+        return (playerRed.GetTotalCollectedVegetables() + playerBlue.GetTotalCollectedVegetables()) == (totalPotato + totalCarrot);
     }
     void UpdateTimerUI()
     {
@@ -287,13 +281,13 @@ public class GameManager : MonoBehaviour
 
     public void OnPauseButtonClick()
     {
-        AudioManager.Instance.PlaySFX("buttonpress1");
+        //AudioManager.Instance.PlaySFX("buttonpress1");
         SetPause(true);
     }
     
     public void OnContinueButtonClick()
     {
-        AudioManager.Instance.PlaySFX("buttonpress1");
+        //AudioManager.Instance.PlaySFX("buttonpress1");
         SetPause(false);
     }
     
@@ -301,7 +295,7 @@ public class GameManager : MonoBehaviour
     public void OnOkButtonClick()
     {
 
-        AudioManager.Instance.PlaySFX("buttonpress1");
+        //AudioManager.Instance.PlaySFX("buttonpress1");
         SetActivatePower(false);
         
     }
@@ -311,7 +305,7 @@ public class GameManager : MonoBehaviour
         int currentPowerUpType = currentPlayer.CheckPowerupType(buttonIndex); // 0 = None, 1 = angry, 2 = sad, 3 = fear, 4 = joy
         if (currentPowerUpType > 0)
         {
-            AudioManager.Instance.PlaySFX("buttonpress1");
+            //AudioManager.Instance.PlaySFX("buttonpress1");
             string word = GetRandomWord();
             SetActivatePower(true);
             powerUpManager.StartActivatePowerUp(isCurretPlayerIsRed, word, currentPowerUpType);
@@ -330,13 +324,13 @@ public class GameManager : MonoBehaviour
 
     public void OnAdvancedSettingsButtonClick()
     {
-        AudioManager.Instance.PlaySFX("buttonpress1");
+        //AudioManager.Instance.PlaySFX("buttonpress1");
         SetAdvancedSettings(true);
     }
 
     public void OnQuitButtonClick()
     {
-        AudioManager.Instance.PlaySFX("buttonpress1");
+        //AudioManager.Instance.PlaySFX("buttonpress1");
         SaveGame();
         SetPause(false);
         SceneManager.LoadScene("GameOver");

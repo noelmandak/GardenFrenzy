@@ -22,7 +22,7 @@ public class VegetableBox : MonoBehaviour
             if (player != null)
             {
                 player.MoveToBox(isCarrot ? 2 : 1, pointValue);
-                agent.AddReward(-0.000001f);
+                agent.AddReward(-0.0000001f);
             }
         }
     }

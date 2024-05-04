@@ -17,16 +17,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/PlayerHistory.unity
     guid: 4200b9988f2feb34b9ed1a021b392cfd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Leaderboard.unity
     guid: 8611acc4a91371f45a787189ef51e70c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Settings.unity
     guid: 55900cebc2330404898e2b138fc78d2c
   - enabled: 0
     path: Assets/Scenes/GameScene.unity
     guid: 3fc8acdd13e6c734bafef6554d6fdbcd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level/Level1.unity
     guid: 895afbc85bacba54d90d40d45286cacc
   - enabled: 0
@@ -38,7 +38,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GameOver.unity
     guid: 1c2be3e09320a3b4eabf2af27823f293
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/About.unity
     guid: 7b96e8ffce5903644a264642279cf7e0
   - enabled: 0
@@ -56,9 +56,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SceneEnv6/TrainingRL.unity
     guid: 877839e05c1edb440b5662577d613001
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SimpleEnv7/TrainingRL.unity
     guid: 3bb636eb380dc9a479ac80dcef72b775
+  - enabled: 1
+    path: Assets/Scenes/Level1 training/Level1 training.unity
+    guid: bfb47c8c5948a8c45bbf966404d586ca
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: c46c8eaf3d2bd214aaa1766a0e8b5c81, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: fcb5dc100210b0f49a5466d4145ffb03, type: 2}

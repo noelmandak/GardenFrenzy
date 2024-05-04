@@ -13,10 +13,10 @@ public class Player : MonoBehaviour
     private Vector3 initialPosition;
     private float playerSpeed = 0;
     private int maxCapacity = 0 ;
-    private int vegetableType = 0;  //0 = none, 1 = potato, 2 = carot
+    private int vegetableType = 0;  //0 = none, 1 = potato, 2 = carrot
     private int playerCaring = 0;
     private int potatoCount = 0;
-    private int carotCount = 0;
+    private int carrotCount = 0;
     private int playerScore = 0;
     private int[] playerPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
     private bool isDoublePointActive = false;
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     private bool isInDirtPath = false;
 
     public GameObject potatoBox;
-    public GameObject carotBox;
+    public GameObject carrotBox;
 
     [SerializeField]
     private GameObject FearField;
@@ -52,12 +52,13 @@ public class Player : MonoBehaviour
     public void ResetPlayer()
     {
         playerSpeed = initialPlayerSpeed;
-        vegetableType = 0;  //0 = none, 1 = potato, 2 = carot
+        vegetableType = 0;  //0 = none, 1 = potato, 2 = carrot
         playerCaring = 0;
         potatoCount = 0;
-        carotCount = 0;
+        carrotCount = 0;
         playerScore = 0;
-        maxCapacity = Random.Range(1, 6);
+        //maxCapacity = Random.Range(1, 6);
+        maxCapacity = 5;
         Debug.Log($"Capacity = {maxCapacity}");
         playerPowerUp = new int[] { 0, 0, 0 }; // 1 = red, 2 = blue, 3 = purple, 4 = yellow
         isDoublePointActive = false;
@@ -95,7 +96,7 @@ public class Player : MonoBehaviour
 
     public int GetTotalCollectedVegetables()
     {
-        return potatoCount + carotCount;
+        return potatoCount + carrotCount;
     }
 
     public void MovePlayer(Vector2 movement)
@@ -135,13 +136,13 @@ public class Player : MonoBehaviour
         {
             if (playerPowerUp[i] != 0) continue;
             playerPowerUp[i] = powerUpType;
-            switch(powerUpType)
-            {
-                case 1: AudioManager.Instance.PlaySFX("pickuppowerup1"); break;
-                case 2: AudioManager.Instance.PlaySFX("pickuppowerup2"); break;
-                case 3: AudioManager.Instance.PlaySFX("pickuppowerup3"); break;
-                case 4: AudioManager.Instance.PlaySFX("pickuppowerup4"); break;
-            }
+            //switch(powerUpType)
+            //{
+            //    case 1: AudioManager.Instance.PlaySFX("pickuppowerup1"); break;
+            //    case 2: AudioManager.Instance.PlaySFX("pickuppowerup2"); break;
+            //    case 3: AudioManager.Instance.PlaySFX("pickuppowerup3"); break;
+            //    case 4: AudioManager.Instance.PlaySFX("pickuppowerup4"); break;
+            //}
             return true;
         }
         return false;
@@ -157,8 +158,8 @@ public class Player : MonoBehaviour
         {
             if (this.playerCaring < maxCapacity)
             {
-                if (vegetableType == 1) AudioManager.Instance.PlaySFX("pickuppotato");
-                if (vegetableType == 2) AudioManager.Instance.PlaySFX("pickupcarrot");
+                //if (vegetableType == 1) AudioManager.Instance.PlaySFX("pickuppotato");
+                //if (vegetableType == 2) AudioManager.Instance.PlaySFX("pickupcarrot");
                 this.playerCaring++;
                 agent.AddReward(0.0001f);
                 return true;
@@ -182,12 +183,12 @@ public class Player : MonoBehaviour
             if (boxType == 1) // Kotak adalah kentang
             {
                 potatoCount += playerCaring; 
-                AudioManager.Instance.PlaySFX("droppotato");
+                //AudioManager.Instance.PlaySFX("droppotato");
             }
             if (boxType == 2) // Kotak adalah wortel
             {
-                carotCount += playerCaring;
-                AudioManager.Instance.PlaySFX("dropcarrot");
+                carrotCount += playerCaring;
+                //AudioManager.Instance.PlaySFX("dropcarrot");
             }
             playerScore += score;
             playerCaring = 0;
@@ -198,7 +199,7 @@ public class Player : MonoBehaviour
         }
         if (vegetableType != 0)
         {
-            agent.AddReward(-0.00001f * score);
+            agent.AddReward(-0.000001f * score);
             //if (gameManager.gamePlayCounter > 100000) agent.AddReward(-0.001f);
         }
 
@@ -241,25 +242,47 @@ public class Player : MonoBehaviour
     {
         Vector3 playerPowerup = new(playerPowerUp[0] / 4, playerPowerUp[1] / 4, playerPowerUp[2] / 4);
         Vector3 dirToPotatoToBox = (potatoBox.transform.localPosition - transform.localPosition).normalized;
-        Vector3 dirToCarotToBox = (carotBox.transform.localPosition - transform.localPosition).normalized;
-        return new PlayerProperties(isRed, isDoublePointActive, FearField.activeSelf, isDoublePointActive, FearField.activeSelf, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarotToBox);
+        Vector3 dirToCarrotToBox = (carrotBox.transform.localPosition - transform.localPosition).normalized;
+        return new PlayerProperties(isRed, isDoublePointActive, FearField.activeSelf, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carrotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarrotToBox);
     }
     public void RandomizePosition()
     {
-        float randomXPlayer = Random.Range(-5f, 5f);
-        float randomYPlayer = Random.Range(-5f, 5f);
-        transform.localPosition = new Vector3(randomXPlayer, randomYPlayer, transform.localPosition.z);
+        Vector2 randomPositionPlayer = GetEmptyRandomPosition(-10, -10, 10, 10);
+        transform.localPosition = new Vector3(randomPositionPlayer.x, randomPositionPlayer.y, transform.localPosition.z);
 
-        float randomXPotatoBox = Random.Range(-5f, 5f);
-        float randomYPotatoBox = Random.Range(-5f, 5f);
-        Vector3 potatoBoxPosition = new Vector3(randomXPotatoBox, randomYPotatoBox, potatoBox.transform.localPosition.z);
+        Vector2 randomPositionPotatoBox = GetEmptyRandomPosition(-10, -10, 10, 10);
+        Vector3 potatoBoxPosition = new Vector3(randomPositionPotatoBox.x, randomPositionPotatoBox.x, potatoBox.transform.localPosition.z);
         potatoBox.transform.localPosition = potatoBoxPosition;
 
-        float randomXCarotBox = Random.Range(-5f, 5f);
-        float randomYCarotBox = Random.Range(-5f, 5f);
-        Vector3 carotBoxPosition = new Vector3(randomXCarotBox, randomYCarotBox, carotBox.transform.localPosition.z);
-        carotBox.transform.localPosition = carotBoxPosition;
+        Vector2 randomPositionCarrotBox = GetEmptyRandomPosition(-10, -10, 10, 10);
+        Vector3 carrotBoxPosition = new Vector3(randomPositionCarrotBox.x, randomPositionCarrotBox.y, carrotBox.transform.localPosition.z);
+        carrotBox.transform.localPosition = carrotBoxPosition;
 
+    }
+
+    Vector2 GetEmptyRandomPosition(float x1, float y1, float x2, float y2)
+    {
+        float randomX;
+        float randomY;
+        bool validPosition;
+        do
+        {
+            randomX = Random.Range(x1, x2);
+            randomY = Random.Range(y1, y2);
+            validPosition = CheckPosition(randomX, randomY);
+        } while (!validPosition);
+        return new Vector2(randomX, randomY);
+    }
+
+    bool CheckPosition(float x, float y)
+    {
+        Vector2 spawnPosition = new Vector2(x, y);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition, 2f);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.CompareTag("Obstacle")) return false;
+        }
+        return true;
     }
 
     private void Flip()
@@ -288,13 +311,15 @@ public class PlayerProperties
     public int PlayerCaring { get; private set; }
     public int VegetableType { get; private set; }
     public int PotatoCount { get; private set; }
-    public int CarotCount { get; private set; }
+    public int CarrotCount { get; private set; }
     public int PlayerScore { get; private set; }
     public Vector3 PlayerPowerUp { get; private set; }
     public Vector3 DirToPotatoBox { get; private set; }
-    public Vector3 DirToCarotBox { get; private set; }
+    public Vector3 DirToCarrotBox { get; private set; }
 
-    public PlayerProperties(bool isRed, bool isDoublePointActive, bool isFearFieldActive, bool isDoublePointActive, bool isFearFieldActive, float speed, int capacity, int playerCaring, int vegetableType, int potatoCount, int carotCount, int playerScore, Vector3 playerPowerUp, Vector3 dirToPotatoBox, Vector3 dirToCarotBox)
+    public PlayerProperties(bool isRed, bool isDoublePointActive, bool isFearFieldActive, float speed, 
+        int capacity, int playerCaring, int vegetableType, int potatoCount, int carrotCount, int playerScore, 
+        Vector3 playerPowerUp, Vector3 dirToPotatoBox, Vector3 dirToCarrotBox)
     {
         IsRed = isRed;
         IsDoublePointActive = isDoublePointActive;
@@ -304,10 +329,10 @@ public class PlayerProperties
         PlayerCaring = playerCaring;
         VegetableType = vegetableType;
         PotatoCount = potatoCount;
-        CarotCount = carotCount;
+        CarrotCount = carrotCount;
         PlayerScore = playerScore;
         PlayerPowerUp = playerPowerUp;
         DirToPotatoBox = dirToPotatoBox;
-        DirToCarotBox = dirToCarotBox;
+        DirToCarrotBox = dirToCarrotBox;
     }
 }
