@@ -1,0 +1,32 @@
+{
+    "lesson_num": {
+        "lesson_num": 0
+    },
+    "CollectVegetableRed": {
+        "checkpoints": [
+            {
+                "steps": 22293,
+                "file_path": "results\\Level1_Academy_2Layer\\CollectVegetableRed\\CollectVegetableRed-22293.onnx",
+                "reward": 0.011108097579352716,
+                "creation_time": 1714892172.849621,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy_2Layer\\CollectVegetableRed\\CollectVegetableRed-22293.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 22293,
+            "file_path": "results\\Level1_Academy_2Layer\\CollectVegetableRed.onnx",
+            "reward": 0.011108097579352716,
+            "creation_time": 1714892172.849621,
+            "auxillary_file_paths": [
+                "results\\Level1_Academy_2Layer\\CollectVegetableRed\\CollectVegetableRed-22293.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

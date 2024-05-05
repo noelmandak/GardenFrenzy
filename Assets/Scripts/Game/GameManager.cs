@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Networking;
+using Unity.MLAgents;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
@@ -52,6 +53,22 @@ public class GameManager : MonoBehaviour
     private DateTime startTime;
     private DateTime endTime;
 
+    private RLAcademy rLAcademy;
+
+    public float GetEnvParam(string key, float defaultValue)
+    {
+        int lessonNo = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("lesson_num", defaultValue)-1;
+        Debug.Log($"Get {key} from lesson no {lessonNo}");
+        if (key == "duration") return rLAcademy.duration[lessonNo];
+        if (key == "num_potato") return rLAcademy.num_potato[lessonNo];
+        if (key == "num_carrot") return rLAcademy.num_carrot[lessonNo];
+        if (key == "reward_collect_a_vegetable") return rLAcademy.reward_collect_a_vegetable[lessonNo];
+        if (key == "reward_put_a_vegetable_in_right_box") return rLAcademy.reward_put_a_vegetable_in_right_box[lessonNo];
+        if (key == "reward_put_a_vegetable_in_wrong_box") return rLAcademy.reward_put_a_vegetable_in_wrong_box[lessonNo];
+        if (key == "reward_collect_wrong_vegetable") return rLAcademy.reward_collect_wrong_vegetable[lessonNo];
+        return 0;
+    }
+
     private List<string> friendlyWords = new List<string> {
         "Hello", "Smile", "Love", "Happy", "Friend",
         "Cheerful", "Kindness", "Joy", "Gratitude", "Sunshine"
@@ -76,14 +93,19 @@ public class GameManager : MonoBehaviour
         powerUpSpawner = gameObject.GetComponent<PowerUpSpawner>();
         playerUI = gameObject.GetComponent<PlayerUI>();
         powerUpUI = gameObject.GetComponent<PowerUpUI>();
+        rLAcademy = gameObject.AddComponent<RLAcademy>();
 
         isPaused = false;
         isActivatingPower = false;
         isAdvancedSettings = false;
         if (!isDisplayUI) gameCanvas.SetActive(false);
 
+        duration = GetEnvParam("duration", 100f);
         timerSlider.maxValue = duration;
         timer = duration;
+
+        totalPotato = (int)GetEnvParam("num_potato", 100f);
+        totalCarrot = (int)GetEnvParam("num_carrot", 100f);
 
         playerRed.Init(playerSpeed, maxCapacity);
         playerBlue.Init(playerSpeed, maxCapacity);
@@ -134,9 +156,11 @@ public class GameManager : MonoBehaviour
                     //    AgentBlue.AddReward(1f);
                     //}
 
-                    
-                    totalPotato = UnityEngine.Random.Range(1, 11);
-                    totalCarrot = UnityEngine.Random.Range(1, 11);;
+
+
+                    duration = GetEnvParam("duration", 100f);
+                    totalPotato = (int)GetEnvParam("num_potato", 100f);
+                    totalCarrot = (int)GetEnvParam("num_carrot", 100f);
 
                     timer = duration;
                     AgentRed.EndEpisode();

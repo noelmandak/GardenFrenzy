@@ -6,8 +6,8 @@ using UnityEngine;
 public class Vegetable : MonoBehaviour
 {
     public bool isCarrot = false;
-    int redCount = 0;
-    int blueCount = 0;
+    //int redCount = 0;
+    //int blueCount = 0;
 
 
     void OnTriggerStay2D(Collider2D other)
@@ -21,10 +21,10 @@ public class Vegetable : MonoBehaviour
         }
         if (player != null)
         {
-            if (player.GetPlayerProperties().IsRed) redCount++;
-            else blueCount++;
-            if (redCount > 10) agent.AddReward(-0.0000001f);
-            if (blueCount > 10) agent.AddReward(-0.0000001f);
+            //if (player.GetPlayerProperties().IsRed) redCount++;
+            //else blueCount++;
+            //if (redCount > 10) agent.AddReward(-0.0000001f);
+            //if (blueCount > 10) agent.AddReward(-0.0000001f);
 
             if (player.CollectVegetable(isCarrot ? 2 : 1))
             {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.MLAgents;
 using Unity.MLAgents.Integrations.Match3;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -120,6 +121,8 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("Field")) isInField = true;
         if (other.CompareTag("DirtPath")) isInDirtPath = true;
+        if (other.CompareTag("Obstacle"))
+            agent.AddReward(gameManager.GetEnvParam("reward_colide_with_obstacle", 0));
         
     }
 
@@ -143,6 +146,7 @@ public class Player : MonoBehaviour
             //    case 3: AudioManager.Instance.PlaySFX("pickuppowerup3"); break;
             //    case 4: AudioManager.Instance.PlaySFX("pickuppowerup4"); break;
             //}
+            agent.AddReward(0.001f);
             return true;
         }
         return false;
@@ -161,12 +165,13 @@ public class Player : MonoBehaviour
                 //if (vegetableType == 1) AudioManager.Instance.PlaySFX("pickuppotato");
                 //if (vegetableType == 2) AudioManager.Instance.PlaySFX("pickupcarrot");
                 this.playerCaring++;
-                agent.AddReward(0.0001f);
+                agent.AddReward(gameManager.GetEnvParam("reward_collect_a_vegetable", 0.001f));
                 return true;
             }
             //if (gameManager.gamePlayCounter>100000) agent.AddReward(-0.0001f);
         }
-        agent.AddReward(-0.00001f);
+        agent.AddReward(gameManager.GetEnvParam("reward_collect_wrong_vegetable", -0.001f));
+
         //if (gameManager.gamePlayCounter > 100000)
         //{
         //    agent.AddReward(-0.0001f);
@@ -190,16 +195,18 @@ public class Player : MonoBehaviour
                 carrotCount += playerCaring;
                 //AudioManager.Instance.PlaySFX("dropcarrot");
             }
+            agent.AddReward(gameManager.GetEnvParam("reward_put_a_vegetable_in_right_box", 0.001f) * playerCaring + gameManager.GetTimeBonus()*0.1f);
             playerScore += score;
             playerCaring = 0;
             vegetableType = 0;
-            agent.AddReward(0.001f * score + gameManager.GetTimeBonus()*0.1f);
+
             return true;
 
         }
         if (vegetableType != 0)
         {
             agent.AddReward(-0.000001f * score);
+            agent.AddReward(gameManager.GetEnvParam("reward_put_a_vegetable_in_wrong_box", -0.001f) * playerCaring + gameManager.GetTimeBonus() * 0.1f);
             //if (gameManager.gamePlayCounter > 100000) agent.AddReward(-0.001f);
         }
 
@@ -277,7 +284,7 @@ public class Player : MonoBehaviour
     bool CheckPosition(float x, float y)
     {
         Vector2 spawnPosition = new Vector2(x, y);
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition, 2f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(spawnPosition, 3f);
         foreach (Collider2D collider in colliders)
         {
             if (collider.CompareTag("Obstacle")) return false;

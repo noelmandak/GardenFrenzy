@@ -55,9 +55,11 @@ public class RLAgent : Agent
         sensor.AddObservation((playerProperties.VegetableType == 2) ? 1 : 0); // carrot
         sensor.AddObservation(playerProperties.PlayerScore);
         sensor.AddObservation(playerProperties.PlayerPowerUp);
-        if (playerProperties.VegetableType== 1) sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
-        else if (playerProperties.VegetableType == 2) sensor.AddObservation(new Vector2(playerProperties.DirToCarrotBox.x, playerProperties.DirToCarrotBox.y));
-        else sensor.AddObservation(new Vector2(0, 0));
+        sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
+        sensor.AddObservation(new Vector2(playerProperties.DirToCarrotBox.x, playerProperties.DirToCarrotBox.y));
+        //if (playerProperties.VegetableType== 1) sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
+        //else if (playerProperties.VegetableType == 2) sensor.AddObservation(new Vector2(playerProperties.DirToCarrotBox.x, playerProperties.DirToCarrotBox.y));
+        //else sensor.AddObservation(new Vector2(0, 0));
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)

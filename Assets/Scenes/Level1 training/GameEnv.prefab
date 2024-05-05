@@ -8492,6 +8492,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1504938976802201622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5970497468164959206}
+  m_Layer: 0
+  m_Name: Academy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5970497468164959206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504938976802201622}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8644876833920551692}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1570236986255214030
 GameObject:
   m_ObjectHideFlags: 0
@@ -13737,6 +13768,7 @@ GameObject:
   - component: {fileID: 4887207105968442251}
   - component: {fileID: 1137364658448707886}
   - component: {fileID: 3110636126747994670}
+  - component: {fileID: 8247401971230760047}
   - component: {fileID: 6490842331889083032}
   m_Layer: 0
   m_Name: GameEnv
@@ -13768,6 +13800,7 @@ Transform:
   - {fileID: 2441512610603821360}
   - {fileID: 5002796249845252608}
   - {fileID: 2235555466305975300}
+  - {fileID: 5970497468164959206}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &699537214808317228
@@ -13902,6 +13935,81 @@ MonoBehaviour:
   - {fileID: 6059156360601000738}
   playerRedMessageText: {fileID: 8515756659085486287}
   playerBlueMessageText: {fileID: 2620454821611173653}
+--- !u!114 &8247401971230760047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5046421684006195827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220c05f84ae17c948a7ea09aa3e263da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lesson_num:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  duration:
+  - 60
+  - 60
+  - 100
+  - 120
+  - 120
+  - 120
+  num_potato:
+  - 1
+  - 2
+  - 5
+  - 8
+  - 10
+  - 15
+  num_carrot:
+  - 1
+  - 2
+  - 5
+  - 8
+  - 10
+  - 15
+  reward_collect_a_vegetable:
+  - 0.1
+  - 0.05
+  - 0.02
+  - 0.0125
+  - 0
+  - 0
+  reward_put_a_vegetable_in_right_box:
+  - 0.4
+  - 0.2
+  - 0.08
+  - 0.05
+  - 0.05
+  - 0.04
+  reward_put_a_vegetable_in_wrong_box:
+  - -0.01
+  - -0.01
+  - -0.001
+  - -0.0005
+  - -0.0002
+  - -0.0001
+  reward_collect_wrong_vegetable:
+  - -0.01
+  - -0.01
+  - -0.001
+  - -0.0005
+  - -0.0002
+  - -0.0001
+  reward_colide_with_obstacle:
+  - -0.001
+  - -0.001
+  - -0.001
+  - -0.001
+  - -0.001
+  - -0.001
 --- !u!81 &6490842331889083032
 AudioListener:
   m_ObjectHideFlags: 0
@@ -14715,7 +14823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 12
+    VectorObservationSize: 14
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
@@ -26135,7 +26243,7 @@ Transform:
   m_GameObject: {fileID: 8472075550429955987}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13, y: 0, z: 0}
+  m_LocalPosition: {x: -19, y: -13.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -26275,7 +26383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 12
+    VectorObservationSize: 14
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
