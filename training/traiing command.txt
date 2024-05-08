@@ -71,4 +71,26 @@ mlagents-learn config\defaultConfig-500K.yaml --run-id=Level1Env1 --env=env-7.6\
 
 mlagents-learn config\defaultConfig-30M-4layer.yaml --run-id=Level14layer --env=level1_1\GardenFrenzy --base-port=5013 --force 
 
-mlagents-learn config\defaultConfig-30M-2layer.yaml --run-id=Level1_Academy_2Layer --env=level1-academy1 --base-port=5012 --force
+mlagents-learn config\defaultConfig-30M-2layer.yaml --run-id=Level1_Academy_2Layer --env=level1-academy1 --base-port=5012 --resume
+
+mlagents-learn config\defaultConfig-30M-2layer.yaml --run-id=Level1_Academy_2Layer_2 --env=level1-academy2 --base-port=5013 --resume
+
+
+
+
+mlagents-learn config\defaultConfig-30M-2layer.yaml --run-id=Level1_Academy2_L2_E --env=level1-academy2-E --base-port=5012 --force
+
+mlagents-learn config\defaultConfig-30M-2layer.yaml --run-id=Level1_Academy2_L2_H --env=level1-academy2-H --base-port=5013 --force
+
+
+
+mlagents-learn config\defaultConfig-30M-2layer-demo-easy.yaml --run-id=Level1_Academy2_L2_demo_E --env=level1-academy2-E --base-port=5012 --force
+
+mlagents-learn config\defaultConfig-30M-2layer-demo-hard.yaml --run-id=Level1_Academy2_L2_demo_H --env=level1-academy2-H --base-port=5013 --force
+
+
+
+
+mlagents-learn config\defaultConfig-30M-2layer-demo-easy-2.yaml --run-id=Level1_Academy_L2_demo_E_2 --env=level1-academy2-E-2 --base-port=5012 --force
+
+mlagents-learn config\defaultConfig-30M-2layer-demo-hard-2.yaml --run-id=Level1_Academy_L2_demo_H_2 --env=level1-academy2-H-2 --base-port=5013 --force

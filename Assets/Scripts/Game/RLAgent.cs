@@ -57,7 +57,7 @@ public class RLAgent : Agent
         sensor.AddObservation(playerProperties.PlayerPowerUp);
         sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
         sensor.AddObservation(new Vector2(playerProperties.DirToCarrotBox.x, playerProperties.DirToCarrotBox.y));
-        //if (playerProperties.VegetableType== 1) sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
+        //if (playerProperties.VegetableType == 1) sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
         //else if (playerProperties.VegetableType == 2) sensor.AddObservation(new Vector2(playerProperties.DirToCarrotBox.x, playerProperties.DirToCarrotBox.y));
         //else sensor.AddObservation(new Vector2(0, 0));
     }
@@ -95,7 +95,6 @@ public class RLAgent : Agent
         //    player.CheckPowerupType(2);
         // }
 
-        AddReward(-0.000000001f);
     }
 
     public int GetStar()

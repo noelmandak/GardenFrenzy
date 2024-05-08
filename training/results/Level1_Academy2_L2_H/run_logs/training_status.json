@@ -1,0 +1,158 @@
+{
+    "lesson_num": {
+        "lesson_num": 0
+    },
+    "CollectVegetableRed": {
+        "checkpoints": [
+            {
+                "steps": 499947,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-499947.onnx",
+                "reward": 0.02266666723880917,
+                "creation_time": 1714909340.7494614,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-499947.pt"
+                ]
+            },
+            {
+                "steps": 999958,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-999958.onnx",
+                "reward": 0.022444445225927565,
+                "creation_time": 1714914161.6098533,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-999958.pt"
+                ]
+            },
+            {
+                "steps": 1499969,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-1499969.onnx",
+                "reward": 0.0003333333491658171,
+                "creation_time": 1714918948.167725,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-1499969.pt"
+                ]
+            },
+            {
+                "steps": 1999971,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-1999971.onnx",
+                "reward": 0.0001111111163886057,
+                "creation_time": 1714923692.2586653,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-1999971.pt"
+                ]
+            },
+            {
+                "steps": 2499982,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-2499982.onnx",
+                "reward": 0.056506174474230245,
+                "creation_time": 1714928350.5786843,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-2499982.pt"
+                ]
+            },
+            {
+                "steps": 2999993,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-2999993.onnx",
+                "reward": 0.01133333350945678,
+                "creation_time": 1714933021.813264,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-2999993.pt"
+                ]
+            },
+            {
+                "steps": 3499995,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-3499995.onnx",
+                "reward": null,
+                "creation_time": 1714937668.629739,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-3499995.pt"
+                ]
+            },
+            {
+                "steps": 3999942,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-3999942.onnx",
+                "reward": 0.0452716029378482,
+                "creation_time": 1714942311.8505871,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-3999942.pt"
+                ]
+            },
+            {
+                "steps": 4499953,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-4499953.onnx",
+                "reward": null,
+                "creation_time": 1714946977.9831862,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-4499953.pt"
+                ]
+            },
+            {
+                "steps": 4999955,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-4999955.onnx",
+                "reward": 0.011666666858622598,
+                "creation_time": 1714951609.5199988,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-4999955.pt"
+                ]
+            },
+            {
+                "steps": 5499966,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-5499966.onnx",
+                "reward": null,
+                "creation_time": 1714956270.128482,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-5499966.pt"
+                ]
+            },
+            {
+                "steps": 5999985,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-5999985.onnx",
+                "reward": 0.06752777807802583,
+                "creation_time": 1714960948.640379,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-5999985.pt"
+                ]
+            },
+            {
+                "steps": 6499958,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-6499958.onnx",
+                "reward": 0.06700000166893005,
+                "creation_time": 1714965675.6472645,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-6499958.pt"
+                ]
+            },
+            {
+                "steps": 6999986,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-6999986.onnx",
+                "reward": 0.22546905997054031,
+                "creation_time": 1714971029.2610607,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-6999986.pt"
+                ]
+            },
+            {
+                "steps": 7005895,
+                "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-7005895.onnx",
+                "reward": 0.5709998634993099,
+                "creation_time": 1714971139.9297183,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-7005895.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 7005895,
+            "file_path": "results\\Level1_Academy2_L2_H\\CollectVegetableRed.onnx",
+            "reward": 0.5709998634993099,
+            "creation_time": 1714971139.9297183,
+            "auxillary_file_paths": [
+                "results\\Level1_Academy2_L2_H\\CollectVegetableRed\\CollectVegetableRed-7005895.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.29.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

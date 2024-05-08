@@ -1,0 +1,216 @@
+default_settings: null
+behaviors:
+  CollectVegetableRed:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 1024
+      buffer_size: 10240
+      learning_rate: 0.0003
+      beta: 0.005
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+      beta_schedule: linear
+      epsilon_schedule: linear
+    network_settings:
+      normalize: false
+      hidden_units: 128
+      num_layers: 2
+      vis_encode_type: simple
+      memory: null
+      goal_conditioning_type: hyper
+      deterministic: false
+    reward_signals:
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+          deterministic: false
+      curiosity:
+        gamma: 0.99
+        strength: 0.02
+        network_settings:
+          normalize: false
+          hidden_units: 256
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+          deterministic: false
+        learning_rate: 0.0003
+        encoding_size: 256
+      gail:
+        gamma: 0.99
+        strength: 0.01
+        network_settings:
+          normalize: false
+          hidden_units: 128
+          num_layers: 2
+          vis_encode_type: simple
+          memory: null
+          goal_conditioning_type: hyper
+          deterministic: false
+        learning_rate: 0.0003
+        encoding_size: 128
+        use_actions: false
+        use_vail: false
+        demo_path: demo/demoeasy.demo
+    init_path: null
+    keep_checkpoints: 60
+    checkpoint_interval: 500000
+    max_steps: 30000000
+    time_horizon: 64
+    summary_freq: 50000
+    threaded: false
+    self_play: null
+    behavioral_cloning:
+      demo_path: demo/demoeasy.demo
+      steps: 150000
+      strength: 0.5
+      samples_per_update: 0
+      num_epoch: 3
+      batch_size: 512
+env_settings:
+  env_path: null
+  env_args: null
+  base_port: 5005
+  num_envs: 1
+  num_areas: 1
+  seed: -1
+  max_lifetime_restarts: 10
+  restarts_rate_limit_n: 1
+  restarts_rate_limit_period_s: 60
+engine_settings:
+  width: 84
+  height: 84
+  quality_level: 5
+  time_scale: 20.0
+  target_frame_rate: -1
+  capture_frame_rate: 60
+  no_graphics: true
+environment_parameters:
+  lesson_num:
+    curriculum:
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9312
+          value: 1
+      name: Leason1
+      completion_criteria:
+        behavior: CollectVegetableRed
+        measure: reward
+        min_lesson_length: 365
+        signal_smoothing: true
+        threshold: 0.5
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9313
+          value: 2
+      name: Leason2
+      completion_criteria:
+        behavior: CollectVegetableRed
+        measure: reward
+        min_lesson_length: 365
+        signal_smoothing: true
+        threshold: 0.5
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9314
+          value: 3
+      name: Leason3
+      completion_criteria:
+        behavior: CollectVegetableRed
+        measure: reward
+        min_lesson_length: 365
+        signal_smoothing: true
+        threshold: 0.6
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9315
+          value: 4
+      name: Leason4
+      completion_criteria:
+        behavior: CollectVegetableRed
+        measure: reward
+        min_lesson_length: 365
+        signal_smoothing: true
+        threshold: 0.6
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9316
+          value: 5
+      name: Leason5
+      completion_criteria:
+        behavior: CollectVegetableRed
+        measure: reward
+        min_lesson_length: 365
+        signal_smoothing: true
+        threshold: 0.7
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9317
+          value: 6
+      name: Leason6
+      completion_criteria:
+        behavior: CollectVegetableRed
+        measure: reward
+        min_lesson_length: 365
+        signal_smoothing: true
+        threshold: 0.7
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9318
+          value: 7
+      name: Leason7
+      completion_criteria:
+        behavior: CollectVegetableRed
+        measure: reward
+        min_lesson_length: 365
+        signal_smoothing: true
+        threshold: 0.8
+        require_reset: false
+    - value:
+        sampler_type: constant
+        sampler_parameters:
+          seed: 9319
+          value: 8
+      name: Leason8
+      completion_criteria:
+        behavior: CollectVegetableRed
+        measure: reward
+        min_lesson_length: 365
+        signal_smoothing: true
+        threshold: 0.8
+        require_reset: false
+checkpoint_settings:
+  run_id: Level1_Academy_L2_demo_E_2
+  initialize_from: null
+  load_model: false
+  resume: false
+  force: false
+  train_model: false
+  inference: false
+  results_dir: results
+torch_settings:
+  device: null
+debug: false

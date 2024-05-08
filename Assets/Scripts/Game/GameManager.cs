@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     public float GetEnvParam(string key, float defaultValue)
     {
-        int lessonNo = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("lesson_num", defaultValue)-1;
+        int lessonNo = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("lesson_num", 1)-1;
         Debug.Log($"Get {key} from lesson no {lessonNo}");
         if (key == "duration") return rLAcademy.duration[lessonNo];
         if (key == "num_potato") return rLAcademy.num_potato[lessonNo];
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         if (key == "reward_put_a_vegetable_in_right_box") return rLAcademy.reward_put_a_vegetable_in_right_box[lessonNo];
         if (key == "reward_put_a_vegetable_in_wrong_box") return rLAcademy.reward_put_a_vegetable_in_wrong_box[lessonNo];
         if (key == "reward_collect_wrong_vegetable") return rLAcademy.reward_collect_wrong_vegetable[lessonNo];
-        return 0;
+        return defaultValue;
     }
 
     private List<string> friendlyWords = new List<string> {
@@ -104,8 +104,8 @@ public class GameManager : MonoBehaviour
         timerSlider.maxValue = duration;
         timer = duration;
 
-        totalPotato = (int)GetEnvParam("num_potato", 100f);
-        totalCarrot = (int)GetEnvParam("num_carrot", 100f);
+        totalPotato = (int)GetEnvParam("num_potato", 1f);
+        totalCarrot = (int)GetEnvParam("num_carrot", 1f);
 
         playerRed.Init(playerSpeed, maxCapacity);
         playerBlue.Init(playerSpeed, maxCapacity);
@@ -133,7 +133,12 @@ public class GameManager : MonoBehaviour
             {
                 //if (playerRed.GetScore() > playerBlue.GetScore()) playerRed.AddBonusPoint(100);
                 //if (playerBlue.GetScore() > playerRed.GetScore()) playerBlue.AddBonusPoint(100);
+                Debug.Log($"{duration}  {timer}");
                 int bonusPoint = (int)(duration-timer)*2;
+                Debug.Log(bonusPoint);
+                Debug.Log(playerRed);
+                Debug.Log(playerBlue);
+                Debug.Log(currentPlayer);
                 currentPlayer.AddBonusPoint(bonusPoint);
 
                 if (isTraining)
@@ -142,8 +147,8 @@ public class GameManager : MonoBehaviour
                     //AgentRed.AddReward(timerPenalty);
 
                     //float timerPenalty = ((duration - timer) / duration) * -0.001f; // Give the agent a penalty if it becomes stuck somewhere.
-                    float timerBonus = ((duration - timer) / duration) * 0.05f; // Give the agent a bonus point based on how quickly the agent can finish the level.
-                    if (GameOverChecker()) AgentRed.AddReward(0.5f+timerBonus); // Give the agent a reward if it finished the level.
+                    //float timerBonus = ((duration - timer) / duration) * 0.05f; // Give the agent a bonus point based on how quickly the agent can finish the level.
+                    //if (GameOverChecker()) AgentRed.AddReward(0.5f+timerBonus); // Give the agent a reward if it finished the level.
 
                     //if (playerRed.GetScore() > playerBlue.GetScore())
                     //{
@@ -159,8 +164,8 @@ public class GameManager : MonoBehaviour
 
 
                     duration = GetEnvParam("duration", 100f);
-                    totalPotato = (int)GetEnvParam("num_potato", 100f);
-                    totalCarrot = (int)GetEnvParam("num_carrot", 100f);
+                    totalPotato = (int)GetEnvParam("num_potato", 1f);
+                    totalCarrot = (int)GetEnvParam("num_carrot", 1f);
 
                     timer = duration;
                     AgentRed.EndEpisode();

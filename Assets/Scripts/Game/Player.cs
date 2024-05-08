@@ -195,7 +195,7 @@ public class Player : MonoBehaviour
                 carrotCount += playerCaring;
                 //AudioManager.Instance.PlaySFX("dropcarrot");
             }
-            agent.AddReward(gameManager.GetEnvParam("reward_put_a_vegetable_in_right_box", 0.001f) * playerCaring + gameManager.GetTimeBonus()*0.1f);
+            agent.AddReward(gameManager.GetEnvParam("reward_put_a_vegetable_in_right_box", 0.001f) * playerCaring + gameManager.GetTimeBonus()*0.2f);
             playerScore += score;
             playerCaring = 0;
             vegetableType = 0;
@@ -205,8 +205,7 @@ public class Player : MonoBehaviour
         }
         if (vegetableType != 0)
         {
-            agent.AddReward(-0.000001f * score);
-            agent.AddReward(gameManager.GetEnvParam("reward_put_a_vegetable_in_wrong_box", -0.001f) * playerCaring + gameManager.GetTimeBonus() * 0.1f);
+            agent.AddReward(gameManager.GetEnvParam("reward_put_a_vegetable_in_wrong_box", -0.001f));
             //if (gameManager.gamePlayCounter > 100000) agent.AddReward(-0.001f);
         }
 
@@ -254,14 +253,14 @@ public class Player : MonoBehaviour
     }
     public void RandomizePosition()
     {
-        Vector2 randomPositionPlayer = GetEmptyRandomPosition(-10, -10, 10, 10);
+        Vector2 randomPositionPlayer = GetEmptyRandomPosition(-5, -5, 5, 5);
         transform.localPosition = new Vector3(randomPositionPlayer.x, randomPositionPlayer.y, transform.localPosition.z);
 
-        Vector2 randomPositionPotatoBox = GetEmptyRandomPosition(-10, -10, 10, 10);
+        Vector2 randomPositionPotatoBox = GetEmptyRandomPosition(-5, -5, 5, 5);
         Vector3 potatoBoxPosition = new Vector3(randomPositionPotatoBox.x, randomPositionPotatoBox.x, potatoBox.transform.localPosition.z);
         potatoBox.transform.localPosition = potatoBoxPosition;
 
-        Vector2 randomPositionCarrotBox = GetEmptyRandomPosition(-10, -10, 10, 10);
+        Vector2 randomPositionCarrotBox = GetEmptyRandomPosition(-5, -5, 5, 5);
         Vector3 carrotBoxPosition = new Vector3(randomPositionCarrotBox.x, randomPositionCarrotBox.y, carrotBox.transform.localPosition.z);
         carrotBox.transform.localPosition = carrotBoxPosition;
 

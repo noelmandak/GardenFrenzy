@@ -56,9 +56,9 @@ behaviors:
     self_play: null
     behavioral_cloning: null
 env_settings:
-  env_path: null
+  env_path: level1-academy1
   env_args: null
-  base_port: 5005
+  base_port: 5012
   num_envs: 1
   num_areas: 1
   seed: -1
@@ -79,7 +79,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 7517
+          seed: 834
           value: 1
       name: Leason1
       completion_criteria:
@@ -92,7 +92,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 7518
+          seed: 835
           value: 2
       name: Leason2
       completion_criteria:
@@ -105,7 +105,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 7519
+          seed: 836
           value: 3
       name: Leason3
       completion_criteria:
@@ -118,7 +118,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 7520
+          seed: 837
           value: 4
       name: Leason4
       completion_criteria:
@@ -131,7 +131,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 7521
+          seed: 838
           value: 5
       name: Leason5
       completion_criteria:
@@ -144,7 +144,7 @@ environment_parameters:
     - value:
         sampler_type: constant
         sampler_parameters:
-          seed: 7522
+          seed: 839
           value: 6
       name: Leason6
       completion_criteria:

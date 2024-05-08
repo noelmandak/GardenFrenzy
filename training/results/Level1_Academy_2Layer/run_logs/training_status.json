@@ -5,22 +5,31 @@
     "CollectVegetableRed": {
         "checkpoints": [
             {
-                "steps": 22293,
-                "file_path": "results\\Level1_Academy_2Layer\\CollectVegetableRed\\CollectVegetableRed-22293.onnx",
-                "reward": 0.011108097579352716,
-                "creation_time": 1714892172.849621,
+                "steps": 499936,
+                "file_path": "results\\Level1_Academy_2Layer\\CollectVegetableRed\\CollectVegetableRed-499936.onnx",
+                "reward": -0.11462799946612634,
+                "creation_time": 1714900776.7668135,
                 "auxillary_file_paths": [
-                    "results\\Level1_Academy_2Layer\\CollectVegetableRed\\CollectVegetableRed-22293.pt"
+                    "results\\Level1_Academy_2Layer\\CollectVegetableRed\\CollectVegetableRed-499936.pt"
+                ]
+            },
+            {
+                "steps": 592980,
+                "file_path": "results\\Level1_Academy_2Layer\\CollectVegetableRed\\CollectVegetableRed-592980.onnx",
+                "reward": 0.022219209642211506,
+                "creation_time": 1714901709.4030666,
+                "auxillary_file_paths": [
+                    "results\\Level1_Academy_2Layer\\CollectVegetableRed\\CollectVegetableRed-592980.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 22293,
+            "steps": 592980,
             "file_path": "results\\Level1_Academy_2Layer\\CollectVegetableRed.onnx",
-            "reward": 0.011108097579352716,
-            "creation_time": 1714892172.849621,
+            "reward": 0.022219209642211506,
+            "creation_time": 1714901709.4030666,
             "auxillary_file_paths": [
-                "results\\Level1_Academy_2Layer\\CollectVegetableRed\\CollectVegetableRed-22293.pt"
+                "results\\Level1_Academy_2Layer\\CollectVegetableRed\\CollectVegetableRed-592980.pt"
             ]
         }
     },
