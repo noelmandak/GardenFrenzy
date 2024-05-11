@@ -7,7 +7,7 @@ public class RLAcademy : MonoBehaviour
 {
 
     public float[] lesson_num                          = {     1f,    2f,     3f,        4f,       5f,       6f,       7f,       8f};
-    public float[] duration                            = {    60f,   60f,    60f,       60f,     100f,     120f,     120f,     120f};
+    public float[] duration                            = {   200f,  150f,   200f,      150f,     100f,     100f,      60f,     100f};
     public float[] num_potato                          = {     1f,    0f,     1f,        2f,       5f,       8f,      10f,      15f};
     public float[] num_carrot                          = {     0f,    1f,     1f,        2f,       5f,       8f,      10f,      15f};
     public float[] reward_collect_a_vegetable          = {     0f,    0f,  0.05f,     0.05f,    0.02f,  0.0125f,       0f,       0f};
