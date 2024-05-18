@@ -244,6 +244,14 @@ PrefabInstance:
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 519420034}
+    - target: {fileID: 1702075350000943111, guid: ac6710db699e25d4c9568dee6ff3f0ba, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702075350000943111, guid: ac6710db699e25d4c9568dee6ff3f0ba, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5046421684006195827, guid: ac6710db699e25d4c9568dee6ff3f0ba, type: 3}
       propertyPath: m_Name
       value: GameEnv (3)
@@ -555,6 +563,14 @@ PrefabInstance:
       propertyPath: cameraFollow
       value: 
       objectReference: {fileID: 519420034}
+    - target: {fileID: 1702075350000943111, guid: ac6710db699e25d4c9568dee6ff3f0ba, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1702075350000943111, guid: ac6710db699e25d4c9568dee6ff3f0ba, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5046421684006195827, guid: ac6710db699e25d4c9568dee6ff3f0ba, type: 3}
       propertyPath: m_Name
       value: GameEnv (2)

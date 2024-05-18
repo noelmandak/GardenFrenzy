@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Field")) isInField = true;
         if (other.CompareTag("DirtPath")) isInDirtPath = true;
         if (other.CompareTag("Obstacle"))
-            agent.AddReward(gameManager.GetEnvParam("reward_colide_with_obstacle", 0));
+            agent.AddReward(gameManager.GetEnvParam("reward_colide_with_obstacle", 0.0001f));
         
     }
 
@@ -165,12 +165,12 @@ public class Player : MonoBehaviour
                 //if (vegetableType == 1) AudioManager.Instance.PlaySFX("pickuppotato");
                 //if (vegetableType == 2) AudioManager.Instance.PlaySFX("pickupcarrot");
                 this.playerCaring++;
-                agent.AddReward(gameManager.GetEnvParam("reward_collect_a_vegetable", 0.001f));
+                agent.AddReward(gameManager.GetEnvParam("reward_collect_a_vegetable", 0.05f));
                 return true;
             }
             //if (gameManager.gamePlayCounter>100000) agent.AddReward(-0.0001f);
         }
-        agent.AddReward(gameManager.GetEnvParam("reward_collect_wrong_vegetable", -0.001f));
+        agent.AddReward(gameManager.GetEnvParam("reward_collect_wrong_vegetable", -0.0001f));
 
         //if (gameManager.gamePlayCounter > 100000)
         //{
@@ -195,7 +195,7 @@ public class Player : MonoBehaviour
                 carrotCount += playerCaring;
                 //AudioManager.Instance.PlaySFX("dropcarrot");
             }
-            agent.AddReward(gameManager.GetEnvParam("reward_put_a_vegetable_in_right_box", 0.001f) * playerCaring + gameManager.GetTimeBonus()*0.2f);
+            agent.AddReward(gameManager.GetEnvParam("reward_put_a_vegetable_in_right_box", 0.45f) * playerCaring + gameManager.GetTimeBonus()*0.2f);
             playerScore += score;
             playerCaring = 0;
             vegetableType = 0;
@@ -205,7 +205,7 @@ public class Player : MonoBehaviour
         }
         if (vegetableType != 0)
         {
-            agent.AddReward(gameManager.GetEnvParam("reward_put_a_vegetable_in_wrong_box", -0.001f));
+            agent.AddReward(gameManager.GetEnvParam("reward_put_a_vegetable_in_wrong_box", -0.0001f));
             //if (gameManager.gamePlayCounter > 100000) agent.AddReward(-0.001f);
         }
 
@@ -246,10 +246,11 @@ public class Player : MonoBehaviour
 
     public PlayerProperties GetPlayerProperties()
     {
+        Vector3 playerLocalPosition = transform.localPosition;
         Vector3 playerPowerup = new(playerPowerUp[0] / 4, playerPowerUp[1] / 4, playerPowerUp[2] / 4);
-        Vector3 dirToPotatoToBox = (potatoBox.transform.localPosition - transform.localPosition).normalized;
-        Vector3 dirToCarrotToBox = (carrotBox.transform.localPosition - transform.localPosition).normalized;
-        return new PlayerProperties(isRed, isDoublePointActive, FearField.activeSelf, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carrotCount, playerScore, playerPowerup, dirToPotatoToBox, dirToCarrotToBox);
+        Vector3 dirToPotatoToBox = (potatoBox.transform.localPosition - transform.localPosition) / 1000f;
+        Vector3 dirToCarrotToBox = (carrotBox.transform.localPosition - transform.localPosition) / 1000f;
+        return new PlayerProperties(isRed, isDoublePointActive, FearField.activeSelf, playerSpeed, maxCapacity, playerCaring, vegetableType, potatoCount, carrotCount, playerScore, playerLocalPosition, playerPowerup, dirToPotatoToBox, dirToCarrotToBox);
     }
     public void RandomizePosition()
     {
@@ -319,13 +320,14 @@ public class PlayerProperties
     public int PotatoCount { get; private set; }
     public int CarrotCount { get; private set; }
     public int PlayerScore { get; private set; }
+    public Vector3 PlayerPosition { get; private set; }
     public Vector3 PlayerPowerUp { get; private set; }
     public Vector3 DirToPotatoBox { get; private set; }
     public Vector3 DirToCarrotBox { get; private set; }
 
     public PlayerProperties(bool isRed, bool isDoublePointActive, bool isFearFieldActive, float speed, 
-        int capacity, int playerCaring, int vegetableType, int potatoCount, int carrotCount, int playerScore, 
-        Vector3 playerPowerUp, Vector3 dirToPotatoBox, Vector3 dirToCarrotBox)
+        int capacity, int playerCaring, int vegetableType, int potatoCount, int carrotCount, int playerScore,
+        Vector3 playerPosition, Vector3 playerPowerUp, Vector3 dirToPotatoBox, Vector3 dirToCarrotBox)
     {
         IsRed = isRed;
         IsDoublePointActive = isDoublePointActive;
@@ -337,6 +339,7 @@ public class PlayerProperties
         PotatoCount = potatoCount;
         CarrotCount = carrotCount;
         PlayerScore = playerScore;
+        PlayerPosition = playerPosition;
         PlayerPowerUp = playerPowerUp;
         DirToPotatoBox = dirToPotatoBox;
         DirToCarrotBox = dirToCarrotBox;

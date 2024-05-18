@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         isAdvancedSettings = false;
         if (!isDisplayUI) gameCanvas.SetActive(false);
 
-        duration = GetEnvParam("duration", 100f);
+        duration = GetEnvParam("duration", 150f);
         timerSlider.maxValue = duration;
         timer = duration;
 
@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
 
 
 
-                    duration = GetEnvParam("duration", 100f);
+                    duration = GetEnvParam("duration", 150f);
                     totalPotato = (int)GetEnvParam("num_potato", 1f);
                     totalCarrot = (int)GetEnvParam("num_carrot", 1f);
 

@@ -105,5 +105,42 @@ public class VegetableSpawner : MonoBehaviour
         RemoveAllVegetables();
         Init(totalPotato, totalCarrot);
     }
+
+    public List<GameObject> GetNearestVegetable(Vector2 PlayerPosition, int num, bool isCarrot)
+    {
+        List<GameObject> nearestVegetables = new List<GameObject>();
+
+        // Dictionary untuk menyimpan jarak setiap vegetable ke player
+        Dictionary<GameObject, float> vegetableDistances = new Dictionary<GameObject, float>();
+
+        // Mengisi dictionary dengan semua vegetables yang masih ada dan jarak masing-masing ke player
+        foreach (GameObject vegetable in spawnedVegetables)
+        {
+            // Memeriksa apakah game object masih ada
+            if (vegetable != null)
+            {
+                Vegetable vegetableComponent = vegetable.GetComponent<Vegetable>();
+                if (vegetableComponent != null && vegetableComponent.isCarrot == isCarrot)
+                {
+                    float distance = Vector2.Distance(PlayerPosition, vegetable.transform.localPosition);
+                    vegetableDistances.Add(vegetable, distance);
+                }
+            }
+        }
+
+        // Mengurutkan dictionary berdasarkan jarak
+        var sortedVegetables = new List<KeyValuePair<GameObject, float>>(vegetableDistances);
+        sortedVegetables.Sort((x, y) => x.Value.CompareTo(y.Value));
+
+        // Mengambil num vegetables terdekat
+        for (int i = 0; i < Mathf.Min(num, sortedVegetables.Count); i++)
+        {
+            nearestVegetables.Add(sortedVegetables[i].Key);
+        }
+
+        return nearestVegetables;
+    }
+
+
 }
 

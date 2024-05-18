@@ -74,5 +74,5 @@ crashlytics-build.properties
 training/venv3.8
 training/env*
 training/results/simpleEnv6-*/run_logs/Player-0.log
-training/results/*/run_logs/Player-0.log
+training/results/
 /[Aa]ssets/record
