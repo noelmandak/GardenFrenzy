@@ -99,3 +99,23 @@ mlagents-learn config\defaultConfig-30M-2layer-demo-hard-2.yaml --run-id=Level1_
 mlagents-learn config\defaultConfig-30M-2layer-academy-1.yaml --run-id=Level1_nearestVegetable_E_1 --env=level1-nearestVegetable-E-1 --base-port=5012 --force
 
 mlagents-learn config\defaultConfig-30M-2layer-academy-1.yaml --run-id=Level1_nearestVegetable_H_1 --env=level1-nearestVegetable-H-1 --base-port=5013 --force
+
+mlagents-learn config\defaultConfig-30M-2layer-academy-2.yaml --run-id=Level1_nearestVegetable_E_2 --env=level1-nearestVegetable-E-2 --base-port=5012 --force
+
+mlagents-learn config\defaultConfig-30M-2layer-academy-2.yaml --run-id=Level1_nearestVegetable_H_2 --env=level1-nearestVegetable-H-2 --base-port=5013 --force
+
+
+mlagents-learn config\defaultConfig-10M-2layer-academy-3.yaml --run-id=Level1_nearestVegetable_E_2 --env=level1-nearestVegetable-E-2 --base-port=5012 --force
+
+mlagents-learn config\defaultConfig-10M-2layer-academy-3.yaml --run-id=Level1_nearestVegetable_H_2 --env=level1-nearestVegetable-H-2 --base-port=5013 --force
+
+
+mlagents-learn config\defaultConfig-10M-3layer-nearest-simplest.yaml --run-id=simplest_10M_1 --env=simplest_H_1 --base-port=5012 --force
+
+mlagents-learn config\defaultConfig-30M-3layer-nearest-simplest.yaml --run-id=simplest_30M_1 --env=simplest_H_1 --base-port=5013 --force
+
+
+
+mlagents-learn config\defaultConfig-10M-3layer-nearest-simplest.yaml --run-id=simplest_10M_paralel_1 --env=simplest_H_paralel_1 --base-port=5012 --force
+
+mlagents-learn config\defaultConfig-30M-3layer-nearest-simplest.yaml --run-id=simplest_30M_paralel_1 --env=simplest_H_parelel_1 --base-port=5013 --force

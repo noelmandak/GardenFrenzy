@@ -53,8 +53,6 @@ public class RLAgent : Agent
         }
         playerProperties = newPlayerProperties;
         sensor.AddObservation(playerProperties.IsRed ? 0 : 1);
-        sensor.AddObservation(playerProperties.IsDoublePointActive ? 1 : 0);
-        sensor.AddObservation(playerProperties.IsFearFieldActive ? 1 : 0);
         sensor.AddObservation((playerProperties.PlayerCaring < playerProperties.MaxCapacity) ? 1 : 0); // is player can collect more
         sensor.AddObservation((playerProperties.VegetableType == 1) ? 1 : 0); // potato
         sensor.AddObservation((playerProperties.VegetableType == 2) ? 1 : 0); // carrot
@@ -63,11 +61,11 @@ public class RLAgent : Agent
         sensor.AddObservation(getVegetableDirection());
         float[] vegetabledir = getVegetableDirection();
         Debug.Log($"{vegetabledir[0]} {vegetabledir[1]}  {vegetabledir[2]}  {vegetabledir[3]}  {vegetabledir[4]}  {vegetabledir[5]} ");
-        sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
-        sensor.AddObservation(new Vector2(playerProperties.DirToCarrotBox.x, playerProperties.DirToCarrotBox.y));
-        //if (playerProperties.VegetableType == 1) sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
-        //else if (playerProperties.VegetableType == 2) sensor.AddObservation(new Vector2(playerProperties.DirToCarrotBox.x, playerProperties.DirToCarrotBox.y));
-        //else sensor.AddObservation(new Vector2(0, 0));
+        //sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
+        //sensor.AddObservation(new Vector2(playerProperties.DirToCarrotBox.x, playerProperties.DirToCarrotBox.y));
+        if (playerProperties.VegetableType == 1) sensor.AddObservation(new Vector2(playerProperties.DirToPotatoBox.x, playerProperties.DirToPotatoBox.y));
+        else if (playerProperties.VegetableType == 2) sensor.AddObservation(new Vector2(playerProperties.DirToCarrotBox.x, playerProperties.DirToCarrotBox.y));
+        else sensor.AddObservation(new Vector2(0, 0));
     }
 
     private float[] getVegetableDirection()
@@ -115,7 +113,8 @@ public class RLAgent : Agent
         var x = actions.ContinuousActions[0];
         var y = actions.ContinuousActions[1];
         player.MovePlayer(new Vector2(x, y));
-        PlayerProperties playerProperties = player.GetPlayerProperties();
+        AddReward(-1f / (gameManager.GetEnvParam("duration", 150f) * 1000));
+        //PlayerProperties playerProperties = player.GetPlayerProperties();
         //if (actions.DiscreteActions[0] > 0 && (int)playerProperties.PlayerPowerUp[0] > 0)
         //{
         //    powerUpManager.ActivatePower(playerProperties.IsRed, (int)playerProperties.PlayerPowerUp[0], GetStar());

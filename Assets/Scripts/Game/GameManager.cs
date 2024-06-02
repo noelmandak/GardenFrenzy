@@ -104,8 +104,8 @@ public class GameManager : MonoBehaviour
         timerSlider.maxValue = duration;
         timer = duration;
 
-        totalPotato = (int)GetEnvParam("num_potato", 1f);
-        totalCarrot = (int)GetEnvParam("num_carrot", 1f);
+        totalPotato = (int)GetEnvParam("num_potato", 10f);
+        totalCarrot = (int)GetEnvParam("num_carrot", 10f);
 
         playerRed.Init(playerSpeed, maxCapacity);
         playerBlue.Init(playerSpeed, maxCapacity);
@@ -164,8 +164,8 @@ public class GameManager : MonoBehaviour
 
 
                     duration = GetEnvParam("duration", 150f);
-                    totalPotato = (int)GetEnvParam("num_potato", 1f);
-                    totalCarrot = (int)GetEnvParam("num_carrot", 1f);
+                    totalPotato = (int)GetEnvParam("num_potato", 10f);
+                    totalCarrot = (int)GetEnvParam("num_carrot", 10f);
 
                     timer = duration;
                     AgentRed.EndEpisode();

@@ -93,6 +93,7 @@ public class Player : MonoBehaviour
     public void AddBonusPoint(int bonusPoint)
     {
         playerScore += bonusPoint;
+        agent.AddReward(bonusPoint * 0.001f);
     }
 
     public int GetTotalCollectedVegetables()
@@ -114,7 +115,7 @@ public class Player : MonoBehaviour
 
         if (movement.x > 0) isFacingRight = true;
         else if (movement.x < 0) isFacingRight = false;
-        Flip();
+        //Flip();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -257,13 +258,13 @@ public class Player : MonoBehaviour
         Vector2 randomPositionPlayer = GetEmptyRandomPosition(-5, -5, 5, 5);
         transform.localPosition = new Vector3(randomPositionPlayer.x, randomPositionPlayer.y, transform.localPosition.z);
 
-        Vector2 randomPositionPotatoBox = GetEmptyRandomPosition(-5, -5, 5, 5);
-        Vector3 potatoBoxPosition = new Vector3(randomPositionPotatoBox.x, randomPositionPotatoBox.x, potatoBox.transform.localPosition.z);
-        potatoBox.transform.localPosition = potatoBoxPosition;
+        //Vector2 randomPositionPotatoBox = GetEmptyRandomPosition(-5, -5, 5, 5);
+        //Vector3 potatoBoxPosition = new Vector3(randomPositionPotatoBox.x, randomPositionPotatoBox.x, potatoBox.transform.localPosition.z);
+        //potatoBox.transform.localPosition = potatoBoxPosition;
 
-        Vector2 randomPositionCarrotBox = GetEmptyRandomPosition(-5, -5, 5, 5);
-        Vector3 carrotBoxPosition = new Vector3(randomPositionCarrotBox.x, randomPositionCarrotBox.y, carrotBox.transform.localPosition.z);
-        carrotBox.transform.localPosition = carrotBoxPosition;
+        //Vector2 randomPositionCarrotBox = GetEmptyRandomPosition(-5, -5, 5, 5);
+        //Vector3 carrotBoxPosition = new Vector3(randomPositionCarrotBox.x, randomPositionCarrotBox.y, carrotBox.transform.localPosition.z);
+        //carrotBox.transform.localPosition = carrotBoxPosition;
 
     }
 
