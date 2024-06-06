@@ -855,6 +855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicSlider: {fileID: 1970465253}
   _sfxSlider: {fileID: 667031727}
+  ShowIntroductionToggle: {fileID: 1469929046}
 --- !u!1 &602876229
 GameObject:
   m_ObjectHideFlags: 0
@@ -2117,7 +2118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1469929045
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2623,6 +2624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicSlider: {fileID: 0}
   _sfxSlider: {fileID: 0}
+  ShowIntroductionToggle: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

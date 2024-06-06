@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject pausePopup;
     public GameObject activatePowerPopup;
     public GameObject advancedSettingsPopup;
+    public GameObject instoductionPopup;
     public ActivatePowerUpUI activatePowerUp;
     public GameObject gameCanvas;
     public Slider timerSlider;
@@ -53,8 +54,17 @@ public class GameManager : MonoBehaviour
     private DateTime endTime;
 
     private List<string> friendlyWords = new List<string> {
-        "Hello", "Smile", "Love", "Happy", "Friend",
-        "Cheerful", "Kindness", "Joy", "Gratitude", "Sunshine"
+        "Hello", "Smile", "Love", "Happy", "Friend", "Cheerful", "Kindness", "Joy", "Gratitude", "Sunshine", 
+        "Rainbow", "Flowers", "Garden", "Happiness", "Dance", "Dancing", "Pretty", "Awesome", "Amazing", 
+        "Helpful", "Playing", "Colourful", "Nice", "Joyful", "Friendly", "Friendship", "Funny", "Grateful", 
+        "Thankful", "Thanks", "Laughter", "Achieve", "Winner", "Good", "Great", "Sweet", "Yummy", "Tasty", 
+        "Dream", "Bright", "Wonderful", "Morning", "Sunny", "Light", "Butterfly", "Honey", "Beauty", "Beautiful", 
+        "Melody", "Sparkle", "Sparkling", "Shining", "Shine", "Star", "Candy", "Positive", "Diligent", 
+        "Clever", "Smart", "Brilliant", "Elegant", "Cute", "Adorable", "Beaming", "Bubbles", "Charm", 
+        "Delight", "Exciting", "Enjoy", "Excited", "Enjoyable", "Excellent", "Glittering", "Incredible", 
+        "Inspire", "Jolly", "Peaceful", "Peace", "Proud", "Handsome", "Radiant", "Reliable", "Respect", 
+        "Sincere", "Vibrant", "Honest", "Honesty", "Fairness", "Clean", "Victory", "Calm", "Charming", 
+        "Lucky", "Glowing", "Harmony", "Hopeful", "Hope", "Magical", "Motivate", "Merry", "Polite"
     };
 
     public List<EmotionHistory> emotionList = new List<EmotionHistory>();
@@ -95,6 +105,17 @@ public class GameManager : MonoBehaviour
         startTime = DateTime.Now;
         AudioManager.Instance.StopMusic();
         AudioManager.Instance.PlayMusic("ingame_4");
+
+        if (!PlayerPrefs.HasKey("ShowIntroduction"))
+        {
+            PlayerPrefs.SetString("ShowIntroduction", "true");
+            PlayerPrefs.Save();
+        } 
+        if (PlayerPrefs.GetString("ShowIntroduction") == "true")
+        {
+            isPaused = true;
+            SetIntroduction(true);
+        }
     }
 
     void Update()
@@ -269,6 +290,7 @@ public class GameManager : MonoBehaviour
 
         AudioManager.Instance.PlaySFX("buttonpress1");
         SetActivatePower(false);
+        SetIntroduction(false);
         
     }
     
@@ -323,6 +345,12 @@ public class GameManager : MonoBehaviour
         activatePowerUp.CloseResults();
         activatePowerPopup.SetActive(isActivatePowerUp);
         powerUpManager.predictedEmotion = "";
+    }
+    void SetIntroduction(bool isIntroduction)
+    {
+        this.isPaused = isIntroduction;
+        instoductionPopup.SetActive(isIntroduction);
+        gameCanvas.SetActive(!isIntroduction);
     }
     
     void SetAdvancedSettings(bool isAdvancedSettings)

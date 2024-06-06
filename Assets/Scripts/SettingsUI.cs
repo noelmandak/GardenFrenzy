@@ -6,6 +6,20 @@ using UnityEngine.UI;
 public class SettingsUI : MonoBehaviour
 {
     public Slider _musicSlider, _sfxSlider;
+    public Toggle ShowIntroductionToggle;
+
+    void Start()
+    {
+        if (PlayerPrefs.HasKey("ShowIntroduction"))
+        {
+            string showIntroduction = PlayerPrefs.GetString("ShowIntroduction");
+            ShowIntroductionToggle.isOn = showIntroduction == "true";
+        }
+
+        ShowIntroductionToggle.onValueChanged.AddListener(delegate {
+            onShowIntroductionToggleChange(ShowIntroductionToggle.isOn);
+        });
+    }
 
     public void ToggleMusic()
     {
@@ -25,5 +39,11 @@ public class SettingsUI : MonoBehaviour
     public void SFXVolume()
     {
         AudioManager.Instance.SFXVolume(_sfxSlider.value);
+    }
+    public void onShowIntroductionToggleChange(bool isOn)
+    {
+        string valueToSave = isOn ? "true" : "false";
+        PlayerPrefs.SetString("ShowIntroduction", valueToSave);
+        PlayerPrefs.Save();
     }
 }

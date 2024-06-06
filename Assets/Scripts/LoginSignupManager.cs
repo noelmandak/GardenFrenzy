@@ -41,7 +41,7 @@ public class LoginSignupManager : MonoBehaviour
         }
         else
         {
-            SSTools.ShowMessage("No microphone found.", SSTools.Position.bottom, SSTools.Time.twoSecond);
+            SSTools.ShowMessage("Email, or Password cannot be empty!", SSTools.Position.bottom, SSTools.Time.twoSecond);
         }
     }
 

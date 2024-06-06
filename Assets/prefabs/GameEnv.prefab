@@ -3823,6 +3823,7 @@ GameObject:
   - component: {fileID: 1568205027462884870}
   - component: {fileID: 6658990819524096805}
   - component: {fileID: 1625474200019619045}
+  - component: {fileID: 8937035764316239612}
   m_Layer: 7
   m_Name: PlayerRed
   m_TagString: PlayerRed
@@ -4075,6 +4076,22 @@ MonoBehaviour:
   m_ObservationStacks: 1
   rayHitColor: {r: 1, g: 0, b: 0, a: 1}
   rayMissColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &8937035764316239612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2813452092432390948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2902496c0120472b90269f94a0aec7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Record: 1
+  NumStepsToRecord: 0
+  DemonstrationName: differentiateVeg
+  DemonstrationDirectory: demo
 --- !u!1 &2849747668699400753
 GameObject:
   m_ObjectHideFlags: 0
@@ -6342,6 +6359,15 @@ MonoBehaviour:
   - {fileID: 3662833661169799702}
   - {fileID: 566853204666239034}
   - {fileID: 3995027884714673784}
+  activatePowerUpUI: {fileID: 0}
+  targetWord: 
+  targetEmotion: 
+  predictedEmotion: 
+  percentage: 0
+  star: 0
+  durationPU: 0
+  skill: 
+  currentPowerUpType: 0
 --- !u!1 &4919379667618477878
 GameObject:
   m_ObjectHideFlags: 0
@@ -6820,9 +6846,12 @@ MonoBehaviour:
   pausePopup: {fileID: 6513598938624842549}
   activatePowerPopup: {fileID: 6035136470662100032}
   advancedSettingsPopup: {fileID: 5092504660467006032}
+  instoductionPopup: {fileID: 0}
   activatePowerUp: {fileID: 5622076275699229989}
   gameCanvas: {fileID: 1337224647461283228}
   timerSlider: {fileID: 7387612759390028749}
+  totalPotato: 5
+  totalCarot: 5
   isCurretPlayerIsRed: 1
   isDisplayUI: 1
   isTraining: 1
@@ -6832,6 +6861,7 @@ MonoBehaviour:
   AgentRed: {fileID: 1262176381956375389}
   AgentBlue: {fileID: 3703696292539311570}
   cameraFollow: {fileID: 0}
+  emotionList: []
 --- !u!114 &5301688169503284318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6855,6 +6885,15 @@ MonoBehaviour:
   - {fileID: 3662833661169799702}
   - {fileID: 566853204666239034}
   - {fileID: 3995027884714673784}
+  activatePowerUpUI: {fileID: 0}
+  targetWord: 
+  targetEmotion: 
+  predictedEmotion: 
+  percentage: 0
+  star: 0
+  durationPU: 0
+  skill: 
+  currentPowerUpType: 0
 --- !u!114 &7589360561842676351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8324,11 +8363,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPowerUpType: 0
-  commandText: {fileID: 7405890818074931498}
+  word: 
+  timer: 0
   StarsGO:
   - {fileID: 7729031177994799318}
   - {fileID: 8957747221478255989}
   - {fileID: 656871973982042512}
+  PopupRecording: {fileID: 0}
+  WordText: {fileID: 0}
+  EmotionText: {fileID: 0}
+  GetReadyTimerText: {fileID: 0}
+  GetReadyTimer: {fileID: 0}
+  RecordingParent: {fileID: 0}
+  RecordingTimerSlider: {fileID: 0}
+  ProcessText: {fileID: 0}
+  PopupResult: {fileID: 0}
+  CommandText: {fileID: 0}
+  PredictedText: {fileID: 0}
+  DetailsText: {fileID: 0}
+  source: {fileID: 0}
 --- !u!1 &6060528244270165815
 GameObject:
   m_ObjectHideFlags: 0
